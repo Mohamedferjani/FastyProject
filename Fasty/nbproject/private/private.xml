@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/services/ServiceEvent.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/entities/Event.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/gui/GestionEventXML.fxml</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/gui/GestionEventXMLController.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/services/IEvent.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/gui/main.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/gui/MyEventsController.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/entities/Packagedeal.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/entities/Bid.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/tests/MainClass.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/services/IBid.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/gui/myEvents.fxml</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/services/ServicePackage.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/Fasty/src/edu/fasty/services/ServiceBid.java</file>
+        </group>
+    </open-files>
+</project-private>

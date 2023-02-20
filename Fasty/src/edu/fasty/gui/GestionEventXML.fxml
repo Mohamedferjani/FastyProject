@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.GestionEventXMLController">
+   <left>
+      <VBox prefHeight="594.0" prefWidth="230.0" style="-fx-background-color: #00a832;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btn1" mnemonicParsing="false" onMouseClicked="#GestionEventXML" prefHeight="106.0" prefWidth="236.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" text="Event Manager" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#myEvents" prefHeight="106.0" prefWidth="236.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" text="My Events" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn3" layoutX="10.0" layoutY="116.0" mnemonicParsing="false" prefHeight="106.0" prefWidth="284.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" text="Button" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn4" layoutX="10.0" layoutY="222.0" mnemonicParsing="false" prefHeight="106.0" prefWidth="246.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" text="Button" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b4bfb7;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="59.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre " textAlignment="CENTER" wrappingWidth="160.6708984375">
+               <font>
+                  <Font name="Bell MT" size="34.0" />
+               </font>
+            </Text>
+            <Text layoutX="59.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="CENTER" wrappingWidth="160.6708984375">
+               <font>
+                  <Font name="Bell MT" size="32.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="tfdescription" layoutX="235.0" layoutY="141.0" prefHeight="112.0" prefWidth="382.0" />
+            <CheckBox fx:id="chbox" layoutX="235.0" layoutY="297.0" mnemonicParsing="false" text="Bid" />
+            <Text layoutX="59.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" textAlignment="CENTER" wrappingWidth="160.6708984375">
+               <font>
+                  <Font name="Bell MT" size="32.0" />
+               </font>
+            </Text>
+            <CheckBox layoutX="235.0" layoutY="333.0" mnemonicParsing="false" text="Package deal" />
+            <ButtonBar layoutX="235.0" layoutY="434.0" prefHeight="40.0" prefWidth="74.0" />
+          <Button fx:id="btn6" layoutX="239.0" layoutY="381.0" mnemonicParsing="false" text="Button" />
+            <TextField fx:id="txtfieldtitre" layoutX="239.0" layoutY="90.0" style="-fx-background-color: white;" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
