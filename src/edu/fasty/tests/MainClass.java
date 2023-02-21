@@ -20,9 +20,9 @@ import javax.xml.ws.Response;
 public class MainClass {
     public static void main(String[] args) {
            // add a new forum
-        Forum forum1 = new Forum("A forum for discussing topics");
-        Forum forum2 = new Forum("aaaa");
-        Forum forum3 = new Forum(4,"testing");
+        Forum forum1 = new Forum("A forum for discussing topics","");
+        Forum forum2 = new Forum("aaaa","");
+        Forum forum3 = new Forum(4,"testing","");
         ServiceForum sf = new ServiceForum();
        sf.ajouterForum(forum1);
        sf.ajouterForum(forum2);

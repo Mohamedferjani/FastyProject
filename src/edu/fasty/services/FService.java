@@ -15,7 +15,7 @@ import java.util.List;
  * @author FERJANI
  */
 public interface FService {
-    public void ajouterForum(Forum f);
+    public boolean ajouterForum(Forum f);
     public void supprimerForum(int id);
     public void modifierForum(Forum f);
     public List<Forum> getAllForums();

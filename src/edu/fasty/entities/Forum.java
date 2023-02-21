@@ -12,18 +12,24 @@ package edu.fasty.entities;
 public class Forum {
     private int id_forum;
     private String titre;
+    private String contenu;
     
     public Forum() {
     }
 
-    public Forum(String titre) {
+    public Forum(String titre,String contenu) {
         this.titre = titre;
+        this.contenu = contenu;
+        
     }
 
-    public Forum(int id_forum, String titre) {
+    public Forum(int id_forum, String titre,String contenu) {
         this.id_forum = id_forum;
         this.titre = titre;
+        this.contenu = contenu;
+
     }
+    
 public int getId_forum() {
         return id_forum;
     }
@@ -40,10 +46,20 @@ public int getId_forum() {
         this.titre = titre;
     }
 
+    public String getContenu() {
+        return contenu;
+    }
+
+    public void setContenu(String contenu) {
+        this.contenu = contenu;
+    }
+
     @Override
     public String toString() {
-        return "Forum{" + "titre=" + titre + '}';
+        return "Forum{" + "titre=" + titre + ", contenu=" + contenu + '}';
     }
+    
+
 
     @Override
     public int hashCode() {

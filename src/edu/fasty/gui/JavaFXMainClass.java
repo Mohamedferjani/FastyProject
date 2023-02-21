@@ -23,7 +23,7 @@ public class JavaFXMainClass extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("GestionForum.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("AffichageForum.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();

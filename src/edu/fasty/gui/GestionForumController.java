@@ -7,15 +7,21 @@ package edu.fasty.gui;
 
 import edu.fasty.entities.Forum;
 import edu.fasty.services.ServiceForum;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -25,11 +31,9 @@ import javafx.scene.input.MouseEvent;
 public class GestionForumController implements Initializable {
 
     @FXML
-    private TextField tfUser_Id;
-    @FXML
     private TextField tfTitreForum;
     @FXML
-    private Label labelErrorMsg;
+    private TextArea tfContenu;
     
     int id;
 
@@ -41,51 +45,74 @@ public class GestionForumController implements Initializable {
         // TODO
     }    
 
-
     @FXML
     private void btnAjoutClicked(ActionEvent event) {
-   
+         Alert alertType=new Alert(AlertType.ERROR);
             try{
                 
-          labelErrorMsg.setText("");
-           if((tfUser_Id.getText().isEmpty() || tfUser_Id.getText() == null) && (tfTitreForum.getText().isEmpty() || tfTitreForum.getText() == null)){
-                    labelErrorMsg.setText("Enter a valid id and name !");
-          }else if (tfUser_Id.getText().isEmpty() || tfUser_Id.getText() == null){
-                                  labelErrorMsg.setText("Enter a valid id !");
+   //       labelErrorMsg.setText("");
+           if((tfTitreForum.getText().isEmpty()) && (tfContenu.getText().isEmpty())){
+                //    labelErrorMsg.setText("Enter a valid id and name !");
+                alertType.setTitle("Error");
+                    alertType.setHeaderText("Enter a valid title and content !");
+                    alertType.show();
           }
-              else if (tfTitreForum.getText().isEmpty() || tfTitreForum.getText() == null){
-                                          labelErrorMsg.setText("Enter a valid name !");
+              else if (tfTitreForum.getText().isEmpty()){
+                                          //labelErrorMsg.setText("Enter a valid name !");
+                                          alertType.setTitle("Error");
+                    alertType.setHeaderText("Enter a valid title !");
+                    alertType.show();
+                      } else if (tfContenu.getText().isEmpty()){
+                                          //labelErrorMsg.setText("Enter a valid name !");
+                                          alertType.setTitle("Error");
+                    alertType.setHeaderText("Enter a valid content !");
+                    alertType.show();
+                      }else if(tfTitreForum.getText().toString().matches("[0-9]+")){
+                    alertType.setTitle("Error");
+                    alertType.setHeaderText("title must be string not number !");
+                    alertType.show();
                       } else{
-          id = Integer.parseInt(tfUser_Id.getText());
           String nom = tfTitreForum.getText();
-             Forum f = new Forum(id,nom);
+          String contenu = tfContenu.getText();
+               System.err.println(contenu);
+                  Forum f = new Forum(nom,contenu);
                ServiceForum sf = new ServiceForum();
-               sf.ajouterForum(f);
+           boolean test = sf.ajouterForum(f);
+           if(test == true){
+               Alert ok=new Alert(AlertType.INFORMATION);
+               ok.setTitle("DONE");
+               ok.setHeaderText("Forum successfully created !");
+              
+              Optional<ButtonType> result  = ok.showAndWait();
+                        
+ if(result.get() == ButtonType.OK){
+     System.out.println("clicked");
+ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml"));
+     try {
+          Parent root = loader.load();
+        tfTitreForum.getScene().setRoot(root);
+     } catch (IOException e) {
+         System.err.println("Error: "+e.getMessage());
+     }
 
-              }
-          }catch(NumberFormatException e){
-              if(!tfUser_Id.getText().isEmpty()){
-                    labelErrorMsg.setText("id must be a number !");
-              }else   if((tfUser_Id.getText().isEmpty() || tfUser_Id.getText() == null) && (tfTitreForum.getText().isEmpty() || tfTitreForum.getText() == null)){
-                    labelErrorMsg.setText("Enter a valid id and name !");
-          }else if (tfUser_Id.getText().isEmpty() || tfUser_Id.getText() == null){
-                                  labelErrorMsg.setText("Enter a valid id !");
-          }
-              else if (tfTitreForum.getText().isEmpty() || tfTitreForum.getText() == null){
-                                          labelErrorMsg.setText("Enter a valid name !");
+ 
+ }
+     
+else if(result.get() == ButtonType.CANCEL){
+    ok.getDialogPane().lookupButton(ButtonType.OK).setDisable(true);
+}
+    }
                       }
-        }
+            }
             catch(Exception e){
                 System.err.println(e);
         }
-        
     }
 
     @FXML
     private void btnViderClicked(ActionEvent event) {
-        tfUser_Id.clear();
         tfTitreForum.clear();
-        labelErrorMsg.setText("");
+        tfContenu.clear();
     }
     
 }
