@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,10 +27,14 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -59,7 +64,7 @@ public class AffichageForumController implements Initializable {
 
         
         for (Forum f : forums) {
-listviewid.getItems().add(f.getTitre()+" "+f.getContenu());
+            listviewid.getItems().add(f.getId_forum()+" "+f.getTitre()+" "+f.getContenu());
         }
                  listviewid.setCellFactory(param -> new ListCell<String>() {
             @Override
@@ -70,23 +75,42 @@ listviewid.getItems().add(f.getTitre()+" "+f.getContenu());
                     setText(null);
                     setGraphic(null);
                 } else {
-              
-                    String[] words=item.split("\\s",2);
-                    String titre = words[0];
-                    String contenu = words[1];
+                 setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
+                    String[] words=item.split("\\s",3);
+                    String idforum = words[0];
+                    String titre = words[1];
+                    String contenu = words[2];
                     Text title = new Text(titre);
+                             
+
                     title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
                     Text subtitle = new Text(contenu);
                     subtitle.setStyle("-fx-font-size: 14px; -fx-fill: gray;");
 
-                    Button button = new Button("Modifier");
+                    Button button = new Button("Modify");
+                    button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierForum.fxml"));
+                        try {
+                             Parent root = loader.load();
+                             ModifierForumController mfc = loader.getController();
+                             mfc.setForumID(idforum);
+                             mfc.setTitreID(titre);
+                             mfc.setContenuID(contenu);
+                           searchbyname.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }
+                    }
+});
 
                     HBox buttonBox = new HBox(button);
                     buttonBox.setStyle("-fx-alignment: center-right;");
 
                     VBox vbox = new VBox(title, subtitle, buttonBox);
-                    vbox.setStyle("-fx-background-color: white; -fx-padding: 10px;");
+                  //  vbox.setStyle("-fx-background-color: white; -fx-padding: 10px;");
                     vbox.setPrefHeight(80);
 
                     setGraphic(vbox);
