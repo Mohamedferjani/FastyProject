@@ -94,6 +94,23 @@ try {
         }
 
         return list;
+        }
+        public List<Event> getMyEvents(int id ) {
+          List<Event> list = new ArrayList<>();
+          
+        try {
+            String req = "Select * from evenement where id_user = "+id;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Event Ev = new Event(rs.getInt(1),rs.getDate(2).toLocalDate(),rs.getBoolean(3),rs.getInt(4),rs.getString("titre"),rs.getString("description"));
+                list.add(Ev);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
         
         
         

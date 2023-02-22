@@ -27,6 +27,7 @@ public class MainClass {
     //System.out.print(ne);
     //Connection cnx = DataSource.getInstance().getCnx();
      //ServiceEvent se = new ServiceEvent();
+     //System.out.prise.getMyEvents(1);
     // se.ajouter(ne);
      //se.ajouter(ne2);
 

@@ -25,15 +25,16 @@ import javafx.stage.Stage;
 public class main extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
-        try {
+    public void start(Stage primaryStage) throws IOException {
             Parent root =FXMLLoader.load(getClass().getResource("GestionEventXML.fxml"));
                         Scene scene = new Scene(root);
                         primaryStage.setScene(scene);
-primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                        primaryStage.setTitle("Gestion Event Fasty ");
+
+                        primaryStage.show();
+                     
+
+      
 
     }
 

@@ -5,6 +5,7 @@
  */
 package edu.fasty.gui;
 
+import edu.fasty.entities.Event;
 import edu.fasty.services.ServiceEvent;
 import java.io.IOException;
 import java.net.URL;
@@ -65,58 +66,43 @@ public class GestionEventXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    } 
-        private void ajouetrEvent(ActionEvent event) throws IOException {
+        
+    }
+    @FXML
+        private void ajouterEvent(ActionEvent event) throws IOException {
         if (txtfieldtitre.getText().isEmpty() || tfdescription.getText().isEmpty()) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Nom ou prenom invalide(s)", ButtonType.OK);
             a.showAndWait();
         } else {
-            try {
-                       LocalDate myObj = LocalDate.now();
-
-                ServiceEvent sp = new ServiceEvent();
-                Event ne= new Event(myObj,txtfieldtitre.getText(),"hi",true);
-
-                Personne p = new Personne(tfNom.getText(), tfPrenom.getText());
-                sp.ajouter(p);
-                Alert a = new Alert(Alert.AlertType.INFORMATION, "Personne added !", ButtonType.OK);
-                a.showAndWait();
-                
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherPersonne.fxml"));
-                Parent root = loader.load();
-                tfNom.getScene().setRoot(root);
-                
-                AfficherPersonneController apc = loader.getController();
-                apc.setNom(tfNom.getText());
-                apc.setPrenom(tfPrenom.getText());
-                
-            } catch (SQLException ex) {
-                Alert a = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
-                a.showAndWait();
-            }
+            LocalDate myObj = LocalDate.now();
+            int id_user = 1;
+            ServiceEvent se = new ServiceEvent();
+            Event ne= new Event(myObj,true,id_user,txtfieldtitre.getText(),tfdescription.getText() );
+            //Personne p = new Personne(tfNom.getText(), tfPrenom.getText());
+            se.ajouter(ne);
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "eventadded", ButtonType.OK);
+            a.showAndWait();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionEventXML.fxml"));
+            Parent root = loader.load();
+            //txtfieldtitre.getScene().setRoot(root);
         }
-
-    }
+        }
+    
 
     @FXML
     private void GestionEventXML(MouseEvent event) {
+            bp.setCenter(ap);
+
     }
 
     @FXML
     private void myEvents(MouseEvent event) {
+            loadPage("myEvents");
+
     }
 
-}
 
-    @FXML
-    private void GestionEventXML(MouseEvent event) {
-    bp.setCenter(ap);
-    }
-
-    @FXML
-    private void myEvents(MouseEvent event) {
-    loadPage("myEvents");
-    }
+  
     
     private void loadPage(String page){
         Parent root=null;
@@ -128,4 +114,8 @@ public class GestionEventXMLController implements Initializable {
         bp.setCenter(root);
         
 }
+
+  
+    
+    
 }

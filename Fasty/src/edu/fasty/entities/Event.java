@@ -5,6 +5,7 @@
  */
 package edu.fasty.entities;
 import java.time.LocalDate;
+import java.util.Comparator;
 /**
  *
  * @author IHEB
@@ -132,7 +133,9 @@ public class Event {
     
     
     
-    
+    public static Comparator<Event> dateDescendingComparator() {
+        return Comparator.comparing(Event::getDate).reversed();
+    }
     
     
     
