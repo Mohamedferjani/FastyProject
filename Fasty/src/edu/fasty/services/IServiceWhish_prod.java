@@ -25,11 +25,10 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(Whish_prod w) {
  try {
-            String req = "INSERT INTO `whishlist_produit` (`id_Whishlist`,`id_produit`,`id_user`) VALUES (?,?,?)";
+            String req = "INSERT INTO `whishlist_produit` (`id_Whishlist`,`id_produit`) VALUES (?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, w.getId_whishlist());
-            ps.setInt(2, w.getId_user());
-            ps.setInt(3, w.getId_produit());
+            ps.setInt(2, w.getId_produit());
             ps.executeUpdate();
             System.out.println("Tzed");
         } catch (SQLException ex) {
@@ -50,7 +49,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void modifier(Whish_prod w) {
         try {
-            String req = "UPDATE `whishlist_produit` SET `id_produit` = '" + w.getId_produit() + "',`id_user` = '" + w.getId_user() + "' WHERE id_whishlist = " + w.getId_whishlist();
+            String req = "UPDATE `whishlist_produit` SET `id_produit` = '" + w.getId_produit() + "' WHERE id_whishlist = " + w.getId_whishlist();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("User updated !");
@@ -68,7 +67,7 @@ Connection cnx = DataSource.getInstance().getCnx();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 Whish_prod w;
-                w = new Whish_prod(rs.getInt("id_whishlist"),rs.getInt("id_user"),rs.getInt("id_whishlist"));
+                w = new Whish_prod(rs.getInt("id_whishlist"),rs.getInt("id_whishlist"));
                 list.add(w);
             }
         } catch (SQLException ex) {
@@ -80,11 +79,11 @@ Connection cnx = DataSource.getInstance().getCnx();
     public Whish_prod getOneById(int id) {
    Whish_prod w = null;
         try {
-            String req = "Select * from whishlist_prod WHERE id_user = "+id;
+            String req = "Select * from whishlist_prod WHERE id_whishlist = "+id;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                 w = new Whish_prod(rs.getInt("id_whishlist"),rs.getInt("id_user"),rs.getInt("id_produit"));
+                 w = new Whish_prod(rs.getInt("id_whishlist"),rs.getInt("id_produit"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

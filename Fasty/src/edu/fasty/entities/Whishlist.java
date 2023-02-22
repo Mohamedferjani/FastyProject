@@ -13,31 +13,48 @@ import java.util.Objects;
  */
 public class Whishlist {
     private int id_wishlist;
-    private String list_produit;
+    private int id_produit;
+    private int id_user;
 
-    public Whishlist(String list_produit) {
-        this.list_produit = list_produit;
+    public Whishlist(int id_wishlist, int id_produit, int id_user) {
+        this.id_wishlist = id_wishlist;
+        this.id_produit = id_produit;
+        this.id_user = id_user;
     }
 
     public Whishlist(int id_wishlist) {
         this.id_wishlist = id_wishlist;
     }
 
-    public Whishlist(int id_wishlist, String list_produit) {
-        this.id_wishlist = id_wishlist;
-        this.list_produit = list_produit;
+    public Whishlist() {
     }
 
-    @Override
-    public String toString() {
-        return "Whishlist{" + "id_wishlist=" + id_wishlist + ", list_produit=" + list_produit + '}';
+    public Whishlist(int id_wishlist, int id_produit) {
+        this.id_wishlist = id_wishlist;
+        this.id_produit = id_produit;
+    }
+
+    public int getId_wishlist() {
+        return id_wishlist;
+    }
+
+    public void setId_wishlist(int id_wishlist) {
+        this.id_wishlist = id_wishlist;
+    }
+
+    public int getId_produit() {
+        return id_produit;
+    }
+
+    public void setId_produit(int id_produit) {
+        this.id_produit = id_produit;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.id_wishlist;
-        hash = 97 * hash + Objects.hashCode(this.list_produit);
+        int hash = 7;
+        hash = 47 * hash + this.id_wishlist;
+        hash = 47 * hash + this.id_produit;
         return hash;
     }
 
@@ -56,28 +73,23 @@ public class Whishlist {
         if (this.id_wishlist != other.id_wishlist) {
             return false;
         }
-        if (!Objects.equals(this.list_produit, other.list_produit)) {
+        if (this.id_produit != other.id_produit) {
             return false;
         }
         return true;
     }
 
-    public int getId_wishlist() {
-        return id_wishlist;
+    @Override
+    public String toString() {
+        return "Whishlist{" + "id_wishlist=" + id_wishlist + ", id_produit=" + id_produit + '}';
     }
 
-    public void setId_wishlist(int id_wishlist) {
-        this.id_wishlist = id_wishlist;
+    public int getId_user() {
+        return id_user;
     }
 
-    public String getList_produit() {
-        return list_produit;
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
-
-    public void setList_produit(String list_produit) {
-        this.list_produit = list_produit;
-    }
-
- 
-    
+  
 }

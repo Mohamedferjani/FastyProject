@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/services/IServiceWhish_prod.java</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/services/IServiceUser.java</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/gui/InscriptionUserController.java</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/entities/Whish_prod.java</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/gui/inscriptionUser.fxml</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/entities/User.java</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/Esprit/Fasty/src/edu/fasty/entities/Whishlist.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IServiceUser.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/GestionUserFXML.fxml</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IServiceWhishlist.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/inscriptionUser.fxml</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/entities/Whish_prod.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/tests/FXMain.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IServiceWhish_prod.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/InscriptionUserController.java</file>
         </group>
     </open-files>
 </project-private>

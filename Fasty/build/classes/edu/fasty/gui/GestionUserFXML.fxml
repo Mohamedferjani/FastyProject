@@ -4,16 +4,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="827.0" prefWidth="1190.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.fasty.gui.GestionUserFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="579.0" prefWidth="818.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.GestionUserFXMLController">
    <children>
-      <TextField fx:id="TfNom" layoutX="240.0" layoutY="154.0" />
-      <TextField fx:id="TfPrenom" layoutX="240.0" layoutY="261.0" />
-      <Label layoutX="97.0" layoutY="159.0" prefHeight="21.0" prefWidth="83.0" text="Nom" />
-      <Label layoutX="97.0" layoutY="266.0" prefHeight="21.0" prefWidth="83.0" text="Prenom" />
-      <Button layoutX="301.0" layoutY="367.0" mnemonicParsing="false" onAction="#AjouterUser" text="Ajouter" />
-      <Separator layoutX="592.0" layoutY="128.0" orientation="VERTICAL" prefHeight="200.0" />
+      <TextField fx:id="TfNom" layoutX="176.0" layoutY="235.0" />
+      <TextField fx:id="TfPrenom" layoutX="176.0" layoutY="307.0" />
+      <Label alignment="CENTER" layoutX="29.0" layoutY="235.0" prefHeight="21.0" prefWidth="83.0" text="email">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="29.0" layoutY="307.0" prefHeight="21.0" prefWidth="83.0" text="mdp">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
+      <Button layoutX="231.0" layoutY="380.0" mnemonicParsing="false" onAction="#AjouterUser" text="Login">
+         <effect>
+            <Glow />
+         </effect></Button>
+      <Separator layoutX="439.0" layoutY="63.0" orientation="VERTICAL" prefHeight="407.0" prefWidth="0.0" />
+      <Label alignment="CENTER" layoutX="80.0" layoutY="76.0" prefHeight="101.0" prefWidth="316.0" text="LOGIN">
+         <font>
+            <Font name="System Bold Italic" size="71.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
