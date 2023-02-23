@@ -8,27 +8,28 @@ package edu.fasty.gui;
 import edu.fasty.entities.Forum;
 import edu.fasty.services.ServiceForum;
 import java.io.IOException;
-import javafx.geometry.Insets;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.HBox;
@@ -52,6 +53,10 @@ public class AffichageForumController implements Initializable {
     private VBox vboxid;
     @FXML
     private ListView<String> listviewid;
+    @FXML
+    private Button logoutbtn;
+    
+    private Scene scene;
 
     /**
      * Initializes the controller class.
@@ -59,13 +64,15 @@ public class AffichageForumController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                 ServiceForum sf = new ServiceForum();
-
+logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
         List<Forum> forums = sf.getAllForums();
 
         
         for (Forum f : forums) {
             listviewid.getItems().add(f.getId_forum()+" "+f.getTitre()+" "+f.getContenu());
         }
+     
+
                  listviewid.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -75,20 +82,40 @@ public class AffichageForumController implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                 setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
-                    String[] words=item.split("\\s",3);
+                       String[] words=item.split("\\s",3);
                     String idforum = words[0];
                     String titre = words[1];
                     String contenu = words[2];
                     Text title = new Text(titre);
-                             
-
+                    
+                     setOnMouseClicked(event -> {
+      if(event.getClickCount() == 2){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
+                        try {
+                             Parent root = loader.load();
+                             AffichageQuestionsController aqc = loader.getController();
+                          aqc.setLabelID("Welcome to "+titre+" Forum");
+                          
+                        aqc.setForumID(idforum);
+                           searchbyname.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }  
+                        
+                      
+      }
+      });
+                 setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
                     title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
                     Text subtitle = new Text(contenu);
                     subtitle.setStyle("-fx-font-size: 14px; -fx-fill: gray;");
 
                     Button button = new Button("Modify");
+                    button.setStyle("-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
+                    Button button1 = new Button("Delete");
+                    button1.setStyle("-fx-background-color: #c62828; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
+                   
                     button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -105,12 +132,34 @@ public class AffichageForumController implements Initializable {
                         }
                     }
 });
-
-                    HBox buttonBox = new HBox(button);
+                button1.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm Delete ");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to delete this forum?");
+                Optional<ButtonType> result =  alert.showAndWait();
+                if(result.get() == ButtonType.OK){
+                    ServiceForum sf = new ServiceForum();
+                        sf.supprimerForum(Integer.parseInt(idforum));
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml"));
+                        try {
+                             Parent root = loader.load();
+                            
+                             searchbyname.getScene().setRoot(root);
+                        
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }
+                }
+                    }
+});
+                    HBox buttonBox = new HBox(button, button1);
+                 buttonBox.setSpacing(10);
                     buttonBox.setStyle("-fx-alignment: center-right;");
-
                     VBox vbox = new VBox(title, subtitle, buttonBox);
-                  //  vbox.setStyle("-fx-background-color: white; -fx-padding: 10px;");
+                  
                     vbox.setPrefHeight(80);
 
                     setGraphic(vbox);
@@ -121,26 +170,6 @@ public class AffichageForumController implements Initializable {
     }    
  @FXML
     void afficherliste(MouseEvent event) {
-//ListView<String> listView = new ListView<>();
-//        ObservableList<String> items = FXCollections.observableArrayList();
-//           sf.getAllForums();
-//   List<Forum> forums = sf.getAllForums();
-//        for (Forum f : forums) {
-//           items.add(f.getTitre());
-//        }
-//      
-//        
-//
-//        listView.setItems(items);
-//
-//        stackpane.getChildren().add(listView); 
-            
-        
-//        for (CardItem item : items) {
-//            vboxid.getChildren().add(item.getNode());
-//        }
-
-        
     }
     @FXML
     private void ajouterforum(ActionEvent event) {
@@ -153,26 +182,25 @@ public class AffichageForumController implements Initializable {
      }
     }
     
+    
+    public void setScene(Scene scene){
+    this.scene = scene;
+    }
+    
+    //Recherche par nom
+    public List<Forum> findForumByTitle(String title){
+        ServiceForum sf = new ServiceForum();
+    List<Forum> result = sf.getAllForums().stream().filter((p)->p.getTitre().equals(title)).collect(Collectors.toList());
+    return result;
+    
+    }
+    
+    // trie par nom
+    public TreeSet<Forum> SortForumByTitle(){
+        ServiceForum sf = new ServiceForum();
+        TreeSet<Forum> forums =sf.getAllForums().stream().collect(Collectors.toCollection(()-> new TreeSet<Forum>((a,b)->a.getTitre().compareTo(b.getTitre()))));
+        return forums;
+    }
+    
 }
 
-
-
-// class CardItem {
-//    private String title;
-//    private String description;
-//
-//    public CardItem(String title, String description) {
-//        this.title = title;
-//        this.description = description;
-//    }
-//
-//    public Node getNode() {
-//        // create the layout for the card item
-//        BorderPane cardItem = new BorderPane();
-//        cardItem.setTop(new Label(title));
-//        cardItem.setCenter(new Label(description));
-//        cardItem.setPadding(new Insets(10));
-//
-//        return cardItem;
-//    }
-//}

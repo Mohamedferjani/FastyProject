@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1037.0" style="-fx-background-color: rgb(240,255,240);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="edu.fasty.gui.AjouterQuestionController">
+   <children>
+      <Text layoutX="318.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD QUESTION">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="47.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="question" layoutX="318.0" layoutY="214.0" prefHeight="200.0" prefWidth="324.0" promptText="Enter your question" />
+      <Text layoutX="189.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+      </Text>
+      <Button fx:id="addbtn" layoutX="571.0" layoutY="487.0" mnemonicParsing="false" onAction="#ajouterClicked" prefHeight="62.0" prefWidth="164.0" text="ADD" />
+      <Button fx:id="cancelbtn" layoutX="182.0" layoutY="487.0" mnemonicParsing="false" onAction="#annulerClicked" prefHeight="62.0" prefWidth="164.0" text="CANCEL" />
+   </children>
+</AnchorPane>

@@ -243,6 +243,40 @@ r = new Reponse(rs.getInt(2),rs.getInt(3),rs.getString("contenu"),rs.getInt(5));
         }
          return r;    }
 
+    @Override
+    public List<Question> getAllQuestionsById(int id) {
+         List<Question> questions = new ArrayList<>();
+         try {
+            String req = "SELECT * from question WHERE id_forum ="+id;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()){
+                Question q = new Question(rs.getInt(1),rs.getString("contenu"));
+                questions.add(q);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+         return questions; 
+    }
+
+    @Override
+    public List<Question> getALLQuestionByUser(int id) {
+        List<Question> questions = new ArrayList<>();
+         try {
+            String req = "SELECT * from question WHERE id_user ="+id;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()){
+                Question q = new Question(rs.getInt("id_question"),rs.getInt(2),rs.getString("contenu"));
+                questions.add(q);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+         return questions; 
+    }
+
     
     
 }

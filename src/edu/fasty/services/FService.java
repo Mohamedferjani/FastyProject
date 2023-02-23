@@ -24,6 +24,8 @@ public interface FService {
     public void supprimerQuestion(int id);
     public void modifierQuestion(Question q);
     public List<Question> getAllQuestions();
+    public List<Question> getAllQuestionsById(int id);
+    public List<Question> getALLQuestionByUser(int id);
     public Question getQuestionById(int id);
     public void ajouterReponse(Reponse r);
     public void supprimerReponse(int id);
