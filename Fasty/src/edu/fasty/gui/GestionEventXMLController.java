@@ -52,11 +52,13 @@ public class GestionEventXMLController implements Initializable {
     @FXML
     private TextArea tfdescription;
     @FXML
-    private CheckBox chbox;
-    @FXML
     private Button btn6;
     @FXML
     private TextField txtfieldtitre;
+    @FXML
+    private CheckBox bidchbox;
+    @FXML
+    private CheckBox pckgchbox;
 
     /**
      * Initializes the controller class.
@@ -76,15 +78,18 @@ public class GestionEventXMLController implements Initializable {
         } else {
             LocalDate myObj = LocalDate.now();
             int id_user = 1;
+            boolean type;
+                if (bidchbox.isSelected()) {
+                    type = true;
+                } else {
+                    type = false;
+                }
             ServiceEvent se = new ServiceEvent();
-            Event ne= new Event(myObj,true,id_user,txtfieldtitre.getText(),tfdescription.getText() );
-            //Personne p = new Personne(tfNom.getText(), tfPrenom.getText());
+            Event ne= new Event(myObj,type,id_user,txtfieldtitre.getText(),tfdescription.getText() );
             se.ajouter(ne);
-            Alert a = new Alert(Alert.AlertType.INFORMATION, "eventadded", ButtonType.OK);
-            a.showAndWait();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionEventXML.fxml"));
-            Parent root = loader.load();
-            //txtfieldtitre.getScene().setRoot(root);
+       
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionEventXML.fxml"));
+//            Parent root = loader.load();
         }
         }
     

@@ -10,10 +10,11 @@ import java.util.List;
 /**
  *
  * @author IHEB
+ * @param <T>
  */
 
     public interface IEvent <T>{
-    public void ajouter(T E);
+    public boolean ajouter(T E);
     public void supprimer(int id);
     public void modifier(T E);
     public List<T> getAll();

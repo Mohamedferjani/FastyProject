@@ -52,13 +52,13 @@
                </font>
             </Text>
             <TextArea fx:id="tfdescription" layoutX="235.0" layoutY="141.0" prefHeight="112.0" prefWidth="382.0" />
-            <CheckBox fx:id="chbox" layoutX="235.0" layoutY="297.0" mnemonicParsing="false" text="Bid" />
+            <CheckBox fx:id="bidchbox" layoutX="235.0" layoutY="297.0" mnemonicParsing="false" text="Bid" />
             <Text layoutX="59.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" textAlignment="CENTER" wrappingWidth="160.6708984375">
                <font>
                   <Font name="Bell MT" size="32.0" />
                </font>
             </Text>
-            <CheckBox layoutX="235.0" layoutY="333.0" mnemonicParsing="false" text="Package deal" />
+            <CheckBox fx:id="pckgchbox" layoutX="235.0" layoutY="333.0" mnemonicParsing="false" text="Package deal" />
             <ButtonBar layoutX="235.0" layoutY="434.0" prefHeight="40.0" prefWidth="74.0" />
           <Button fx:id="btn6" layoutX="239.0" layoutY="381.0" mnemonicParsing="false" onAction="#ajouterEvent" text="Button" />
             <TextField fx:id="txtfieldtitre" layoutX="239.0" layoutY="90.0" style="-fx-background-color: white;" />

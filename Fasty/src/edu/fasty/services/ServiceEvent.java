@@ -16,6 +16,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -25,30 +27,40 @@ public class ServiceEvent implements IEvent <Event>{
     Connection cnx = DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(Event E) {
-
-      try {
-            String req = "INSERT INTO `evenement` (`date`, `isAuction`,`id_user`,`titre`,`description`) VALUES (?,?,?,?,?)";
-            //String req2= "SELECT id_user FROM `user` WHERE email = 'irezgui@gmail.com'";
-            //PreparedStatement ps2 = cnx.prepareStatement(req2);
-            PreparedStatement ps = cnx.prepareStatement(req);
-        //    ResultSet resultSet=ps2.executeQuery();
-//             int userId = 0;
-//                if (resultSet.next()) {
-//                    userId = resultSet.getInt(1);
-//                }
-              //System.out.print(userId);
-            ps.setDate(1, java.sql.Date.valueOf(E.getDate()));
-            ps.setBoolean(2, E.isIsAuction());
-            ps.setInt(3,E.getId_user());
-            ps.setString(4,E.getTitre());
-            ps.setString(5,E.getDescription());
+    public boolean ajouter(Event E) {
+        try {
+            String req1 = "SELECT * FROM evenement WHERE titre= '"+E.getTitre()+"'";
+             Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req1);
+            if(rs.next()){
+                Alert alertType=new Alert(Alert.AlertType.ERROR);
+                alertType.setTitle("Error");
+                alertType.setHeaderText("titre already exists !");
+                alertType.show();
+                return false;
+            }else {
+                String req = "INSERT INTO `evenement` (`date`, `isAuction`,`id_user`,`titre`,`description`) VALUES (?,?,?,?,?)";
+                PreparedStatement ps = cnx.prepareStatement(req);
+		 ps.setDate(1, java.sql.Date.valueOf(E.getDate()));
+           	 ps.setBoolean(2, E.isIsAuction());
+           	 ps.setInt(3,E.getId_user());
+           	 ps.setString(4,E.getTitre());
+            	 ps.setString(5,E.getDescription());
             
-            ps.executeUpdate();
+                ps.executeUpdate();
+             Alert a = new Alert(Alert.AlertType.INFORMATION, "eventadded", ButtonType.OK);
+            a.showAndWait();
+                System.out.println("event Successfully Created !");
+                return true;
+            }
+          
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.err.println(ex.getMessage());
         }
+        return false;
     }
+    
+    
 
     @Override
     public void supprimer(int id) {
@@ -64,6 +76,21 @@ try {
 
 
     }
+        public void supprimer(String titre) {
+        try {
+            String req = "DELETE FROM `evenement` WHERE titre = ?";
+                PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, titre);
+            ps.executeUpdate();
+            System.out.println("EVENT deleted !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+
+
+    }
+
 
     @Override
     public void modifier(Event E) {

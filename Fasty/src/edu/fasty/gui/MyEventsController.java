@@ -26,6 +26,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * FXML Controller class
@@ -91,6 +92,7 @@ public class MyEventsController implements Initializable {
         List<String> Descripition = new ArrayList<>();
         List<String> date = new ArrayList<>();
         List<String> type = new ArrayList<>();
+       
         ServiceEvent se = new ServiceEvent();
         List<Event> myEvents = se.getMyEvents(1);
         List<Event> sortedList = myEvents.stream()
@@ -112,6 +114,46 @@ public class MyEventsController implements Initializable {
         txtarea2.getItems().addAll(Descripition);
         txtarea3.getItems().addAll(date);
         txtarea4.getItems().addAll(type);
+    }
+    
+    
+    @FXML 
+    private void deleteSelected(ActionEvent event){
+   
+
+        List<String> titres = new ArrayList<>();
+        List<String> Descripition = new ArrayList<>();
+        List<String> date = new ArrayList<>();
+        List<String> type = new ArrayList<>();
+
+        ServiceEvent se = new ServiceEvent();
+        List<Event> myEvents = se.getMyEvents(1);
+       String Selectedevent = txtarea1.getSelectionModel().getSelectedItem();
+        System.out.print(Selectedevent); 
+       se.supprimer(Selectedevent);
+       
+        txtarea1.getItems().clear();
+        txtarea2.getItems().clear();
+        txtarea3.getItems().clear();
+        txtarea4.getItems().clear();
+        
+            myEvents.forEach((Event event2) -> {
+            titres.add(event2.getTitre());
+            Descripition.add(event2.getDescription());
+            date.add(""+event2.getDate());
+            if(event2.isIsAuction()==true){
+            type.add("bid");
+            } else {
+            type.add("package deal");
+            }
+            
+        });
+         txtarea1.getItems().addAll(titres);
+        txtarea2.getItems().addAll(Descripition);
+        txtarea3.getItems().addAll(date);
+        txtarea4.getItems().addAll(type);
+       
+       
     }
 
 
