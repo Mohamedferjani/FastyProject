@@ -81,7 +81,7 @@ public class Whishlist {
 
     @Override
     public String toString() {
-        return "Whishlist{" + "id_wishlist=" + id_wishlist + ", id_produit=" + id_produit + '}';
+        return "Wishlist{" + "id_wishlist=" + id_wishlist + ", id_produit=" + id_produit + '}';
     }
 
     public int getId_user() {

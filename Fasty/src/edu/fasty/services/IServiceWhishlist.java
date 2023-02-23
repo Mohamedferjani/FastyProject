@@ -26,7 +26,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(Whishlist w) {
            try {
-            String req = "INSERT INTO `whishlist` (`id_whishlist`, `id_produit`,`id_user`) VALUES (?,?,?)";
+            String req = "INSERT INTO `wishlist` (`id_wishlist`, `id_produit`,`id_user`) VALUES (?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(2, w.getId_produit());
             ps.setInt(1, w.getId_wishlist());
@@ -41,10 +41,10 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void supprimer(int id) {
         try {
-            String req = "DELETE FROM `whishlist` WHERE id_whishlist = " + id;
+            String req = "DELETE FROM `whishlist` WHERE id_wishlist = " + id;
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
-            System.out.println("whishlist deleted !");
+            System.out.println("wishlist deleted !");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }    }
@@ -52,10 +52,10 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void modifier(Whishlist u) {
         try {
-            String req = "UPDATE `whishlist` SET `id_produit` = '" + u.getId_produit() + "' , `id_user` = '" + u.getId_user() + "'  WHERE id_Whishlist = " + u.getId_wishlist();
+            String req = "UPDATE `wishlist` SET `id_produit` = '" + u.getId_produit() + "' , `id_user` = '" + u.getId_user() + "'  WHERE id_wishlist = " + u.getId_wishlist();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
-            System.out.println("Whishlist updated !");
+            System.out.println("Wishlist updated !");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -65,12 +65,12 @@ Connection cnx = DataSource.getInstance().getCnx();
     public List<Whishlist> getAll() {
             List<Whishlist> list = new ArrayList<>();
         try {
-            String req = "Select * from whishlist";
+            String req = "Select * from wishlist";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 Whishlist w;
-                w = new Whishlist(rs.getInt("id_whishlist"),rs.getInt("id_produit"),rs.getInt("id_user"));
+                w = new Whishlist(rs.getInt("id_wishlist"),rs.getInt("id_produit"),rs.getInt("id_user"));
                 list.add(w);
             }
         } catch (SQLException ex) {
@@ -83,11 +83,11 @@ Connection cnx = DataSource.getInstance().getCnx();
     public Whishlist getOneById(int id) {
     Whishlist w = null;
         try {
-            String req = "Select * from whishlist WHERE id_whishlist = "+id;
+            String req = "Select * from wishlist WHERE id_user = "+id;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                     w = new Whishlist(rs.getInt("id_whishlist"),rs.getInt("id_produit"),rs.getInt("id_user"));            }
+                     w = new Whishlist(rs.getInt("id_wishlist"),rs.getInt("id_produit"),rs.getInt("id_user"));            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

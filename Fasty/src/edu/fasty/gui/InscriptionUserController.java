@@ -70,15 +70,7 @@ public class InscriptionUserController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
         try {
             Parent root = loader.load();
-           GestionUserFXMLController guc = loader.getController();
-           guc.SetTfAdresse(adresse);
-           guc.SetTfCin(""+s.getCin());
-           guc.SetTfMail(s.getEmail());
-           guc.SetTfNum(""+s.getNum_tel());
-           guc.SetTfNom(s.getNom());
-           guc.SetTfPrenom(s.getPrenom());
-           guc.SetTfID(""+s.getId_user());
-           guc.SetTfPass(s.getPassword());
+
            
            tfNom.getScene().setRoot(root);
            
