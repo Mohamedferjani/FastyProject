@@ -18,6 +18,16 @@ public class User {
     public User() {
     }
 
+    public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password) {
+        this.cin = cin;
+        this.num_tel = num_tel;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password, String token) {
         this.cin = cin;
         this.num_tel = num_tel;

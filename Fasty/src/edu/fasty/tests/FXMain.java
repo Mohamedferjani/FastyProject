@@ -27,12 +27,12 @@ public class FXMain extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/GestionUserFXML.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../gui/inscriptionUser.fxml"));
             
             
-            Scene scene = new Scene(root, 300, 250);
+            Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Hello World!");
+            primaryStage.setTitle("Inscription!");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
