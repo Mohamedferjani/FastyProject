@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class ServiceProduit implements INTService<Produit> {
     Connection cnx = DataSource.getInstance().getCnx();
-
+    
     @Override
     public void ajouter(Produit p) {
         try {
@@ -74,7 +74,7 @@ public class ServiceProduit implements INTService<Produit> {
     public List<Produit> getAll() {
         List<Produit> list = new ArrayList<>();
         try {
-            String req = "Select * from personne";
+            String req = "Select * from produit";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {

@@ -16,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.StageStyle;
 
 /**
@@ -24,8 +26,18 @@ import javafx.stage.StageStyle;
  * @author Hp
  */
 public class GestionmesproduitsController implements Initializable {
+    @FXML
+     private TextField getNom_produit;
+    @FXML
+    ListView<Produit> listViewNom_produit;
+    @FXML
+    ListView<Produit> listViewDescription;
+    @FXML
+    ListView<Produit> listViewvaleur;
+    
 ServiceProduit sp = new ServiceProduit();
 ObservableList<Produit> produitList = (ObservableList<Produit>) sp.getAll();
+
     /**
      * Initializes the controller class.
      */
@@ -47,19 +59,19 @@ ObservableList<Produit> produitList = (ObservableList<Produit>) sp.getAll();
             alert.setHeaderText("Veuillez entré le nom de produit 🙂 ");
             alert.show(); //entré n'est pas string
         } else {
-            Optional<Produit> matchingTransaction = produitList.stream() //maching transaction t3abi valeur li 3malt 3lih recherche
-                    .filter(transaction -> transaction.getNom_produit().toLowerCase().equals(nom.toLowerCase()))
+            Optional<Produit> matchingProduit = produitList.stream() //maching produit t3abi valeur li 3malt 3lih recherche
+                    .filter(produit -> produit.getNom_produit().toLowerCase().equals(nom.toLowerCase()))
                     .findFirst();
             //to lower case bech yefhem maj w miniscule 
 
-            if (matchingTransaction.isPresent()) {
+            if (matchingProduit.isPresent()) {
                 produitList.clear();
                 Produit produit = matchingProduit.get();
                 produitList.add(produit);
                 listViewNom_produit.setItems(produitList);
                 listViewvaleur.setItems(produitList);
-                listViewDesription.setItems(produitList);
-                produitList = ts.getAllTransaction();
+                listViewDescription.setItems(produitList);
+                produitList = (ObservableList<Produit>) sp.getAll();
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -90,7 +102,7 @@ ObservableList<Produit> produitList = (ObservableList<Produit>) sp.getAll();
                 if (empty || trans == null) {
                     setText(null);
                 } else {
-                    setText(us.getUserFullNameById(trans.getDecription()));
+                    setText(us.getUserFullNameById(rs.getDecription()));
                 }
             }
         });
@@ -104,7 +116,7 @@ ObservableList<Produit> produitList = (ObservableList<Produit>) sp.getAll();
                 if (empty || trans == null) {
                     setText(null);
                 } else {
-                    setText(ps.getMontantById(trans.getId_produit()) + " DT");
+                    setText(sp.getvaleurById(trans.getId_produit()) + " DT");
                 }
             }
         });
@@ -116,14 +128,14 @@ ObservableList<Produit> produitList = (ObservableList<Produit>) sp.getAll();
     }
 
     private void setListItemsFromDatabase() {
-        produitList = ts.getAllTransaction();
+        produitList = (ObservableList<Produit>) sp.getAll();
         listViewNom_produit.setItems(produitList);
         listViewvaleur.setItems(produitList);
         listViewDescription.setItems(produitList);
     }
 
     @FXML
-    private void DeleteOne(ActionEvent event) {
+    private void supprimer(ActionEvent event) {
         Produit t = listViewNom_produit.getSelectionModel().getSelectedItem();
         if (t != null) {
             if (ts.supprimerTransaction(t.getId_produit())) {
