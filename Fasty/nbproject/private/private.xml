@@ -6,8 +6,13 @@
             <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IServiceUser.java</file>
             <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/GestionUserFXMLController.java</file>
             <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/WhishlistFXMLController.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/utils/DataSource.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/tests/MainClass.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IServiceWhishlist.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IService.java</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/services/IServiceWhish_prod.java</file>
             <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/LoginFXMLController.java</file>
-            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/LoginFXML.fxml</file>
+            <file>file:/C:/Users/MSI%20GAMING/Desktop/FastyProject/Fasty/src/edu/fasty/gui/InscriptionUserController.java</file>
         </group>
     </open-files>
 </project-private>

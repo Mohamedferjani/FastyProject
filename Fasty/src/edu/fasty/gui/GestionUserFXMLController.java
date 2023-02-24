@@ -56,6 +56,7 @@ public class GestionUserFXMLController implements Initializable {
 
     @FXML
     private void AfficherUser(ActionEvent event) {
+        
         IServiceUser u = new IServiceUser();
         List<User> myusers = u.getAll();
         LVAffiche.getItems().addAll(myusers);

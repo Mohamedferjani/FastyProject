@@ -7,11 +7,15 @@ package edu.fasty.gui;
 
 import edu.fasty.entities.Whishlist;
 import edu.fasty.services.IServiceWhishlist;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -44,10 +48,23 @@ public class WhishlistFXMLController implements Initializable {
     @FXML
     private void AfficheWish(ActionEvent event) {
         IServiceWhishlist w = new IServiceWhishlist();
-        int id = Integer.parseInt(tfAfficheWish.getText());
-        w.getOneById(id);
+        List<Whishlist> wishliist = w.getAll();
+        LVWishlist.getItems().addAll(wishliist);
         
         
+    }
+
+    @FXML
+    private void Retour(ActionEvent event) {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+        try {
+            Parent root = loader.load();
+
+            LVWishlist.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println("Error:" + ex.getMessage());
+        }
     }
     
     

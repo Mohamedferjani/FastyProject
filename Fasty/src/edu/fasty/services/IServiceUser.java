@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.mindrot.jbcrypt.BCrypt;
 /**
  *
  * @author MSI GAMING
@@ -98,6 +98,10 @@ Connection cnx = DataSource.getInstance().getCnx();
         }
 
         return u;    }
-   
- 
+    
+    private String hashPasswd(String R){
+        User u= new User ();
+        R = u.getPassword();
+        return BCrypt.hashpw(R, BCrypt.gensalt());
+    }
 }

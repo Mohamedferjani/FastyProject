@@ -28,5 +28,6 @@
             <Image url="@../../../../../../../Downloads/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
          </image>
       </ImageView>
+      <Button layoutX="22.0" layoutY="21.0" mnemonicParsing="false" onAction="#Retour" text="Retour" />
    </children>
 </AnchorPane>
