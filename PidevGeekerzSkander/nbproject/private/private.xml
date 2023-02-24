@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/skand/OneDrive/Documents/NetBeansProjects/PidevGeekerzSkander/src/edu/geekerz/gui/RatingCategoryInterfaceController.java</file>
+            <file>file:/C:/Users/skand/OneDrive/Documents/NetBeansProjects/PidevGeekerzSkander/src/edu/geekerz/services/ServiceRating.java</file>
+            <file>file:/C:/Users/skand/OneDrive/Documents/NetBeansProjects/PidevGeekerzSkander/src/edu/geekerz/gui/ScoresInterfaceController.java</file>
+            <file>file:/C:/Users/skand/OneDrive/Documents/NetBeansProjects/PidevGeekerzSkander/src/edu/geekerz/gui/RatingInterfaceController.java</file>
+            <file>file:/C:/Users/skand/OneDrive/Documents/NetBeansProjects/PidevGeekerzSkander/src/edu/geekerz/tests/FXMain.java</file>
+            <file>file:/C:/Users/skand/OneDrive/Documents/NetBeansProjects/PidevGeekerzSkander/src/edu/geekerz/services/ServiceCategoryRating.java</file>
+        </group>
     </open-files>
 </project-private>

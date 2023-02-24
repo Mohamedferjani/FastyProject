@@ -1,5 +1,6 @@
 package edu.geekerz.services;
 
+import edu.geekerz.entities.CategoryRating;
 import edu.geekerz.entities.Rating;
 import edu.geekerz.utils.DataSource;
 import java.sql.Connection;
@@ -14,21 +15,36 @@ import java.util.List;
 public class ServiceRating implements InterfaceServices<Rating> {
     //ETABLIR LA CONNECTION
     Connection conn=DataSource.getInstance().getConn();
+    ServiceCategoryRating scr=new ServiceCategoryRating();
     
     //OVVERRIDE DES METHODES
     @Override
     public void ajouter(Rating r) {
         
         try {
-            String req = "INSERT INTO `rating`(`id_rating`, `rating_value`, `id_user`, `rating-date`, `comment`) VALUES (?,?,?,?,?)";
+            String req = "INSERT INTO `rating`( `rating_value`, `id_user`, `rating-date`, `comment`, `id_Cat_Rating`) VALUES (?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
-            ps.setInt(1, r.getIdRating());
-            ps.setDouble(2, r.getRatingValue());
-            ps.setInt(3, r.getIdUser());
-            ps.setString(4,r.getRatingdate());
-            ps.setString(5, r.getComment());
+            ps.setDouble(1, r.getRatingValue());
+            ps.setInt(2, r.getIdUser());
+            ps.setString(3,r.getRatingdate());
+            ps.setString(4, r.getComment());
+            ps.setInt(5,r.getCategory().getId_Cat_Rating());
             ps.executeUpdate();
             System.out.println("Rating added  !");
+            
+            /*
+            //ajouter est affecter l'id:
+            String idreq="SELECT LAST_INSERT_ID();";
+                Statement st2 = conn.createStatement();
+                ResultSet rs =st2.executeQuery(idreq);
+                while (rs.next()){
+                    int getid=rs.getInt(1);
+                    r.setIdRating(getid);
+                }
+                if (r.getIdRating()!= 0){
+                    System.out.println("Id affected!");
+                }*/
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -53,7 +69,7 @@ public class ServiceRating implements InterfaceServices<Rating> {
     public void modifier(int id,Rating r) {
         
         try {
-            String req = "UPDATE `rating` SET `rating_value`='"+r.getRatingValue()+"',`id_user`='"+r.getIdUser()+"',`rating-date`='"+r.getRatingdate()+"',`comment`='"+r.getComment()+"' WHERE id_rating ="+id;
+            String req = "UPDATE `rating` SET `rating_value`='"+r.getRatingValue()+"',`id_user`='"+r.getIdUser()+"',`rating-date`='"+r.getRatingdate()+"',`comment`='"+r.getComment()+"',`id_Cat_Rating`='"+r.getCategory().getId_Cat_Rating()+"' WHERE id_rating ="+id;
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("Rating updated !");
@@ -72,7 +88,8 @@ public class ServiceRating implements InterfaceServices<Rating> {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Rating r = new Rating(rs.getInt(1), rs.getInt(3), rs.getDouble(2),rs.getString(4),rs.getString(5));
+                CategoryRating category = scr.getOneByID(rs.getInt(6));
+                Rating r = new Rating(rs.getInt(1), rs.getInt(3), rs.getDouble(2),rs.getString(4),rs.getString(5),category);
                 list.add(r);
             }
         } catch (SQLException ex) {
@@ -93,7 +110,8 @@ public class ServiceRating implements InterfaceServices<Rating> {
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 if (rs.getInt(1)==id){
-                 r = new Rating(rs.getInt(1), rs.getInt(3), rs.getDouble(2),rs.getString(4),rs.getString(5));}
+                 CategoryRating category = scr.getOneByID(rs.getInt(6));
+                 r = new Rating(rs.getInt(1), rs.getInt(3), rs.getDouble(2),rs.getString(4),rs.getString(5),category);}
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

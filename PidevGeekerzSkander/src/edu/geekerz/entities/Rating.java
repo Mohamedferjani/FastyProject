@@ -1,6 +1,11 @@
 package edu.geekerz.entities;
 
+import edu.geekerz.utils.DataSource;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class Rating {
@@ -11,25 +16,28 @@ public class Rating {
     double ratingValue;
     String ratingdate;
     String comment;
+    CategoryRating category;
     
     //LES CONSTRUCTEURS
 
     public Rating() {
     }
 
-    public Rating(int idUser, double ratingValue, String ratingdate, String comment) {
+    public Rating(int idUser, double ratingValue, String ratingdate, String comment, CategoryRating category) {
         this.idUser = idUser;
         this.ratingValue = ratingValue;
         this.ratingdate = ratingdate;
         this.comment = comment;
+        this.category = category;
     }
 
-    public Rating(int idRating, int idUser, double ratingValue, String ratingdate, String comment) {
+    public Rating(int idRating, int idUser, double ratingValue, String ratingdate, String comment, CategoryRating category) {
         this.idRating = idRating;
         this.idUser = idUser;
         this.ratingValue = ratingValue;
         this.ratingdate = ratingdate;
         this.comment = comment;
+        this.category = category;
     }
     
     //GETTERS AT SETTERS
@@ -73,13 +81,38 @@ public class Rating {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public CategoryRating getCategory() {
+        return category;
+    }
+
     
+    public void setCategory(CategoryRating category) {
+        this.category = category;
+    }
+
     //TO STRING , HACHCODE AND EQUALS
 
     @Override
     public String toString() {
-        return "Rating{" + "ratingValue=" + ratingValue + ", ratingdate=" + ratingdate + ", comment=" + comment + '}';
+        String nom="null" ,prenom="null";
+        Connection conn=DataSource.getInstance().getConn();
+        try{
+        String req = "SELECT  `nom`, `prenom` FROM `user` WHERE `id_user` = "+idUser;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+        nom=rs.getString(1);
+        prenom=rs.getString(2);
+        }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "User name=" + nom +" "+ prenom + ", ratingValue=" + ratingValue + ", ratingdate=" + ratingdate + ", comment=" + comment + ", category=" + category.getName_Cat_Rating() ;
     }
+    
+    
+    
 
     @Override
     public int hashCode() {

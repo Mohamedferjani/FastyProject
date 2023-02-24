@@ -1,6 +1,11 @@
 package edu.geekerz.entities;
 
+import edu.geekerz.utils.DataSource;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class Score {
@@ -80,8 +85,23 @@ public class Score {
 
     @Override
     public String toString() {
-        return "Score{" + "scoreValue=" + scoreValue + ", scoreSentiment=" + scoreSentiment + ", scoreDate=" + scoreDate + '}';
+        String nom="null" ,prenom="null";
+        Connection conn=DataSource.getInstance().getConn();
+        try{
+        String req = "SELECT  `nom`, `prenom` FROM `user` WHERE `id_user` = "+idUser;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+        nom=rs.getString(1);
+        prenom=rs.getString(2);
+        }
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "idUser=" + nom +" "+prenom + ", scoreValue=" + scoreValue + ", scoreSentiment=" + scoreSentiment + ", scoreDate=" + scoreDate ;
     }
+    
+    
 
     @Override
     public int hashCode() {

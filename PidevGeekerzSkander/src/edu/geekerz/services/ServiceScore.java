@@ -28,6 +28,20 @@ public class ServiceScore implements InterfaceServices<Score> {
             ps.setString(5, s.getScoreDate());
             ps.executeUpdate();
             System.out.println("score added  !");
+            
+            /*
+              //ajouter est affecter l'id:
+            String idreq="SELECT LAST_INSERT_ID();";
+                Statement st2 = conn.createStatement();
+                ResultSet rs =st2.executeQuery(idreq);
+                while (rs.next()){
+                    int getid=rs.getInt(1);
+                    s.setIdScore(getid);
+                }
+                if (s.getIdScore()!= 0){
+                    System.out.println("Id affected!");
+                }*/
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
