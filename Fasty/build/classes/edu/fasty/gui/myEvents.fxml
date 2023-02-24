@@ -23,5 +23,6 @@
       <Text layoutX="835.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
       <Button fx:id="btn" layoutX="803.0" layoutY="26.0" mnemonicParsing="false" onAction="#sortListbydate" text="Sort by date" />
       <Button layoutX="655.0" layoutY="26.0" mnemonicParsing="false" onAction="#deleteSelected" text="Supprimer" />
+      <Button fx:id="btnmodify" layoutX="529.0" layoutY="26.0" mnemonicParsing="false" onAction="#modifierSelected" text="update" />
    </children>
 </AnchorPane>

@@ -130,6 +130,11 @@ public class Event {
         }
         return true;
     }
+
+    public Event(String titre, String description) {
+        this.titre = titre;
+        this.description = description;
+    }
     
     
     

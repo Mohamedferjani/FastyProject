@@ -24,8 +24,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -44,10 +46,6 @@ public class GestionEventXMLController implements Initializable {
     @FXML
     private Button btn2;
     @FXML
-    private Button btn3;
-    @FXML
-    private Button btn4;
-    @FXML
     private AnchorPane ap;
     @FXML
     private TextArea tfdescription;
@@ -56,9 +54,9 @@ public class GestionEventXMLController implements Initializable {
     @FXML
     private TextField txtfieldtitre;
     @FXML
-    private CheckBox bidchbox;
+    private RadioButton bidchbox;
     @FXML
-    private CheckBox pckgchbox;
+    private RadioButton pckgchbox;
 
     /**
      * Initializes the controller class.
@@ -68,11 +66,13 @@ public class GestionEventXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+        ToggleGroup toggleGroup = new ToggleGroup();
+    bidchbox.setToggleGroup(toggleGroup);
+    pckgchbox.setToggleGroup(toggleGroup);
     }
     @FXML
         private void ajouterEvent(ActionEvent event) throws IOException {
-        if (txtfieldtitre.getText().isEmpty() || tfdescription.getText().isEmpty()) {
+        if (txtfieldtitre.getText().isEmpty() || tfdescription.getText().isEmpty() ) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Nom ou prenom invalide(s)", ButtonType.OK);
             a.showAndWait();
         } else {
@@ -119,6 +119,8 @@ public class GestionEventXMLController implements Initializable {
         bp.setCenter(root);
         
 }
+
+   
 
   
     

@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/ModifyEventController.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/GestionEventXMLController.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/entities/Event.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/main.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/services/ServiceEvent.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/SortEvents.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/tests/MainClass.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MyEventsController.java</file>
         </group>
     </open-files>

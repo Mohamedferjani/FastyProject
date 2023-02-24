@@ -18,7 +18,6 @@ import java.util.List;
 import java.time.LocalDate;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
 /**
  *
  * @author IHEB
@@ -82,6 +81,7 @@ try {
                 PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, titre);
             ps.executeUpdate();
+            
             System.out.println("EVENT deleted !");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -103,6 +103,22 @@ try {
             System.out.println(ex.getMessage());
         }
     }
+        public Event getOnbyTitre(String titre) {
+        Event Ev=null;
+             try {
+            String req = "Select * from evenement where id_evenement = "+titre;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Ev = new Event(rs.getInt(1),rs.getDate(2).toLocalDate(),rs.getBoolean(3),rs.getInt(4),rs.getString("titre"),rs.getString("description"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return Ev;
+    }
+    
 
     @Override
     public List<Event> getAll() {
