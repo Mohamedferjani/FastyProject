@@ -63,7 +63,8 @@ public class AjouterQuestionController implements Initializable {
                     alertType.setHeaderText("Question cannot be a number !");
                     alertType.show();
         }else {
-          Question f = new Question(Integer.parseInt(idforum),question.getText());
+            Forum ff = new Forum();
+          Question f = new Question(ff,question.getText());
                ServiceForum sf = new ServiceForum();
            sf.ajouterQuestion(f);
                Alert ok=new Alert(AlertType.INFORMATION);
@@ -82,18 +83,12 @@ public class AjouterQuestionController implements Initializable {
      } catch (IOException e) {
          System.err.println("Error: "+e.getMessage());
      }
-
- 
- }
-     
+ }  
 else if(result.get() == ButtonType.CANCEL){
     ok.getDialogPane().lookupButton(ButtonType.OK).setDisable(true);
 }
     }
         }
-
-    
-
     @FXML
     void annulerClicked(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageMesQuestions.fxml"));

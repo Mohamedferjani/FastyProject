@@ -5,14 +5,12 @@
  */
 package edu.fasty.gui;
 
-import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sun.util.logging.PlatformLogger;
 
 /**
  *

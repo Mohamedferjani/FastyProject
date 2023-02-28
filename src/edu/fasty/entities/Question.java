@@ -11,33 +11,31 @@ package edu.fasty.entities;
  */
 public class Question {
     private int id_question;
-    private int forumId;
+    private Forum forumId;
     private String contenu;
+    
 
     public Question() {
     }
 
    
 
-    public Question(int forumId,String contenu) {
-        this.forumId = forumId;
+    public Question(Forum f ,String contenu) {
+       this.forumId = f;
         this.contenu = contenu;
-        
     }
 
-    public Question(int id_question,int forumId, String contenu) {
+    public Question(int id_question,Forum f , String contenu) {
         this.id_question = id_question;
-        this.forumId = forumId;
+       this.forumId =f;
         this.contenu = contenu;
     }
 
-     public int getForumId() {
+     public Forum getForumId() {
         return forumId;
     }
 
-    public void setForumId(int forumId) {
-        this.forumId = forumId;
-    }
+    
     public int getId_question() {
         return id_question;
     }

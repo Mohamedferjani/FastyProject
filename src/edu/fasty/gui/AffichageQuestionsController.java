@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -68,11 +69,15 @@ public class AffichageQuestionsController implements Initializable {
     private ListView<String> listviewid;
     
      private String idforum;
+     private String titre;
     /**
      * Initializes the controller class.
      */
      
+     
      int i= 0;
+     
+     private Preferences prefs = Preferences.userNodeForPackage(AffichageForumController.class);
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                            
@@ -85,9 +90,12 @@ mesquestionsid.setStyle("-fx-background-color: #f9a825;-fx-text-fill: white; -fx
 resoluid.setStyle("-fx-background-color: #4caf50;-fx-text-fill: white;-fx-font-size: 14;-fx-padding: 10 20;-fx-font-weight: bold;-fx-border-radius: 25px;-fx-cursor: hand;-fx-background-radius: 25px;-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 2);");
 nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-font-size: 14;-fx-padding: 10 20;-fx-font-weight: bold;-fx-border-radius: 25px;-fx-cursor: hand;-fx-background-radius: 25px;-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 2);");
 Platform.runLater(()->{
+    titre = prefs.get("titre", "default");
+    labelid.setText("Welcome to "+titre+" Forum");
+   idforum = prefs.get("idforum", "default");
     if (idforum != null && !idforum.isEmpty()) {
-
- List<Question> questions = sf.getAllQuestionsById(Integer.parseInt(idforum));
+Forum f = sf.getForumById(Integer.parseInt(idforum));
+ List<Question> questions = sf.getAllQuestionsById(f.getId_forum());
     
  for (Question q : questions) {
             listviewid.getItems().add(q.getId_question()+" "+q.getContenu());
@@ -152,8 +160,8 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageMesQuestions
      try {
           Parent root = loader.load();
         listviewid.getScene().setRoot(root);
-        AffichageMesQuestionsController amqc = loader.getController();
-        amqc.SetForumID(idforum);
+//        AffichageMesQuestionsController amqc = loader.getController();
+//        amqc.SetForumID(idforum);
      } catch (IOException e) {
          System.err.println("Error: "+e.getMessage());
      }

@@ -7,26 +7,28 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="575.0" style="-fx-background-color: rgb(143,188,143);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.GestionForumController">
+<AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1037.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.GestionForumController">
    <children>
-      <Label layoutX="147.0" layoutY="140.0" text="Title">
+      <Label layoutX="346.0" layoutY="209.0" text="Title">
          <font>
             <Font name="Arial Black" size="17.0" />
          </font></Label>
-      <TextField fx:id="tfTitreForum" layoutX="206.0" layoutY="132.0" prefHeight="43.0" prefWidth="187.0">
+      <TextField fx:id="tfTitreForum" layoutX="405.0" layoutY="195.0" prefHeight="49.0" prefWidth="265.0" promptText="enter forum's title">
          <effect>
             <InnerShadow />
          </effect></TextField>
-      <Text layoutX="177.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD FORUM" wrappingWidth="357.19873046875">
+      <Text layoutX="376.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD FORUM" wrappingWidth="357.19873046875">
          <font>
-            <Font name="Arial Black" size="35.0" />
+            <Font name="Arial Black" size="47.0" />
          </font>
       </Text>
-      <Button layoutX="409.0" layoutY="386.0" mnemonicParsing="false" onAction="#btnAjoutClicked" prefHeight="31.0" prefWidth="128.0" text="Add" textFill="#24cd35" textOverrun="CLIP">
+      <Button layoutX="649.0" layoutY="511.0" mnemonicParsing="false" onAction="#btnAjoutClicked" prefHeight="31.0" prefWidth="128.0" text="Add" textFill="#24cd35" textOverrun="CLIP">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -36,22 +38,27 @@
          <font>
             <Font name="Arial Black" size="20.0" />
          </font></Button>
-      <Button layoutX="49.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnViderClicked" prefHeight="31.0" prefWidth="128.0" text="Clear" textFill="RED">
+      <Button layoutX="278.0" layoutY="507.0" mnemonicParsing="false" onAction="#btnViderClicked" prefHeight="31.0" prefWidth="128.0" text="Clear" textFill="RED">
          <effect>
             <DropShadow />
          </effect>
          <font>
             <Font name="Arial Black" size="20.0" />
          </font></Button>
-      <Label layoutX="116.0" layoutY="251.0" text="Content">
+      <Label layoutX="315.0" layoutY="320.0" text="Content">
          <font>
             <Font name="Arial Black" size="17.0" />
          </font>
       </Label>
-      <TextArea fx:id="tfContenu" layoutX="204.0" layoutY="198.0" prefHeight="131.0" prefWidth="187.0">
+      <TextArea fx:id="tfContenu" layoutX="403.0" layoutY="267.0" prefHeight="185.0" prefWidth="265.0" promptText="enter content">
          <effect>
             <InnerShadow />
          </effect>
       </TextArea>
+      <ImageView fitHeight="113.0" fitWidth="224.0" layoutY="-3.0">
+         <image>
+            <Image url="@../../../Images/327980221_885364026055071_1669266333073417803_n.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

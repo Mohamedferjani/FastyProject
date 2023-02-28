@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -158,8 +159,8 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageMesQuestions.fxml"));
                         try {
                              Parent root = loader.load();
-                            AffichageMesQuestionsController amq = loader.getController();
-                            amq.SetForumID(idforum);
+                            //AffichageMesQuestionsController amq = loader.getController();
+                          //  amq.SetForumID(idforum);
                              listviewid.getScene().setRoot(root);
                         
                         } catch (IOException e) {
@@ -206,8 +207,6 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml")
 FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
      try {
           Parent root = loader.load();
-          AffichageQuestionsController aqc = loader.getController();
-          aqc.setForumID(idforum);
         listviewid.getScene().setRoot(root);
      } catch (IOException e) {
          System.err.println("Error: "+e.getMessage());

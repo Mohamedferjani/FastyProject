@@ -115,7 +115,7 @@ public class ServiceForum implements FService{
     public void ajouterQuestion(Question q) {
         int iduser=15;
         try {
-            String req = "INSERT INTO `question` (`id_user`,`id_forum`,`contenu`) VALUES ('"+iduser+"','"+q.getForumId()+"','"+q.getContenu()+"')";
+            String req = "INSERT INTO `question` (`id_user`,`id_forum`,`contenu`) VALUES ('"+iduser+"','"+q.getForumId().getId_forum()+"','"+q.getContenu()+"')";
             PreparedStatement ps = con.prepareStatement(req);
             ps.executeUpdate(req);
             System.out.println("Forum Successfully Created !");
@@ -154,7 +154,8 @@ public class ServiceForum implements FService{
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()){
-                Question q = new Question(rs.getInt(1),rs.getString("contenu"));
+              Forum f =  getForumById(rs.getInt(1));
+                Question q = new Question(f,rs.getString("contenu"));
                 questions.add(q);
             }
         } catch (SQLException ex) {
@@ -170,7 +171,8 @@ Question q = null;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             if(rs.next()){
-            q = new Question(rs.getInt(1),rs.getString("contenu"));
+                Forum f =  getForumById(rs.getInt(1));
+            q = new Question(f,rs.getString("contenu"));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -181,7 +183,7 @@ Question q = null;
     public void ajouterReponse(Reponse r) {
         int iduser=15;
         try {
-            String req = "INSERT INTO `reponse` (`id_user`,`id_forum`,`contenu`,`id_question`) VALUES ('"+iduser+"','"+r.getForumId()+"','"+r.getContenu()+"','"+r.getQuestionId()+"')";
+            String req = "INSERT INTO `reponse` (`id_user`,`id_forum`,`contenu`,`id_question`) VALUES ('"+iduser+"','"+r.getForumId().getId_forum()+"','"+r.getContenu()+"','"+r.getQuestionId().getId_question()+"')";
             PreparedStatement ps = con.prepareStatement(req);
             ps.executeUpdate(req);
             System.out.println("Response Successfully Created !");
@@ -220,7 +222,9 @@ List<Reponse> reponses = new ArrayList<>();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()){
-                Reponse r = new Reponse(rs.getInt(2),rs.getInt(3),rs.getString("contenu"),rs.getInt(5));
+                Forum f =  getForumById(rs.getInt(3));
+                Question q = getQuestionById(rs.getInt(5));
+                Reponse r = new Reponse(rs.getInt(2),f,rs.getString("contenu"),q);
                 reponses.add(r);
             }
         } catch (SQLException ex) {
@@ -236,7 +240,9 @@ Reponse r = null;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             if(rs.next()){
-r = new Reponse(rs.getInt(2),rs.getInt(3),rs.getString("contenu"),rs.getInt(5));    
+                Forum f =  getForumById(rs.getInt(3));
+                Question q = getQuestionById(rs.getInt(5));
+r = new Reponse(rs.getInt(2),f,rs.getString("contenu"),q);    
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -251,7 +257,8 @@ r = new Reponse(rs.getInt(2),rs.getInt(3),rs.getString("contenu"),rs.getInt(5));
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()){
-                Question q = new Question(rs.getInt(1),rs.getString("contenu"));
+                Forum f =  getForumById(rs.getInt(1));
+                Question q = new Question(f,rs.getString("contenu"));
                 questions.add(q);
             }
         } catch (SQLException ex) {
@@ -268,7 +275,8 @@ r = new Reponse(rs.getInt(2),rs.getInt(3),rs.getString("contenu"),rs.getInt(5));
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()){
-                Question q = new Question(rs.getInt("id_question"),rs.getInt(2),rs.getString("contenu"));
+                Forum f =  getForumById(rs.getInt(2));
+                Question q = new Question(rs.getInt("id_question"),f,rs.getString("contenu"));
                 questions.add(q);
             }
         } catch (SQLException ex) {

@@ -14,6 +14,7 @@ public class Forum {
     private String titre;
     private String contenu;
     
+    
     public Forum() {
     }
 

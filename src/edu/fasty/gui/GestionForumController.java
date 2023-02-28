@@ -50,21 +50,17 @@ public class GestionForumController implements Initializable {
          Alert alertType=new Alert(AlertType.ERROR);
             try{
                 
-   //       labelErrorMsg.setText("");
            if((tfTitreForum.getText().isEmpty()) && (tfContenu.getText().isEmpty())){
-                //    labelErrorMsg.setText("Enter a valid id and name !");
                 alertType.setTitle("Error");
                     alertType.setHeaderText("Enter a valid title and content !");
                     alertType.show();
           }
               else if (tfTitreForum.getText().isEmpty()){
-                                          //labelErrorMsg.setText("Enter a valid name !");
-                                          alertType.setTitle("Error");
+                    alertType.setTitle("Error");
                     alertType.setHeaderText("Enter a valid title !");
                     alertType.show();
                       } else if (tfContenu.getText().isEmpty()){
-                                          //labelErrorMsg.setText("Enter a valid name !");
-                                          alertType.setTitle("Error");
+                    alertType.setTitle("Error");
                     alertType.setHeaderText("Enter a valid content !");
                     alertType.show();
                       }else if(tfTitreForum.getText().toString().matches("[0-9]+")){
@@ -86,7 +82,6 @@ public class GestionForumController implements Initializable {
               Optional<ButtonType> result  = ok.showAndWait();
                         
  if(result.get() == ButtonType.OK){
-     System.out.println("clicked");
  FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml"));
      try {
           Parent root = loader.load();
@@ -94,8 +89,6 @@ public class GestionForumController implements Initializable {
      } catch (IOException e) {
          System.err.println("Error: "+e.getMessage());
      }
-
- 
  }
      
 else if(result.get() == ButtonType.CANCEL){

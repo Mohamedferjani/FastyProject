@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
+import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -57,12 +58,19 @@ public class AffichageForumController implements Initializable {
     private Button logoutbtn;
     
     private Scene scene;
+    
+    private Preferences prefs = Preferences.userNodeForPackage(AffichageForumController.class);
+    
+    private int i = 0;
+
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        String aa = prefs.get("titre","default");
+        System.err.println(aa);
                 ServiceForum sf = new ServiceForum();
 logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
         List<Forum> forums = sf.getAllForums();
@@ -71,8 +79,7 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
         for (Forum f : forums) {
             listviewid.getItems().add(f.getId_forum()+" "+f.getTitre()+" "+f.getContenu());
         }
-     
-
+        
                  listviewid.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -86,17 +93,24 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                     String idforum = words[0];
                     String titre = words[1];
                     String contenu = words[2];
-                    Text title = new Text(titre);
+                    Text title = new Text("TITLE : "+titre);
                     
                      setOnMouseClicked(event -> {
       if(event.getClickCount() == 2){
+                        
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
                         try {
                              Parent root = loader.load();
-                             AffichageQuestionsController aqc = loader.getController();
-                          aqc.setLabelID("Welcome to "+titre+" Forum");
+                            // AffichageQuestionsController aqc = loader.getController();
+                            // aqc.setLabelID("Welcome to "+titre+" Forum");
+                            // Forum f = new Forum(idforum,titre,contenu);
+                                            
+                       
+                          prefs.put("titre", titre);
+                          prefs.put("idforum", idforum);
                           
-                        aqc.setForumID(idforum);
+                          
+                       // aqc.setForumID(idforum);
                            searchbyname.getScene().setRoot(root);
                         } catch (IOException e) {
                             System.err.println("Error: "+e.getMessage());
@@ -166,6 +180,115 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                 }
             }
         });
+                 
+                
+                searchbyname.textProperty().addListener((obs,oldValue,newValue)->{
+                 listviewid.getItems().clear();
+                 List<Forum> forumss = findForumByTitle(newValue);
+                 for (Forum f : forumss) {
+                     listviewid.getItems().add(f.getId_forum()+" "+f.getTitre()+" "+f.getContenu());
+        }
+           listviewid.setCellFactory(param -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                       String[] words=item.split("\\s",3);
+                    String idforum = words[0];
+                    String titre = words[1];
+                    String contenu = words[2];
+                    Text title = new Text("TITLE : "+titre);
+                    
+                     setOnMouseClicked(event -> {
+      if(event.getClickCount() == 2){
+                        
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
+                        try {
+                             Parent root = loader.load();
+                            // AffichageQuestionsController aqc = loader.getController();
+                            // aqc.setLabelID("Welcome to "+titre+" Forum");
+                            // Forum f = new Forum(idforum,titre,contenu);
+                                            
+                       
+                          prefs.put("titre", titre);
+                          prefs.put("idforum", idforum);
+                          
+                          
+                       // aqc.setForumID(idforum);
+                           searchbyname.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }  
+                        
+                      
+      }
+      });
+                 setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
+                    title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+                    Text subtitle = new Text(contenu);
+                    subtitle.setStyle("-fx-font-size: 14px; -fx-fill: gray;");
+
+                    Button button = new Button("Modify");
+                    button.setStyle("-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
+                    Button button1 = new Button("Delete");
+                    button1.setStyle("-fx-background-color: #c62828; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
+                   
+                    button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierForum.fxml"));
+                        try {
+                             Parent root = loader.load();
+                             ModifierForumController mfc = loader.getController();
+                             mfc.setForumID(idforum);
+                             mfc.setTitreID(titre);
+                             mfc.setContenuID(contenu);
+                           searchbyname.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }
+                    }
+});
+                button1.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm Delete ");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to delete this forum?");
+                Optional<ButtonType> result =  alert.showAndWait();
+                if(result.get() == ButtonType.OK){
+                    ServiceForum sf = new ServiceForum();
+                        sf.supprimerForum(Integer.parseInt(idforum));
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml"));
+                        try {
+                             Parent root = loader.load();
+                            
+                             searchbyname.getScene().setRoot(root);
+                        
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }
+                }
+                    }
+});
+                    HBox buttonBox = new HBox(button, button1);
+                 buttonBox.setSpacing(10);
+                    buttonBox.setStyle("-fx-alignment: center-right;");
+                    VBox vbox = new VBox(title, subtitle, buttonBox);
+                  
+                    vbox.setPrefHeight(80);
+
+                    setGraphic(vbox);
+                }
+            }
+        });      
+                });
         // TODO
     }    
  @FXML
@@ -190,9 +313,9 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
     //Recherche par nom
     public List<Forum> findForumByTitle(String title){
         ServiceForum sf = new ServiceForum();
-    List<Forum> result = sf.getAllForums().stream().filter((p)->p.getTitre().equals(title)).collect(Collectors.toList());
+    List<Forum> result = sf.getAllForums().stream().filter((p)->p.getTitre().contains(title.toUpperCase())).collect(Collectors.toList());
     return result;
-    
+  
     }
     
     // trie par nom
