@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +14,7 @@
     <children>
         <BorderPane layoutY="-1.0" prefHeight="720.0" prefWidth="1280.0">
             <left>
-                <VBox prefHeight="648.0" prefWidth="355.0" style="-fx-background-color: #98D08B;" BorderPane.alignment="CENTER">
+                <VBox prefHeight="648.0" prefWidth="355.0" style="-fx-background-color: #98D08B;" styleClass="#98D08B" BorderPane.alignment="CENTER">
                     <children>
                         <Button fx:id="btnUser" mnemonicParsing="false" onAction="#OnUserClicked" prefHeight="76.0" prefWidth="361.0" style="-fx-background-color: #32452E; -fx-font-family: Sans-serif; -fx-font-size: 22;" text="User" textFill="WHITE">
                             <graphic>
@@ -129,32 +127,6 @@
                     </BorderPane.margin>
                 </VBox>
             </top>
-            <center>
-                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-                    <tabs>
-                        <Tab fx:id="btnAfficheUser" onSelectionChanged="#OnViewUserClicked" style="-fx-background-color: #D0F9FF;" text="View Users">
-                            <content>
-                                <AnchorPane fx:id="AffichageUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            </content>
-                        </Tab>
-                        <Tab fx:id="btnAddUser" onSelectionChanged="#OnAddUserClicked" style="-fx-background-color: #D0F9FF;" text="Add Users">
-                            <content>
-                                <AnchorPane fx:id="AjoutUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            </content>
-                        </Tab>
-                        <Tab fx:id="btnModifUser" onSelectionChanged="#OnUpdateUserClicked" style="-fx-background-color: #D0F9FF;" text="Update Users">
-                            <content>
-                                <AnchorPane fx:id="ModifUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            </content>
-                        </Tab>
-                        <Tab fx:id="btnSuppUser" onSelectionChanged="#OnDeleteUserClicked" style="-fx-background-color: #D0F9FF;" text="Delete Users">
-                            <content>
-                                <AnchorPane fx:id="SuppUser" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            </content>
-                        </Tab>
-                    </tabs>
-                </TabPane>
-            </center>
         </BorderPane>
     </children>
 </AnchorPane>

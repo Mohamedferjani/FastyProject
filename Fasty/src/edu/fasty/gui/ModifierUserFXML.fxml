@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="643.0" prefWidth="922.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.ModifierUserFXMLController">
+   <children>
+      <Label layoutX="144.0" layoutY="49.0" prefHeight="82.0" prefWidth="377.0" text="Modify Your Account">
+         <font>
+            <Font name="Britannic Bold" size="41.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="102.0" fitWidth="200.0" layoutX="672.0" layoutY="39.0">
+         <image>
+            <Image url="@../../../../../../../Downloads/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="CLOSED_HAND" />
+         </cursor>
+         <effect>
+            <Blend />
+         </effect>
+      </ImageView>
+      <Label layoutX="127.0" layoutY="198.0" text="Nom" />
+      <Label layoutX="127.0" layoutY="267.0" text="Prénom" />
+      <Label layoutX="127.0" layoutY="351.0" prefHeight="21.0" prefWidth="52.0" text="Tel" />
+      <Label layoutX="127.0" layoutY="441.0" text="Adresse" />
+      <Label layoutX="486.0" layoutY="232.0" text="Cin" />
+      <Label layoutX="486.0" layoutY="311.0" text="Email" />
+      <Label layoutX="486.0" layoutY="396.0" text="Mdp" />
+      <TextField fx:id="tfNom" layoutX="233.0" layoutY="193.0" />
+      <TextField fx:id="tfPrenom" layoutX="233.0" layoutY="262.0" />
+      <TextField fx:id="tfTel" layoutX="233.0" layoutY="346.0" />
+      <TextField fx:id="tfAdresse" layoutX="233.0" layoutY="436.0" />
+      <TextField fx:id="tfCin" layoutX="579.0" layoutY="227.0" />
+      <TextField fx:id="tfEmail" layoutX="579.0" layoutY="306.0" />
+      <TextField fx:id="tfMdp" layoutX="579.0" layoutY="391.0" />
+      <Button fx:id="BtnModif" layoutX="439.0" layoutY="517.0" mnemonicParsing="false" onAction="#ModifierUser" prefHeight="53.0" prefWidth="187.0" text="Modify">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <effect>
+            <SepiaTone />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

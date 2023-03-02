@@ -42,7 +42,6 @@ public class AdminFXMLController {
 
     @FXML
     private void OnUserClicked(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource())
     }
 
     @FXML
