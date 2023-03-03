@@ -10,6 +10,7 @@ package edu.fasty.entities;
  * @author FERJANI
  */
 public class Forum {
+    
     private int id_forum;
     private String titre;
     private String contenu;

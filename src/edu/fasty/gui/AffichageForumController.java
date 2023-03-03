@@ -69,12 +69,10 @@ public class AffichageForumController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String aa = prefs.get("titre","default");
-        System.err.println(aa);
-                ServiceForum sf = new ServiceForum();
+     
+       ServiceForum sf = new ServiceForum();
 logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
         List<Forum> forums = sf.getAllForums();
-
         
         for (Forum f : forums) {
             listviewid.getItems().add(f.getId_forum()+" "+f.getTitre()+" "+f.getContenu());
@@ -93,6 +91,8 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                     String idforum = words[0];
                     String titre = words[1];
                     String contenu = words[2];
+                    prefs.put("titre", titre);
+                    prefs.put("idforum", idforum);
                     Text title = new Text("TITLE : "+titre);
                     
                      setOnMouseClicked(event -> {
@@ -101,15 +101,11 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
                         try {
                              Parent root = loader.load();
+                             prefs.put("idforum", idforum);
+                             prefs.put("titre", titre);
                             // AffichageQuestionsController aqc = loader.getController();
                             // aqc.setLabelID("Welcome to "+titre+" Forum");
                             // Forum f = new Forum(idforum,titre,contenu);
-                                            
-                       
-                          prefs.put("titre", titre);
-                          prefs.put("idforum", idforum);
-                          
-                          
                        // aqc.setForumID(idforum);
                            searchbyname.getScene().setRoot(root);
                         } catch (IOException e) {
@@ -137,7 +133,6 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                         try {
                              Parent root = loader.load();
                              ModifierForumController mfc = loader.getController();
-                             mfc.setForumID(idforum);
                              mfc.setTitreID(titre);
                              mfc.setContenuID(contenu);
                            searchbyname.getScene().setRoot(root);
@@ -202,7 +197,8 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                     String titre = words[1];
                     String contenu = words[2];
                     Text title = new Text("TITLE : "+titre);
-                    
+                    prefs.put("titre", titre);
+                    prefs.put("idforum", idforum);
                      setOnMouseClicked(event -> {
       if(event.getClickCount() == 2){
                         
@@ -212,12 +208,8 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                             // AffichageQuestionsController aqc = loader.getController();
                             // aqc.setLabelID("Welcome to "+titre+" Forum");
                             // Forum f = new Forum(idforum,titre,contenu);
-                                            
-                       
-                          prefs.put("titre", titre);
                           prefs.put("idforum", idforum);
-                          
-                          
+                          prefs.put("titre", titre);
                        // aqc.setForumID(idforum);
                            searchbyname.getScene().setRoot(root);
                         } catch (IOException e) {
@@ -245,7 +237,6 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
                         try {
                              Parent root = loader.load();
                              ModifierForumController mfc = loader.getController();
-                             mfc.setForumID(idforum);
                              mfc.setTitreID(titre);
                              mfc.setContenuID(contenu);
                            searchbyname.getScene().setRoot(root);
@@ -313,7 +304,7 @@ logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-fon
     //Recherche par nom
     public List<Forum> findForumByTitle(String title){
         ServiceForum sf = new ServiceForum();
-    List<Forum> result = sf.getAllForums().stream().filter((p)->p.getTitre().contains(title.toUpperCase())).collect(Collectors.toList());
+    List<Forum> result = sf.getAllForums().stream().filter((p)->p.getTitre().toUpperCase().contains(title.toUpperCase())).collect(Collectors.toList());
     return result;
   
     }

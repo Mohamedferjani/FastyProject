@@ -20,16 +20,4 @@ public interface FService {
     public void modifierForum(Forum f);
     public List<Forum> getAllForums();
     public Forum getForumById(int id);
-    public void ajouterQuestion(Question q);
-    public void supprimerQuestion(int id);
-    public void modifierQuestion(Question q);
-    public List<Question> getAllQuestions();
-    public List<Question> getAllQuestionsById(int id);
-    public List<Question> getALLQuestionByUser(int id);
-    public Question getQuestionById(int id);
-    public void ajouterReponse(Reponse r);
-    public void supprimerReponse(int id);
-    public void modifierReponse(Reponse r);
-    public List<Reponse> getAllReponses();
-    public Reponse getReponseById(int id);
 }

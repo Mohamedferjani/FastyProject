@@ -3,20 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/entities/Reponse.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/services/QService.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/services/ServiceForum.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/services/ServiceQuestion.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AjouterReponseController.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/utils/DataSource.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/tests/MainClass.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/JavaFXMainClass.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/entities/Forum.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AffichageForumController.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/WebPurifyExample.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/services/RService.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/entities/Reponse.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/Reports/report.txt</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/ModifierForumController.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AjouterReponse.fxml</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AffichageMesQuestionsController.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/services/FService.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/GestionForumController.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AjouterQuestionController.java</file>
-            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/tests/MainClass.java</file>
-            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/JavaFXMainClass.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/services/ServiceReponse.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/entities/Question.java</file>
-            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/entities/Forum.java</file>
-            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AffichageForumController.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AffichageReponsesController.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AffichageQuestionsController.java</file>
             <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/ModifierQuestionController.java</file>
+            <file>file:/C:/Users/midot/OneDrive/Documents/NetBeansProjects/FastyProject/FastyProject/src/edu/fasty/gui/AffichageReponses.fxml</file>
         </group>
     </open-files>
 </project-private>

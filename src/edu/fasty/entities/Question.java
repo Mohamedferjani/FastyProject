@@ -13,6 +13,16 @@ public class Question {
     private int id_question;
     private Forum forumId;
     private String contenu;
+    private int iduser;
+  //  private Reponse reponse_id;
+
+    public int getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(int iduser) {
+        this.iduser = iduser;
+    }
     
 
     public Question() {
@@ -20,16 +30,19 @@ public class Question {
 
    
 
-    public Question(Forum f ,String contenu) {
+    public Question(Forum f ,String contenu , int iduser) {
        this.forumId = f;
         this.contenu = contenu;
+        this.iduser = iduser;
     }
 
-    public Question(int id_question,Forum f , String contenu) {
+    public Question(int id_question,Forum f , String contenu , int iduser) {
         this.id_question = id_question;
        this.forumId =f;
         this.contenu = contenu;
+        this.iduser = iduser;
     }
+ 
 
      public Forum getForumId() {
         return forumId;

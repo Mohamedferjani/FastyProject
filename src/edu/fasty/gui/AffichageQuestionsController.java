@@ -8,6 +8,8 @@ package edu.fasty.gui;
 import edu.fasty.entities.Forum;
 import edu.fasty.entities.Question;
 import edu.fasty.services.ServiceForum;
+import edu.fasty.services.ServiceQuestion;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -34,6 +36,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 /**
  * FXML Controller class
@@ -66,10 +78,12 @@ public class AffichageQuestionsController implements Initializable {
     private Button allquestions;
     
     @FXML
-    private ListView<String> listviewid;
+    private ListView<Question> listviewid;
     
      private String idforum;
      private String titre;
+     private boolean isReported = false;
+     boolean found = false;
     /**
      * Initializes the controller class.
      */
@@ -78,11 +92,13 @@ public class AffichageQuestionsController implements Initializable {
      int i= 0;
      
      private Preferences prefs = Preferences.userNodeForPackage(AffichageForumController.class);
+     private Preferences prefs1 = Preferences.userNodeForPackage(AffichageQuestionsController.class);
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-                           
+                          isReported = Boolean.parseBoolean(prefs1.get("isreported", "true"));
 
          ServiceForum sf = new ServiceForum();
+          ServiceQuestion sq= new ServiceQuestion();
 logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
 backbtn.setStyle("-fx-background-color: #F7F7F7; -fx-border-color: #C2C2C2; -fx-border-radius: 50; -fx-border-width:2; -fx-padding: 10 12; -fx-cursor: hand;");
 allquestions.setStyle("-fx-background-color: #1E90FF;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 10px 20px;-fx-border-radius: 25px;-fx-cursor: hand;-fx-background-radius: 25px;-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 2);");
@@ -95,16 +111,16 @@ Platform.runLater(()->{
    idforum = prefs.get("idforum", "default");
     if (idforum != null && !idforum.isEmpty()) {
 Forum f = sf.getForumById(Integer.parseInt(idforum));
- List<Question> questions = sf.getAllQuestionsById(f.getId_forum());
+ List<Question> questions = sq.getAllQuestionsById(f.getId_forum());
     
  for (Question q : questions) {
-            listviewid.getItems().add(q.getId_question()+" "+q.getContenu());
+            listviewid.getItems().add(q);
         }
     }
 });
-                 listviewid.setCellFactory(param -> new ListCell<String>() {
+                 listviewid.setCellFactory(param -> new ListCell<Question>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(Question item, boolean empty) {
                 
                 super.updateItem(item, empty);
 
@@ -112,34 +128,123 @@ Forum f = sf.getForumById(Integer.parseInt(idforum));
                     setText(null);
                     setGraphic(null);
                 } else {
-                       String[] words=item.split("\\s",2);
-                    String idquestion = words[0];
-                    String question = words[1];
                    Text Question = new Text("Question "+Integer.toString(i)+" :");
-                    Text title = new Text(question);
-                    
-//                     setOnMouseClicked(event -> {
-//      if(event.getClickCount() == 2){
-//                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
-//                        try {
-//                             Parent root = loader.load();
-//                             AffichageQuestionsController aqc = loader.getController();
-//                          aqc.setLabelID("Welcome to "+titre+" Forum");
-//                        aqc.setForumID(idforum);
-//                           labelid.getScene().setRoot(root);
-//                        } catch (IOException e) {
-//                            System.err.println("Error: "+e.getMessage());
-//                        }  
-//                        
-//                      
-//      }
-//      });
+                    Text title = new Text(item.getContenu());
+                    prefs1.put("idquestion", Integer.toString(item.getId_question()));
+                     setOnMouseClicked(event -> {
+      if(event.getClickCount() == 2){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageReponses.fxml"));
+                        prefs1.put("idquestion", Integer.toString(item.getId_question()));
+                        try {
+                             Parent root = loader.load();
+                             AffichageReponsesController aqc = loader.getController();
+                          aqc.setLabelID("Question : "+item.getContenu());
+                          
+                      //  aqc.setForumID(idforum);
+                           labelid.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }  
+                        
+                      
+      }
+      });
                  setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
                     title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                    VBox vbox = new VBox(Question,title);
+                    
+                    Path filePath = Paths.get("src/Reports/report.txt");
+
+
+
+try (BufferedReader reader = Files.newBufferedReader(filePath)) {
+    String line;
+    while ((line = reader.readLine()) != null) {
+        if (line.contains(String.valueOf(item.getId_question()))) {
+            found = true;
+           isReported = true;
+            break;
+        }
+    }
+} catch (IOException e) {
+    // Handle exception
+}
+                       if(found == false){
+                    Button button = new Button("Report");
+                    button.setStyle("-fx-background-color: #d32f2f;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 6px 10px;-fx-border-radius: 4px;-fx-cursor: hand;");
+                   
+button.setOnAction(e -> {
+    // Toggle the isReported flag
+   // isReported = !isReported;
+    prefs1.put("isreported", new Boolean(isReported).toString());
+    // Add or remove the question ID from the report file
+
+    File reportFile = new File("src/Reports/report.txt");
+    try {
+        if (isReported) {
+            Files.write(reportFile.toPath(), Collections.singletonList("Question numero : "+Integer.toString(item.getId_question())), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            button.setText("Unreport");
+            isReported = false;
+        } else {
+            List<String> lines = Files.lines(reportFile.toPath()).filter(line -> !line.equals(Integer.toString(item.getId_question()))).collect(Collectors.toList());
+            Files.write(reportFile.toPath(), lines, StandardOpenOption.TRUNCATE_EXISTING);
+            button.setText("Report");
+            isReported = true;
+        }
+    } catch (IOException ex) {
+        System.err.println(ex);
+    }
+});
+                    
+
+                    HBox buttonBox = new HBox(button);
+                     
+                     //buttonBox.setSpacing(10);
+                    buttonBox.setStyle("-fx-alignment: center-right;");
+                    VBox vbox = new VBox(Question,title,buttonBox);
                     vbox.setPrefHeight(80);
                     setGraphic(vbox);
                     i++;
+                    
+                    }
+                    
+                    else
+                    
+                    {
+                        Button button = new Button("Unreport");
+                    button.setStyle("-fx-background-color: #d32f2f;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 6px 10px;-fx-border-radius: 4px;-fx-cursor: hand;");
+                   
+button.setOnAction(e -> {
+    // Toggle the isReported flag
+  // isReported = !isReported;
+    prefs1.put("isreported", new Boolean(isReported).toString());
+
+    File reportFile = new File("src/Reports/report.txt");
+    try {
+        if (!isReported) {
+            Files.write(reportFile.toPath(), Collections.singletonList(Integer.toString(item.getId_question())), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            button.setText("Unreport");
+            isReported = true;
+        } else {
+            List<String> lines = Files.lines(reportFile.toPath()).filter(line -> !line.equals(Integer.toString(item.getId_question()))).collect(Collectors.toList());
+            Files.write(reportFile.toPath(), lines, StandardOpenOption.TRUNCATE_EXISTING);
+            button.setText("Report");
+            isReported = false;
+        }
+    } catch (IOException ex) {
+        System.err.println(ex);
+    }
+});
+                    
+
+                    HBox buttonBox = new HBox(button);
+                     
+                     //buttonBox.setSpacing(10);
+                    buttonBox.setStyle("-fx-alignment: center-right;");
+                    VBox vbox = new VBox(Question,title,buttonBox);
+                    vbox.setPrefHeight(80);
+                    setGraphic(vbox);
+                    i++;
+                    }
                 }
             }
         });

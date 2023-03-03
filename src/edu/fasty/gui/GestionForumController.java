@@ -104,8 +104,15 @@ else if(result.get() == ButtonType.CANCEL){
 
     @FXML
     private void btnViderClicked(ActionEvent event) {
-        tfTitreForum.clear();
-        tfContenu.clear();
+//        tfTitreForum.clear();
+//        tfContenu.clear();
+FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml"));
+     try {
+          Parent root = loader.load();
+        tfTitreForum.getScene().setRoot(root);
+     } catch (IOException e) {
+         System.err.println("Error: "+e.getMessage());
+     }
     }
     
 }

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +33,9 @@ public class ModifierForumController implements Initializable {
     private TextField titreid;
     @FXML
     private TextArea contenuid;
-    @FXML
-    private TextField idforum;
+    
+    private Preferences prefs = Preferences.userNodeForPackage(AffichageForumController.class);
+
 
     /**
      * Initializes the controller class.
@@ -73,7 +75,7 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml")
                         
  if(result.get() == ButtonType.OK){
  ServiceForum sf = new ServiceForum();
- Forum f = new Forum(Integer.parseInt(idforum.getText()),titreid.getText(),contenuid.getText());
+ Forum f = new Forum(Integer.parseInt(prefs.get("idforum", "default")),titreid.getText(),contenuid.getText());
  sf.modifierForum(f);
  FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml"));
      try {
@@ -86,14 +88,11 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageForum.fxml")
         }
 
     }
-    public void setForumID(String message){
-    this.idforum.setText(message);
-    idforum.setEditable(false);
-    }
     public void setTitreID(String message){
     this.titreid.setText(message);
     }
     public void setContenuID(String message){
     this.contenuid.setText(message);
     }
+    
 }

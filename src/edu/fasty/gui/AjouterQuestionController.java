@@ -8,10 +8,12 @@ package edu.fasty.gui;
 import edu.fasty.entities.Forum;
 import edu.fasty.entities.Question;
 import edu.fasty.services.ServiceForum;
+import edu.fasty.services.ServiceQuestion;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +45,7 @@ public class AjouterQuestionController implements Initializable {
     private Button cancelbtn;
     
     private String idforum;
-    
+     private Preferences prefs = Preferences.userNodeForPackage(AffichageForumController.class);
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         addbtn.setStyle("-fx-background-color: #4CAF50;-fx-background-radius: 5;-fx-border-radius: 5;-fx-border-width: 1;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 8 16;;-fx-cursor: hand;");
@@ -63,10 +65,12 @@ public class AjouterQuestionController implements Initializable {
                     alertType.setHeaderText("Question cannot be a number !");
                     alertType.show();
         }else {
-            Forum ff = new Forum();
-          Question f = new Question(ff,question.getText());
-               ServiceForum sf = new ServiceForum();
-           sf.ajouterQuestion(f);
+            ServiceQuestion sq= new ServiceQuestion();
+            ServiceForum sf = new ServiceForum();
+            Forum f = sf.getForumById(Integer.parseInt(prefs.get("idforum", "default")));
+          Question q= new Question(f,question.getText(),15);
+                
+           sq.ajouterQuestion(q);
                Alert ok=new Alert(AlertType.INFORMATION);
                ok.setTitle("DONE");
                ok.setHeaderText("Question successfully created !");

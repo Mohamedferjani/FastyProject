@@ -37,14 +37,14 @@ public class MainClass {
         }
 //        Forum a = sf.getForumById(7);
 //        System.out.println(a.getTitre());
-       Question question = new Question(1,forum2, "How do I use this example?");
+       Question question = new Question(1,forum2, "How do I use this example?",15);
 //        sf.ajouterQuestion(question);
-         Reponse response = new Reponse(1,forum2,"You can start by reading the documentation or following tutorials online",question);
+         Reponse response = new Reponse(1,forum2,"You can start by reading the documentation or following tutorials online",question,15);
       //  sf.ajouterReponse(response);
-         Question question2 = new Question(2,forum2, "How you doing today?");
+         Question question2 = new Question(2,forum2, "How you doing today?",15);
            //   sf.ajouterQuestion(question2);
            
-         Reponse response2 = new Reponse(2,forum2,"Im doing fine , thanks for asking !",question2);
+         Reponse response2 = new Reponse(2,forum2,"Im doing fine , thanks for asking !",question2,15);
        //  sf.ajouterReponse(response2);
          
           //Question q1 = sf.getQuestionById(2);

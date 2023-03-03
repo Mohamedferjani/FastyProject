@@ -7,6 +7,7 @@ package edu.fasty.gui;
 
 import edu.fasty.entities.Question;
 import edu.fasty.services.ServiceForum;
+import edu.fasty.services.ServiceQuestion;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -71,7 +72,7 @@ public class AffichageMesQuestionsController implements Initializable {
     private Button addbtn;
     
     private String idforum;
-    
+    private Preferences prefs = Preferences.userNodeForPackage(AffichageMesQuestionsController.class);
     int i = 0;
     /**
      * Initializes the controller class.
@@ -80,6 +81,8 @@ public class AffichageMesQuestionsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
          ServiceForum sf = new ServiceForum();
+         ServiceQuestion sq= new ServiceQuestion();
+         
 addbtn.setStyle("-fx-background-color: #4CAF50;-fx-background-radius: 5;-fx-border-radius: 5;-fx-border-width: 1;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 8 16;;-fx-cursor: hand;");
 logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
 backbtn.setStyle("-fx-background-color: #F7F7F7; -fx-border-color: #C2C2C2; -fx-border-radius: 50; -fx-border-width:2; -fx-padding: 10 12; -fx-cursor: hand;");
@@ -88,7 +91,7 @@ mesquestionsid.setStyle("-fx-background-color: #f9a825;-fx-text-fill: white; -fx
 resoluid.setStyle("-fx-background-color: #4caf50;-fx-text-fill: white;-fx-font-size: 14;-fx-padding: 10 20;-fx-font-weight: bold;-fx-border-radius: 25px;-fx-cursor: hand;-fx-background-radius: 25px;-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 2);");
 nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-font-size: 14;-fx-padding: 10 20;-fx-font-weight: bold;-fx-border-radius: 25px;-fx-cursor: hand;-fx-background-radius: 25px;-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 2);");
 //Platform.runLater(()->{
- List<Question> questions = sf.getALLQuestionByUser(15);
+ List<Question> questions = sq.getALLQuestionByUser(15);
  for (Question q : questions) {
             listviewid.getItems().add(q.getId_question()+" "+q.getContenu());
         }
@@ -109,7 +112,7 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
                     String question = words[1];
                    Text Question = new Text("Question "+Integer.toString(i)+" :");
                     Text title = new Text(question);
-                    
+                    prefs.put("idquestion", idquestion);
 //                     setOnMouseClicked(event -> {
 //      if(event.getClickCount() == 2){
 //                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fxml"));
@@ -136,9 +139,12 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
                     button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                       FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierForum.fxml"));
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierQuestion.fxml"));
                         try {
+                            prefs.put("idquestion", idquestion);
                              Parent root = loader.load();
+                             ModifierQuestionController mqc = loader.getController();
+                             mqc.setContenuID(question);
                            listviewid.getScene().setRoot(root);
                         } catch (IOException e) {
                             System.err.println("Error: "+e.getMessage());
@@ -155,7 +161,7 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
                 Optional<ButtonType> result =  alert.showAndWait();
                 if(result.get() == ButtonType.OK){
                     ServiceForum sf = new ServiceForum();
-                        sf.supprimerQuestion(Integer.parseInt(idquestion));
+                        sq.supprimerQuestion(Integer.parseInt(idquestion));
                        FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageMesQuestions.fxml"));
                         try {
                              Parent root = loader.load();
