@@ -5,6 +5,12 @@
  */
 package edu.fasty.services;
 
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.Version;
+import com.restfb.exception.FacebookOAuthException;
+import com.restfb.types.FacebookType;
 import edu.fasty.entities.Forum;
 import edu.fasty.entities.Question;
 import edu.fasty.utils.DataSource;
@@ -15,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -128,5 +135,29 @@ Question q = null;
             System.err.println(ex.getMessage());
         }
          return questions; 
+    }
+
+    @Override
+    public void PostQuestionOnFacebook(Question q) {
+      String accessToken = "EAADELBJHovIBAPZCZA5Ce7OWKBgoQ7ueqcPaVlpKUrNSBgcM8LWn0G7JjjlMV2ROdxw1pSZCpzhMTjiRQZCa0PltDY0Ji0C8Uxubv2CzZB172oe5kVW4LRjZAWW8qcsB1vZBBW68AVLxSzwAZBLhw4PiORdbqD4GpEtigI26NxAngXToNbIT9EbVRjVftEUYlnY6PpOpmLcRDrUpxZAZCCAM1S";
+        String pageId = "102900889410694"; // replace with your page ID
+        String message = q.getContenu();
+        FacebookClient fbClient = new DefaultFacebookClient(accessToken, Version.LATEST);
+
+        try {
+            FacebookType result = fbClient.publish(pageId + "/feed", FacebookType.class,
+                    Parameter.with("message", message));
+            System.out.println("Post published on page: " + result.getId());
+             Alert ok=new Alert(Alert.AlertType.INFORMATION);
+               ok.setTitle("DONE");
+               ok.setHeaderText("Question successfully published on your Facebook Page !");
+               ok.show();
+        } catch (FacebookOAuthException ex) {
+            System.err.println("Failed to post on page: " + ex.getMessage());
+            Alert ok=new Alert(Alert.AlertType.ERROR);
+               ok.setTitle("Error");
+               ok.setHeaderText("There is an error while publishing...");
+               ok.show();
+        }
     }
 }

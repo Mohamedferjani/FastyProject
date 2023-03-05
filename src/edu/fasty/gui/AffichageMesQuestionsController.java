@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,6 +28,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -63,7 +66,7 @@ public class AffichageMesQuestionsController implements Initializable {
     private Button backbtn;
     
     @FXML
-    private ListView<String> listviewid;
+    private ListView<Question> listviewid;
     
     @FXML
     private Button allquestions;
@@ -73,6 +76,8 @@ public class AffichageMesQuestionsController implements Initializable {
     
     private String idforum;
     private Preferences prefs = Preferences.userNodeForPackage(AffichageMesQuestionsController.class);
+      ServiceForum sf = new ServiceForum();
+         ServiceQuestion sq= new ServiceQuestion();
     int i = 0;
     /**
      * Initializes the controller class.
@@ -80,8 +85,7 @@ public class AffichageMesQuestionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-         ServiceForum sf = new ServiceForum();
-         ServiceQuestion sq= new ServiceQuestion();
+       
          
 addbtn.setStyle("-fx-background-color: #4CAF50;-fx-background-radius: 5;-fx-border-radius: 5;-fx-border-width: 1;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 8 16;;-fx-cursor: hand;");
 logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
@@ -93,13 +97,13 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
 //Platform.runLater(()->{
  List<Question> questions = sq.getALLQuestionByUser(15);
  for (Question q : questions) {
-            listviewid.getItems().add(q.getId_question()+" "+q.getContenu());
+            listviewid.getItems().add(q);
         }
         
 //});
-                 listviewid.setCellFactory(param -> new ListCell<String>() {
+                 listviewid.setCellFactory(param -> new ListCell<Question>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(Question item, boolean empty) {
                 
                 super.updateItem(item, empty);
 
@@ -107,9 +111,9 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
                     setText(null);
                     setGraphic(null);
                 } else {
-                       String[] words=item.split("\\s",2);
-                    String idquestion = words[0];
-                    String question = words[1];
+                     
+                    String idquestion = Integer.toString(item.getId_question());
+                    String question = item.getContenu();
                    Text Question = new Text("Question "+Integer.toString(i)+" :");
                     Text title = new Text(question);
                     prefs.put("idquestion", idquestion);
@@ -131,6 +135,26 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
 //      });
                  setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
                     title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+                    
+                    HBox shareBox = new HBox(10);
+        shareBox.setPadding(new Insets(10));
+        
+        // Create the Facebook logo image
+        Image facebookLogo = new Image("/Images/facebook.png");
+        ImageView facebookImageView = new ImageView(facebookLogo);
+        facebookImageView.setFitHeight(24);
+        facebookImageView.setFitWidth(24);
+        // Create the Share button
+        Button shareButton = new Button("Share");
+        shareButton.setStyle("-fx-background-color: #3b5998; -fx-text-fill: white; -fx-font-weight: bold;");
+        shareButton.setGraphic(facebookImageView);
+       // shareBox.getChildren().addAll(facebookImageView, shareButton);
+                 shareButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                       sq.PostQuestionOnFacebook(item);
+                    }
+});   
                     Button button = new Button("Modify");
                     button.setStyle("-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
                     Button button1 = new Button("Delete");
@@ -175,7 +199,7 @@ nonresoluid.setStyle("-fx-background-color: #f44336;-fx-text-fill: white;-fx-fon
                 }
                     }
 });
-                    HBox buttonBox = new HBox(button, button1);
+                    HBox buttonBox = new HBox(shareButton,button, button1);
                  buttonBox.setSpacing(10);
                     buttonBox.setStyle("-fx-alignment: center-right;");
                                  

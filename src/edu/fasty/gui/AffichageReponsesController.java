@@ -70,6 +70,8 @@ public class AffichageReponsesController implements Initializable {
     private Button addResponse;
     
     private Preferences prefs = Preferences.userNodeForPackage(AffichageQuestionsController.class);
+        private Preferences prefs1 = Preferences.userNodeForPackage(AffichageReponsesController.class);
+
     int i;
 
     /**
@@ -77,6 +79,9 @@ public class AffichageReponsesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+     if(selectedQID.getText().isEmpty()){
+     selectedQID.setText(prefs1.get("QuestionTitre", "default"));
+     }
     ServiceReponse sr = new ServiceReponse();
     ServiceQuestion sq = new ServiceQuestion();
 logoutbtn.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;-fx-cursor: hand;");
@@ -149,10 +154,10 @@ if(item.getIduser() == 15){
                   //  vbox.setPrefHeight(200);
 
                     setGraphic(vbox);
-                                    button1.setOnAction(new EventHandler<ActionEvent>() {
+                    button1.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirm Delete ");
                 alert.setHeaderText(null);
                 alert.setContentText("Are you sure you want to delete this Response?");
@@ -222,6 +227,7 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fx
     
     public void setLabelID(String message){
     this.selectedQID.setText(message);
+    prefs1.put("QuestionTitre", message);
     }
     @FXML
     void AjouterClicked(ActionEvent event) {

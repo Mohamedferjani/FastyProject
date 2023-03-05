@@ -95,7 +95,7 @@ public class AffichageQuestionsController implements Initializable {
      private Preferences prefs1 = Preferences.userNodeForPackage(AffichageQuestionsController.class);
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-                          isReported = Boolean.parseBoolean(prefs1.get("isreported", "true"));
+                        //  isReported = prefs1.getBoolean("isreported", false);
 
          ServiceForum sf = new ServiceForum();
           ServiceQuestion sq= new ServiceQuestion();
@@ -159,36 +159,38 @@ Forum f = sf.getForumById(Integer.parseInt(idforum));
 try (BufferedReader reader = Files.newBufferedReader(filePath)) {
     String line;
     while ((line = reader.readLine()) != null) {
-        if (line.contains(String.valueOf(item.getId_question()))) {
+        if (line.contains("Question numero : "+Integer.toString(item.getId_question()))) {
             found = true;
-           isReported = true;
-            break;
+           //isReported = true;
+           break;
+        }else{
+        found = false;
         }
     }
 } catch (IOException e) {
     // Handle exception
 }
-                       if(found == false){
-                    Button button = new Button("Report");
+                    
+                    Button button = new Button(found ?"Unreport":"Report");
                     button.setStyle("-fx-background-color: #d32f2f;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 6px 10px;-fx-border-radius: 4px;-fx-cursor: hand;");
                    
 button.setOnAction(e -> {
     // Toggle the isReported flag
-   // isReported = !isReported;
-    prefs1.put("isreported", new Boolean(isReported).toString());
+    found = !found;
+    //prefs1.put("isreported", new Boolean(isReported).toString());
     // Add or remove the question ID from the report file
 
     File reportFile = new File("src/Reports/report.txt");
     try {
-        if (isReported) {
+        if (found) {
             Files.write(reportFile.toPath(), Collections.singletonList("Question numero : "+Integer.toString(item.getId_question())), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             button.setText("Unreport");
-            isReported = false;
+           // isReported = false;
         } else {
-            List<String> lines = Files.lines(reportFile.toPath()).filter(line -> !line.equals(Integer.toString(item.getId_question()))).collect(Collectors.toList());
+            List<String> lines = Files.lines(reportFile.toPath()).filter(line -> !line.contains("Question numero : "+Integer.toString(item.getId_question()))).collect(Collectors.toList());
             Files.write(reportFile.toPath(), lines, StandardOpenOption.TRUNCATE_EXISTING);
             button.setText("Report");
-            isReported = true;
+           //isReported = true;
         }
     } catch (IOException ex) {
         System.err.println(ex);
@@ -205,46 +207,9 @@ button.setOnAction(e -> {
                     setGraphic(vbox);
                     i++;
                     
-                    }
                     
-                    else
                     
-                    {
-                        Button button = new Button("Unreport");
-                    button.setStyle("-fx-background-color: #d32f2f;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 6px 10px;-fx-border-radius: 4px;-fx-cursor: hand;");
-                   
-button.setOnAction(e -> {
-    // Toggle the isReported flag
-  // isReported = !isReported;
-    prefs1.put("isreported", new Boolean(isReported).toString());
-
-    File reportFile = new File("src/Reports/report.txt");
-    try {
-        if (!isReported) {
-            Files.write(reportFile.toPath(), Collections.singletonList(Integer.toString(item.getId_question())), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            button.setText("Unreport");
-            isReported = true;
-        } else {
-            List<String> lines = Files.lines(reportFile.toPath()).filter(line -> !line.equals(Integer.toString(item.getId_question()))).collect(Collectors.toList());
-            Files.write(reportFile.toPath(), lines, StandardOpenOption.TRUNCATE_EXISTING);
-            button.setText("Report");
-            isReported = false;
-        }
-    } catch (IOException ex) {
-        System.err.println(ex);
-    }
-});
                     
-
-                    HBox buttonBox = new HBox(button);
-                     
-                     //buttonBox.setSpacing(10);
-                    buttonBox.setStyle("-fx-alignment: center-right;");
-                    VBox vbox = new VBox(Question,title,buttonBox);
-                    vbox.setPrefHeight(80);
-                    setGraphic(vbox);
-                    i++;
-                    }
                 }
             }
         });
