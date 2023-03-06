@@ -21,4 +21,6 @@ public interface QService {
     public List<Question> getALLQuestionByUser(int id);
     public Question getQuestionById(int id);
     public void PostQuestionOnFacebook(Question q);
+    public List<Question> getALLUnsolvedQuestions(int idforum);
+    public List<Question> getALLSolvedQuestions(int idforum);
 }

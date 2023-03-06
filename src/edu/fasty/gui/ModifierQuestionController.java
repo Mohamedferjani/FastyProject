@@ -12,6 +12,7 @@ import edu.fasty.services.ServiceForum;
 import edu.fasty.services.ServiceQuestion;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -75,7 +76,7 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageMesQuestions
     }
 
     @FXML
-    void modifierquestion(ActionEvent event) throws IOException, ParserConfigurationException, SAXException {
+    void modifierquestion(ActionEvent event) throws IOException, ParserConfigurationException, SAXException, URISyntaxException {
  if(questiontype.getText().isEmpty()){
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR ");

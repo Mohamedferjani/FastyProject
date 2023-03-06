@@ -12,6 +12,7 @@ import edu.fasty.services.ServiceQuestion;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -74,7 +75,7 @@ public class AjouterQuestionController implements Initializable {
     } 
     
     @FXML
-    void ajouterClicked(ActionEvent event) throws UnsupportedEncodingException, IOException, SAXException, ParserConfigurationException {
+    void ajouterClicked(ActionEvent event) throws UnsupportedEncodingException, IOException, SAXException, ParserConfigurationException, URISyntaxException {
         if(question.getText().isEmpty()){
          Alert alertType=new Alert(AlertType.ERROR);
                 alertType.setTitle("Error");

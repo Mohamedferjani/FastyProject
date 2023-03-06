@@ -72,7 +72,7 @@ public class AffichageReponsesController implements Initializable {
     private Preferences prefs = Preferences.userNodeForPackage(AffichageQuestionsController.class);
         private Preferences prefs1 = Preferences.userNodeForPackage(AffichageReponsesController.class);
 
-    int i;
+    long i;
 
     /**
      * Initializes the controller class.
@@ -91,16 +91,20 @@ backbtn.setAlignment(Pos.CENTER_RIGHT);
 Question q = sq.getQuestionById(Integer.parseInt(prefs.get("idquestion", "default")));
        // System.err.println(q.getId_question());
 List<Reponse> reponses = sr.getAllReponsesByQuestion(q.getId_question());
-i = reponses.size();
+//Sum of all responses
+
+        for (Reponse r : reponses) {
+            listviewID.getItems().add(r);
+        }
+        i = listviewID.getItems()
+                .stream()
+                .count();
 if(i==1 || i == 0){
     RCountID.setText("There is "+i+" Response");
 
 }else{
 RCountID.setText("There is "+i+" Responses");
 }
-        for (Reponse r : reponses) {
-            listviewID.getItems().add(r);
-        }
                  listviewID.setCellFactory(param -> new ListCell<Reponse>() {
        
                      private ImageView imageView = new ImageView();             
@@ -116,7 +120,7 @@ RCountID.setText("There is "+i+" Responses");
 
                     Text sentby = new Text("Sent by : ");
                     Text title = new Text("Reponse : "+item.getContenu());      
-    
+    prefs.put("idreponse", Integer.toString(item.getId_reponse()));
                     title.wrappingWidthProperty().bind(listviewID.widthProperty().subtract(10));
              Image image = new Image("/Images/user.png");
                     imageView.setImage(image);
@@ -178,21 +182,21 @@ if(item.getIduser() == 15){
                 }
                     }
 });
-                                    //                    button.setOnAction(new EventHandler<ActionEvent>() {
-//                    @Override
-//                    public void handle(ActionEvent event) {
-//                       FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierForum.fxml"));
-//                        try {
-//                             Parent root = loader.load();
-//                             ModifierForumController mfc = loader.getController();
-//                             mfc.setTitreID(titre);
-//                             mfc.setContenuID(contenu);
-//                           searchbyname.getScene().setRoot(root);
-//                        } catch (IOException e) {
-//                            System.err.println("Error: "+e.getMessage());
-//                        }
-//                    }
-//});
+                                                        button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
+                        try {
+                            prefs.put("idreponse", Integer.toString(item.getId_reponse()));
+                             Parent root = loader.load();
+                             ModifierReponseController mrc = loader.getController();
+                            mrc.setContenuID(item.getContenu());
+                           selectedQID.getScene().setRoot(root);
+                        } catch (IOException e) {
+                            System.err.println("Error: "+e.getMessage());
+                        }
+                    }
+});
 }else{
                    HBox imageBox = new HBox(imageView);
                     imageBox.setStyle("-fx-alignment: center;");

@@ -14,6 +14,7 @@ import edu.fasty.services.ServiceQuestion;
 import edu.fasty.services.ServiceReponse;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -29,7 +30,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -71,11 +71,13 @@ final ServiceReponse sr = new ServiceReponse();
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      addbtn.setStyle("-fx-background-color: #4CAF50;-fx-background-radius: 5;-fx-border-radius: 5;-fx-border-width: 1;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 8 16;;-fx-cursor: hand;");
+      cancelbtn.setStyle(" -fx-background-color: #e74c3c;-fx-background-radius: 5;-fx-border-radius: 5;-fx-border-width: 1;-fx-border-color: #c0392b;-fx-text-fill: white;-fx-font-size: 14px;-fx-font-weight: bold;-fx-padding: 8 16;");
+    
     }    
 
     @FXML
-    private void ajouterClicked(ActionEvent event) throws IOException, ParserConfigurationException, SAXException {
+    private void ajouterClicked(ActionEvent event) throws IOException, ParserConfigurationException, SAXException, URISyntaxException {
         if(answerID.getText().isEmpty()){
          Alert alertType=new Alert(Alert.AlertType.ERROR);
                 alertType.setTitle("Error");

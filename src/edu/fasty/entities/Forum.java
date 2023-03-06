@@ -14,6 +14,7 @@ public class Forum {
     private int id_forum;
     private String titre;
     private String contenu;
+    private int iduser;
     
     
     public Forum() {
@@ -38,6 +39,14 @@ public int getId_forum() {
 
     public void setId_forum(int id_forum) {
         this.id_forum = id_forum;
+    }
+
+    public int getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(int iduser) {
+        this.iduser = iduser;
     }
 
     public String getTitre() {

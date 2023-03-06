@@ -136,6 +136,7 @@ Question q = null;
         }
          return questions; 
     }
+    
 
     @Override
     public void PostQuestionOnFacebook(Question q) {
@@ -159,5 +160,43 @@ Question q = null;
                ok.setHeaderText("There is an error while publishing...");
                ok.show();
         }
+    }
+
+    @Override
+    public List<Question> getALLUnsolvedQuestions(int idforum) {
+       List<Question> questions = new ArrayList<>();
+         try {
+            String req = "SELECT DISTINCT * FROM question LEFT JOIN reponse ON question.id_question = reponse.id_question WHERE reponse.id_question IS NULL AND question.id_forum ="+idforum;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()){
+                ServiceForum sf = new ServiceForum();
+                Forum f =  sf.getForumById(rs.getInt(1));
+                Question q = new Question(rs.getInt("id_question"),f,rs.getString("contenu"),rs.getInt("id_user"));
+                questions.add(q);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+         return questions;
+    }
+
+    @Override
+    public List<Question> getALLSolvedQuestions(int idforum) {
+                List<Question> questions = new ArrayList<>();
+         try {
+            String req = "SELECT DISTINCT question.* FROM question INNER JOIN reponse ON question.id_question = reponse.id_question WHERE question.id_forum ="+idforum;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()){
+                ServiceForum sf = new ServiceForum();
+                Forum f =  sf.getForumById(rs.getInt(1));
+                Question q = new Question(rs.getInt("id_question"),f,rs.getString("contenu"),rs.getInt("id_user"));
+                questions.add(q);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+         return questions;
     }
 }

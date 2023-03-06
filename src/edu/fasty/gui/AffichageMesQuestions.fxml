@@ -21,8 +21,8 @@
       <Pane layoutX="-2.0" layoutY="157.0" prefHeight="257.0" prefWidth="190.0" style="-fx-background-color: rgb(240,255,240);">
          <children>
             <Button fx:id="mesquestionsid" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#MesQuestionsClicked" prefHeight="41.0" prefWidth="145.0" text="My Questions" />
-            <Button fx:id="resoluid" layoutX="14.0" layoutY="96.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="145.0" text="Solved" />
-            <Button fx:id="nonresoluid" layoutX="14.0" layoutY="163.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="145.0" text="Unsolved" />
+            <Button fx:id="resoluid" layoutX="14.0" layoutY="96.0" mnemonicParsing="false" onAction="#SolvedClicked" prefHeight="41.0" prefWidth="145.0" text="Solved" />
+            <Button fx:id="nonresoluid" layoutX="14.0" layoutY="163.0" mnemonicParsing="false" onAction="#UnsolvedClicked" prefHeight="41.0" prefWidth="145.0" text="Unsolved" />
          </children>
       </Pane>
       <ListView fx:id="listviewid" layoutX="201.0" layoutY="317.0" prefHeight="361.0" prefWidth="635.0" />
@@ -33,5 +33,10 @@
       </Separator>
       <Button fx:id="allquestions" layoutX="13.0" layoutY="127.0" mnemonicParsing="false" onAction="#AllQuestionsClicked" prefHeight="41.0" prefWidth="145.0" text="All Questions" />
       <Button fx:id="addbtn" layoutX="674.0" layoutY="228.0" mnemonicParsing="false" onAction="#ajouterClicked" prefHeight="48.0" prefWidth="162.0" text="ADD QUESTION" />
+      <ImageView fitHeight="222.0" fitWidth="223.0" layoutX="390.0" layoutY="68.0">
+         <image>
+            <Image url="@../../../Images/myquestions.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

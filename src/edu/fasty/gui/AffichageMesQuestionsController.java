@@ -255,6 +255,27 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageQuestions.fx
      }
 
     }
+    @FXML
+    void SolvedClicked(ActionEvent event) {
+FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsResolues.fxml"));
+     try {
+          Parent root = loader.load();
+        listviewid.getScene().setRoot(root);
+     } catch (IOException e) {
+         System.err.println("Error: "+e.getMessage());
+     }
+    }
+
+    @FXML
+    void UnsolvedClicked(ActionEvent event) {
+FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsNonResolues.fxml"));
+     try {
+          Parent root = loader.load();
+        listviewid.getScene().setRoot(root);
+     } catch (IOException e) {
+         System.err.println("Error: "+e.getMessage());
+     }
+    }
     
     public void SetForumID(String message){
     this.idforum = message;

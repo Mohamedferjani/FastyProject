@@ -236,6 +236,27 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("AffichageMesQuestions
          System.err.println("Error: "+e.getMessage());
      }
     }
+     @FXML
+    void SolvedClicked(ActionEvent event) {
+FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsResolues.fxml"));
+     try {
+          Parent root = loader.load();
+        listviewid.getScene().setRoot(root);
+     } catch (IOException e) {
+         System.err.println("Error: "+e.getMessage());
+     }
+    }
+
+    @FXML
+    void UnsolvedClicked(ActionEvent event) {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("QuestionsNonResolues.fxml"));
+     try {
+          Parent root = loader.load();
+        listviewid.getScene().setRoot(root);
+     } catch (IOException e) {
+         System.err.println("Error: "+e.getMessage());
+     }
+    }
     
     public void setLabelID(String message){
     this.labelid.setText(message);
