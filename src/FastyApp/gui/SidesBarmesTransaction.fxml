@@ -2,25 +2,54 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: rgb(240,255,240) rgb(240,255,240);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FastyApp.gui.SidesBarmesTransactionController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: rgb(240,255,240) rgb(240,255,240);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FastyApp.gui.SidesBarmesTransactionController">
     <stylesheets>
         <URL value="@sidesbarmestransaction.css" />
     </stylesheets>
    <children>
       <TextField fx:id="getNom" layoutX="38.0" layoutY="98.0" prefHeight="26.0" prefWidth="203.0" promptText="Donner le nom de la transaction" />
-      <TextArea fx:id="affich" layoutX="40.0" layoutY="171.0" prefHeight="416.0" prefWidth="858.0" />
-      <ImageView fitHeight="88.0" fitWidth="180.0" layoutX="729.0">
+      <ImageView fx:id="image" fitHeight="88.0" fitWidth="180.0" layoutX="729.0">
          <image>
             <Image url="@../../../ImageUsed/323539476_729940748745569_2741585085534218373_n.png" />
          </image>
       </ImageView>
-      <Button layoutX="342.0" layoutY="95.0" mnemonicParsing="false" onAction="#btnaffiche" prefHeight="32.0" prefWidth="96.0" text="Afficher" />
-      <Button layoutX="595.0" layoutY="95.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="96.0" text="Supprimer" />
+      <Button layoutX="273.0" layoutY="95.0" mnemonicParsing="false" onAction="#getOneByName" prefHeight="32.0" prefWidth="96.0" text="Rechercher" />
+      <Button layoutX="442.0" layoutY="95.0" mnemonicParsing="false" onAction="#DeleteOne" prefHeight="32.0" prefWidth="96.0" text="Supprimer" />
+      <ListView fx:id="listViewNom" layoutX="114.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <Button layoutX="614.0" layoutY="95.0" mnemonicParsing="false" onAction="#getAll" prefHeight="32.0" prefWidth="203.0" text="Afficher tous les transaction" />
+      <ListView fx:id="listViewRecepteur" layoutX="292.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <ListView fx:id="listViewExepediteur" layoutX="468.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <ListView fx:id="listViewMontant" layoutX="646.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <Label layoutX="177.0" layoutY="142.0" text="Nom" />
+      <Label layoutX="339.0" layoutY="142.0" text="Recepteur" />
+      <Label layoutX="512.0" layoutY="142.0" text="Expéditeur " />
+      <Label layoutX="698.0" layoutY="142.0" text="Valeur" />
+      <Text layoutX="38.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Transaction" underline="true">
+         <effect>
+            <Glow level="0.49" />
+         </effect>
+      </Text>
+      <Button layoutX="782.0" layoutY="647.0" mnemonicParsing="false" onAction="#GoMesFacture" prefHeight="32.0" prefWidth="114.0" text="Mes Factures" />
+      <Label layoutX="195.0" layoutY="615.0" text="Total transaction : " underline="true">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_totalTransac" layoutX="393.0" layoutY="615.0" text="0 Dt">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      
    </children>
 </AnchorPane>

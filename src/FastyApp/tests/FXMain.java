@@ -6,6 +6,8 @@
 package FastyApp.tests;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,15 +23,22 @@ import javafx.stage.Stage;
  * @author ISSAM
  */
 public class FXMain extends Application {
-    
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../gui/SidesBarmesTransaction.fxml"));  
-        Scene scene = new Scene(root);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        Parent root;
+        try {
+            //  root = FXMLLoader.load(getClass().getResource("../gui/SidesBarmesTransaction.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../gui/TransactionFXML.fxml"));
+
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("SELEMOU 3ALAYKOM");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+
     }
 
     /**
@@ -38,5 +47,5 @@ public class FXMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

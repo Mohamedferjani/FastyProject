@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -26,7 +28,7 @@ public class ServiceTransaction implements InterfaceTransaction<Transaction>{
     public void ajouterTransaction(Transaction t) {
           try {
 
-            String req = "INSERT INTO `transaction`( `id_recepteur`, `id_expiditeur`, `id_produit`) VALUES ('" + t.getId_recepteur() + "','" + t.getId_expiditeur() + "','"+ t.getId_produit()+"')";
+            String req = "INSERT INTO `transaction`( `id_recepteur`, `id_expiditeur`,`NomTransaction`, `id_produit` ) VALUES ('" + t.getId_recepteur() + "','" + t.getId_expiditeur() + "','"+ t.getNomTransaction()+ "','"+ t.getId_produit()+"')";
             Statement st = connect.createStatement();
             st.executeUpdate(req);
             System.out.println("Trasaction Created !");
@@ -37,15 +39,18 @@ public class ServiceTransaction implements InterfaceTransaction<Transaction>{
     }
 
     @Override
-    public void supprimerTransaction(int id) {
+    public boolean supprimerTransaction(int id) {
+        boolean res = false;
         try {
             String req = "DELETE FROM `transaction` WHERE id_transaction = " + id;
             Statement st = connect.createStatement();
             st.executeUpdate(req);
             System.out.println("transaction Deleted !");
+            res=true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return res;
     }
 
     @Override
@@ -62,14 +67,14 @@ public class ServiceTransaction implements InterfaceTransaction<Transaction>{
     }
 
     @Override
-    public List<Transaction> getAllTransaction() {
-       List<Transaction> list = new ArrayList<>();
+    public ObservableList<Transaction> getAllTransaction() {
+       ObservableList<Transaction> list = FXCollections.observableArrayList();
         try {
             String req = "Select * from transaction";
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Transaction t = new Transaction(rs.getInt(1), rs.getInt("2"), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                Transaction t = new Transaction(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
                 list.add(t);
             }
         } catch (SQLException ex) {
@@ -99,6 +104,8 @@ public class ServiceTransaction implements InterfaceTransaction<Transaction>{
 
         return t;
     }
+
+
        
     }
     

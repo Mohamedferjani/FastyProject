@@ -68,6 +68,12 @@ public class Transaction {
         this.id_produit = id_produit;
         this.NomTransaction = NomTransaction;
     }
+     public Transaction( int id_recepteur, int id_expiditeur, int id_produit, String NomTransaction) {
+        this.id_recepteur = id_recepteur;
+        this.id_expiditeur = id_expiditeur;
+        this.id_produit = id_produit;
+        this.NomTransaction = NomTransaction;
+    }
 
     @Override
     public int hashCode() {

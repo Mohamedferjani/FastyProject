@@ -14,9 +14,11 @@ import java.util.List;
 public interface InterfaceTransaction <T> {
     
     public void ajouterTransaction(T p);
-    public void supprimerTransaction(int id);
+    public boolean supprimerTransaction(int id);
     public void modifierTransaction(T p);
     public List<T> getAllTransaction();
     public T getOneByIdT(int id);
+        
+
     
 }
