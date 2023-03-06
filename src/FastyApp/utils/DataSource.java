@@ -24,7 +24,7 @@ public class DataSource {
     private final String PWD = "";
     private final String URL = "jdbc:mysql://localhost:3306/fasty";
 
-    public DataSource() {
+    private DataSource() {
         try {
             cnx = DriverManager.getConnection(URL, USER, PWD);
             System.out.println("Connected !");
