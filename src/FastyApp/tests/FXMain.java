@@ -28,8 +28,8 @@ public class FXMain extends Application {
     public void start(Stage primaryStage) {
         Parent root;
         try {
-              root = FXMLLoader.load(getClass().getResource("../gui/SidesBarmesTransaction.fxml"));
-           // root = FXMLLoader.load(getClass().getResource("../gui/TransactionFXML.fxml"));
+              //root = FXMLLoader.load(getClass().getResource("../gui/SidesBarmesTransaction.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../gui/TransactionFXML.fxml"));
 
             Scene scene = new Scene(root);
             primaryStage.setTitle("SELEMOU 3ALAYKOM");

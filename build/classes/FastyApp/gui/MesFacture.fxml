@@ -12,7 +12,10 @@
 <AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1030.0" style="-fx-background-color: rgb(240,255,240) rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FastyApp.gui.MesFactureController">
    <children>
       <ListView fx:id="listViewnumf" layoutX="83.0" layoutY="145.0" prefHeight="455.0" prefWidth="518.0" />
-      <Text layoutX="297.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro Factures" />
+      <Text layoutX="285.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro Factures">
+         <font>
+            <Font name="Calibri Bold Italic" size="15.0" />
+         </font></Text>
       <Text layoutX="354.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Factures">
          <font>
             <Font name="Arial Black" size="47.0" />
@@ -22,7 +25,7 @@
             <Image url="@../../../ImageUsed/logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="792.0" layoutY="625.0" mnemonicParsing="false" onAction="#retourt" text="Retour" />
+      <Button layoutX="792.0" layoutY="625.0" mnemonicParsing="false" onAction="#retourt" style="-fx-background-color: rgb(192,192,192);" text="Retour" />
       <ImageView fx:id="generatePDF" fitHeight="85.0" fitWidth="91.0" layoutX="764.0" layoutY="145.0" onMouseClicked="#generatePDF" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../ImageUsed/pdf.png" />
@@ -33,5 +36,6 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
+      <Button layoutX="906.0" layoutY="26.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Deconnecté" textFill="#f5f0f0" />
    </children>
 </AnchorPane>
