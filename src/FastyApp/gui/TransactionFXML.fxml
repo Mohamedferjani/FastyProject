@@ -8,30 +8,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FastyApp.gui.GestionFactureFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1030.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FastyApp.gui.GestionFactureFXMLController">
    <children>
-      <Button fx:id="btnEnvoiyer" layoutX="152.0" layoutY="540.0" mnemonicParsing="false" onAction="#sendEmail" prefHeight="32.0" prefWidth="239.0" style="-fx-background-color: rgb(192,192,192);" text="Négocier par mail">
+      <Button fx:id="btnEnvoiyer" layoutX="154.0" layoutY="607.0" mnemonicParsing="false" onAction="#sendEmail" prefHeight="32.0" prefWidth="239.0" style="-fx-background-color: rgb(192,192,192);" text="Négocier par mail">
          <cursor>
             <Cursor fx:constant="NW_RESIZE" />
          </cursor></Button>
-      <Button layoutX="483.0" layoutY="540.0" mnemonicParsing="false" onAction="#afficherNumero" prefHeight="32.0" prefWidth="239.0" style="-fx-background-color: rgb(192,192,192);" text="Afficher le numéro du vendeur" />
+      <Button layoutX="566.0" layoutY="607.0" mnemonicParsing="false" onAction="#afficherNumero" prefHeight="32.0" prefWidth="239.0" style="-fx-background-color: rgb(192,192,192);" text="Afficher le numéro du vendeur" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <ImageView fitHeight="82.0" fitWidth="174.0" layoutX="777.0">
-         <image>
-            <Image url="@../../../ImageUsed/323539476_729940748745569_2741585085534218373_n.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="724.0" layoutY="547.0">
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="805.0" layoutY="613.0">
          <image>
             <Image url="@../ImageUsed/Phone-PNG-File.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="21.0" fitWidth="28.0" layoutX="393.0" layoutY="545.0">
+      <ImageView fitHeight="21.0" fitWidth="28.0" layoutX="397.0" layoutY="613.0">
          <image>
             <Image url="@../ImageUsed/Negotiation-PNG-Image.png" />
          </image>
       </ImageView>
-      <ListView layoutX="492.0" layoutY="163.0" prefHeight="303.0" prefWidth="374.0" />
-      <Button layoutX="751.0" layoutY="82.0" mnemonicParsing="false" onAction="#acheterLeProduit" prefHeight="32.0" prefWidth="81.0" text="Acheter" />
+      <ListView layoutX="540.0" layoutY="228.0" prefHeight="303.0" prefWidth="374.0" />
+      <Button layoutX="459.0" layoutY="667.0" mnemonicParsing="false" onAction="#acheterLeProduit" prefHeight="32.0" prefWidth="81.0" text="J'achéte" />
+      <ImageView fitHeight="32.0" fitWidth="56.0" layoutX="543.0" layoutY="667.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icons/3081822.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icons/logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="419.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icons/401176.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
