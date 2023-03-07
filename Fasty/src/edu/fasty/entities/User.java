@@ -5,8 +5,8 @@
  */
 package edu.fasty.entities;
 
-import java.awt.Image;
 import java.util.Objects;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -15,13 +15,13 @@ import java.util.Objects;
 public class User {
     private int id_user,cin,num_tel;
     private String nom, prenom,adresse,email,password,token;
-    private Image image;
+    private String image;
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
 //    private blob photo;
@@ -37,7 +37,7 @@ private int id_role ;
         this.id_role = id_role;
     }
 
-    public User(int id_user, int cin, int num_tel, String nom, String prenom, String adresse, String email, String password, String token, int id_role) {
+    public User(int id_user, int cin, int num_tel, String nom, String prenom, String adresse, String email, String password, int id_role,String image) {
         this.id_user = id_user;
         this.cin = cin;
         this.num_tel = num_tel;
@@ -46,11 +46,11 @@ private int id_role ;
         this.adresse = adresse;
         this.email = email;
         this.password = password;
-        this.token = token;
         this.id_role = id_role;
+        this.image = image;
     }
 
-    public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password) {
+    public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password , int id_role,String image) {
         this.cin = cin;
         this.num_tel = num_tel;
         this.nom = nom;
@@ -58,20 +58,21 @@ private int id_role ;
         this.adresse = adresse;
         this.email = email;
         this.password = password;
-    }
+        this.id_role = id_role;
+        this.image = image;    }
 
-    public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password, String token) {
-        this.cin = cin;
-        this.num_tel = num_tel;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.email = email;
-        this.password = password;
-        this.token = token;
-    }
+//    public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password) {
+//        
+//        this.cin = cin;
+//        this.num_tel = num_tel;
+//        this.nom = nom;
+//        this.prenom = prenom;
+//        this.adresse = adresse;
+//        this.email = email;
+//        this.password = password;
+//    }
 
-    public User(int id_user, int cin, int num_tel, String nom, String prenom, String adresse, String email, String password, String token) {
+    public User(int id_user, int cin, int num_tel, String nom, String prenom, String adresse, String email, String password) {
         this.id_user = id_user;
         this.cin = cin;
         this.num_tel = num_tel;
@@ -80,7 +81,6 @@ private int id_role ;
         this.adresse = adresse;
         this.email = email;
         this.password = password;
-        this.token = token;
     }
 
     public int getId_user() {
@@ -210,9 +210,7 @@ private int id_role ;
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.token, other.token)) {
-            return false;
-        }
+        
         return true;
     }
 

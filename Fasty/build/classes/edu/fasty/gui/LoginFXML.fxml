@@ -5,29 +5,37 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="400.0" prefWidth="600.0" styleClass="bg-form" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.LoginFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="759.0" prefWidth="1037.0" styleClass="bg-form" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.LoginFXMLController">
    <children>
-      <Button fx:id="inscrire_recruteur" layoutX="344.0" layoutY="349.0" mnemonicParsing="false" stylesheets="@login.css" text="s'inscrire en tant que recruteur">
+      <Button fx:id="inscrire_user" layoutX="396.0" layoutY="421.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="46.0" prefWidth="108.0" stylesheets="@login.css" text="S'inscrire">
          <styleClass>
             <String fx:value="login-btn" />
             <String fx:value="bg-form" />
-         </styleClass></Button>
-      <Button fx:id="inscrire_user" layoutX="65.0" layoutY="349.0" mnemonicParsing="false" stylesheets="@login.css" text="s'inscrire en tant que etudiant">
+         </styleClass>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="connect" layoutX="569.0" layoutY="421.0" mnemonicParsing="false" onAction="#seconnecter" prefHeight="46.0" prefWidth="100.0" stylesheets="@login.css" text="connecter">
          <styleClass>
             <String fx:value="login-btn" />
             <String fx:value="bg-form" />
-         </styleClass></Button>
-      <Button fx:id="connect" layoutX="423.0" layoutY="267.0" mnemonicParsing="false" stylesheets="@login.css" text="connecter">
-         <styleClass>
-            <String fx:value="login-btn" />
-            <String fx:value="bg-form" />
-         </styleClass></Button>
-      <Text layoutX="91.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="adresse email" />
-      <Text layoutX="91.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mot de passe" wrappingWidth="99.7109375" />
-      <TextField fx:id="donneradresse" layoutX="251.0" layoutY="135.0" styleClass="textfield" stylesheets="@login.css" />
-      <PasswordField fx:id="password" layoutX="251.0" layoutY="207.0" styleClass="textfield" stylesheets="@login.css" />
+         </styleClass>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Text layoutX="315.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="adresse email">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="313.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mot de passe" wrappingWidth="99.7109375">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Text>
+      <TextField fx:id="donneradresse" layoutX="475.0" layoutY="258.0" styleClass="textfield" stylesheets="@login.css" />
+      <PasswordField fx:id="password" layoutX="475.0" layoutY="330.0" styleClass="textfield" stylesheets="@login.css" />
       
    </children>
 </AnchorPane>

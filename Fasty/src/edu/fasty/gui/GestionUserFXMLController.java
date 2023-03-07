@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -26,6 +27,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -91,8 +94,14 @@ public class GestionUserFXMLController implements Initializable {
 //                    String adresse = words[4];
 
                     Text title = new Text("CIN : " + item.getCin());
-
-                    
+                       Image image = new Image(item.getImage());
+                       ImageView imageview = new ImageView();
+                       imageview.setImage(image);
+                       double aspectRatio = image.getWidth() / image.getHeight();
+                       double scaledWidth = 50 * aspectRatio;
+                       imageview.setFitWidth(scaledWidth);
+                       imageview.setFitHeight(50);
+                       
                         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
                         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
                         Text subtitle = new Text(item.getNom());
@@ -116,6 +125,7 @@ public class GestionUserFXMLController implements Initializable {
                                     muc.setPrenom(item.getPrenom());
                                     muc.setTel(Integer.toString(item.getNum_tel()));
                                     muc.setCin(Integer.toString(item.getCin()));
+                                    muc.setImage(item.getImage());
                                     
                                     searchbyname.getScene().setRoot(root);
                                 } catch (IOException e) {
@@ -147,12 +157,20 @@ public class GestionUserFXMLController implements Initializable {
                                 }
                             }
                         });
+                        VBox imageBox = new VBox(imageview);
+                        imageBox.setStyle("-fx-alignment: center;");
+                        
                         HBox buttonBox = new HBox(button, button1);
-                        buttonBox.setSpacing(10);
-                        buttonBox.setStyle("-fx-alignment: center-right;");
-                        VBox vbox = new VBox(title, subtitle, buttonBox);
+                        buttonBox.setSpacing(25);
+                        buttonBox.setStyle("-fx-alignment: center;");
+                        VBox vbox = new VBox(imageBox,title, subtitle,buttonBox);
+                        vbox.setMargin(imageBox,new Insets(5,0,15,0));
+                        vbox.setMargin(title,new Insets(0,0,5,0));
+                        vbox.setMargin(subtitle,new Insets(0,0,10,0));
+                        vbox.setMargin(buttonBox,new Insets(0,0,15,0));
 
-                        vbox.setPrefHeight(80);
+
+
 
                         setGraphic(vbox);                  
                 }

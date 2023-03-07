@@ -17,5 +17,6 @@ public interface IService <T>{
     public void modifier(T u);
     public List<T> getAll();
     public T getOneById(int id);
+    public T RechercherUserparEmailMdp(String email,String mdp);
     
 }

@@ -43,7 +43,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(User u) {
             try {
-            String req = "INSERT INTO `user` (`nom`, `prenom`,`adresse`,`email`,`cin`,`num_tel`,`password`,`token`) VALUES (?,?,?,?,?,?,?,?)";
+            String req = "INSERT INTO `user` (`nom`, `prenom`,`adresse`,`email`,`cin`,`num_tel`,`password`,`photo`,`id_role`) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(2, u.getPrenom());
             ps.setString(1, u.getNom());
@@ -52,7 +52,8 @@ Connection cnx = DataSource.getInstance().getCnx();
             ps.setInt(5, u.getCin());
             ps.setInt(6, u.getNum_tel());
             ps.setString(7, u.getPassword());
-            ps.setString(8, u.getToken());
+            ps.setString(8, u.getImage());
+            ps.setInt(9, u.getId_role());
             ps.executeUpdate();
             System.out.println("Tzed");
         } catch (SQLException ex) {
@@ -93,7 +94,7 @@ Connection cnx = DataSource.getInstance().getCnx();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 User u;
-                u = new User(rs.getInt("id_user"),rs.getInt("cin"),rs.getInt("num_tel"), rs.getString("nom"), rs.getString("prenom"),rs.getString("adresse"),rs.getString("email"),rs.getString("password"),rs.getString("token"));
+                u = new User(rs.getInt("id_user"),rs.getInt("cin"),rs.getInt("num_tel"), rs.getString("nom"), rs.getString("prenom"),rs.getString("adresse"),rs.getString("email"),rs.getString("password"),rs.getInt("id_role"),rs.getString("photo"));
                 list.add(u);
             }
         } catch (SQLException ex) {
@@ -110,7 +111,7 @@ Connection cnx = DataSource.getInstance().getCnx();
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                 u = new User(rs.getInt("id_user"),rs.getInt("cin"),rs.getInt("num_tel"), rs.getString("nom"), rs.getString("prenom"),rs.getString("adresse"),rs.getString("email"),rs.getString("password"),rs.getString("token"));
+                 u = new User(rs.getInt("id_user"),rs.getInt("cin"),rs.getInt("num_tel"), rs.getString("nom"), rs.getString("prenom"),rs.getString("adresse"),rs.getString("email"),rs.getString("password"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -123,4 +124,22 @@ Connection cnx = DataSource.getInstance().getCnx();
         R = u.getPassword();
         return BCrypt.hashpw(R, BCrypt.gensalt());
     }*/
+@Override
+    public User RechercherUserparEmailMdp(String email , String mdp){
+   User u = null;
+  
+        try {
+            String requete = "SELECT * FROM user WHERE email = ? AND password = ?";
+        PreparedStatement statement = cnx.prepareStatement(requete);
+        statement.setString(1, email);
+        statement.setString(2, mdp);
+        ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                 u = new User(rs.getInt("id_user"),rs.getInt("cin"),rs.getInt("num_tel"), rs.getString("nom"), rs.getString("prenom"),rs.getString("adresse"),rs.getString("email"),rs.getString("password"),rs.getInt("id_role"),rs.getString("photo"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    return u;
+    }
 }

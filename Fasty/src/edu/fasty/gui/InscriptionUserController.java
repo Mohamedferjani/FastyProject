@@ -27,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 
 /**
  * FXML Controller class
@@ -132,12 +133,12 @@ public class InscriptionUserController implements Initializable {
             int cin = Integer.parseInt(tfCin.getText());
             String email = tfEmail.getText();
             String mdp = tfMdp.getText();
-
-            User s = new User(cin, tel, nom, prenom, adresse, email, prenom);
+            String img = "/images/hsan.png";
+            User s = new User(cin, tel, nom, prenom, adresse, email, mdp,2,img);
             IServiceUser sc = new IServiceUser();
             sc.ajouter(s);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
             try {
                 Parent root = loader.load();
 

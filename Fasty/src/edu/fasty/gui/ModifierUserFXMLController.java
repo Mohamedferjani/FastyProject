@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -47,12 +50,19 @@ public class ModifierUserFXMLController implements Initializable {
     private String emailRegex = "\\w+\\.?\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}";
     private String checkEmailQuery = "SELECT COUNT(*) FROM user WHERE email=?";
     Connection cnx = DataSource.getInstance().getCnx();
+    @FXML
+    private ImageView imageviewID;
+    private String image;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Platform.runLater(() -> {
+            Image img = new Image(image);
+            imageviewID.setImage(img);
+        });
 
     }
 
@@ -82,6 +92,10 @@ public class ModifierUserFXMLController implements Initializable {
 
     public void setMdp(String message) {
         this.tfMdp.setText(message);
+    }
+
+    public void setImage(String message) {
+        this.image = message;
     }
 
     @FXML
@@ -135,8 +149,8 @@ public class ModifierUserFXMLController implements Initializable {
             int cin = Integer.parseInt(tfCin.getText());
             String email = tfEmail.getText();
             String mdp = tfMdp.getText();
-
-            User s = new User(cin, tel, nom, prenom, adresse, email, prenom);
+            String img = "/images/hsan.png";
+            User s = new User(cin, tel, nom, prenom, adresse, email, prenom, 2, img);
             IServiceUser sc = new IServiceUser();
             sc.modifier(s);
 

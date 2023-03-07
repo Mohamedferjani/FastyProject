@@ -39,8 +39,6 @@ public class LoginFXMLController implements Initializable {
     @FXML
     private AnchorPane anchor;
     @FXML
-    private Button inscrire_recruteur;
-    @FXML
     private Button inscrire_user;
     @FXML
     private Button connect;
@@ -48,6 +46,8 @@ public class LoginFXMLController implements Initializable {
     private TextField donneradresse;
     @FXML
     private PasswordField password;
+    
+    private String emailRegex = "\\w+\\.?\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}";
 
     /**
      * Initializes the controller class.
@@ -60,22 +60,26 @@ public class LoginFXMLController implements Initializable {
         // TODO
     }    
 
-    private void admin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("inscription.fxml"));
+    
+    @FXML
+    private void inscrire(ActionEvent event) throws IOException {
+     Parent root = FXMLLoader.load(getClass().getResource("inscriptionUser.fxml"));
     Scene scene = new Scene(root);
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
+        
     }
+//    private void admin(ActionEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("inscription.fxml"));
+//    Scene scene = new Scene(root);
+//    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//    stage.setScene(scene);
+//    stage.show();
+//    }
 
-    private void user(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("inscriptionUser.fxml"));
-    Scene scene = new Scene(root);
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
-    }
 
+    @FXML
     private void seconnecter(ActionEvent event)throws SQLException, IOException {
         
    Connection cnx = DataSource.getInstance().getCnx();
@@ -93,23 +97,21 @@ IServiceUser userService = new IServiceUser();
         alert.setTitle("Attention");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez saisir l'email et le mot de passe.");
-        alert.showAndWait();
-        return;
-    } 
+        alert.show();
+        
+    }else if(!email.matches(emailRegex)){
+        Alert alertType = new Alert(Alert.AlertType.ERROR);
+            alertType.setTitle("Error");
+            alertType.setHeaderText("L'adresse email est invalide. Veuillez saisir une adresse email valide (ex: nom_utilisateur@domaine.com) !");
+            alertType.show();
+    } else{
 
-    try {
-        String requete = "SELECT * FROM user WHERE email = ? AND password = ?";
-        PreparedStatement statement = cnx.prepareStatement(requete);
-        statement.setString(1, email);
-        statement.setString(2, mdp);
-        ResultSet resultSet = statement.executeQuery();
-
-
-       if (resultSet.next()) {
-    int idRole = resultSet.getInt("id_role");
+User user = userService.RechercherUserparEmailMdp(email,mdp);
+       if (user != null) {
+    int idRole = user.getId_role();
     if (idRole == 1) {
         // Admin user, load admin.fxml
-        Parent root = FXMLLoader.load(getClass().getResource("AdminFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GestionUserFXML.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -125,21 +127,21 @@ IServiceUser userService = new IServiceUser();
         stage.setScene(scene);
         stage.show();
     }
-}
-        resultSet.close();
-        statement.close();
-      
-    } catch (SQLException e) {
-        e.printStackTrace();
+}else{
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
-        alert.setContentText("Impossible de se connecter à la base de données.");
-        alert.showAndWait();
-    }  
+        alert.setContentText("Email ou mot de passe invalide !.");
+        alert.show();
+       }
+//        resultSet.close();
+//        statement.close();
+  
+    }
     
     
     }
+
 
     }
     
