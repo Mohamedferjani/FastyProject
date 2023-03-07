@@ -3,9 +3,11 @@ package edu.geekerz.tests;
 import edu.geekerz.entities.CategoryRating;
 import edu.geekerz.entities.Rating;
 import edu.geekerz.entities.Score;
+import edu.geekerz.entities.Wishlist;
 import edu.geekerz.services.ServiceCategoryRating;
 import edu.geekerz.services.ServiceRating;
 import edu.geekerz.services.ServiceScore;
+import edu.geekerz.services.ServiceWishlist;
 import edu.geekerz.utils.DataSource;
 import java.sql.Date;
 
@@ -19,6 +21,13 @@ public class MainClass {
 //        DataSource c3=DataSource.getInstance() ;
 //        DataSource c4=DataSource.getInstance() ;
 
+        
+//        ServiceWishlist sw=new ServiceWishlist();
+//        Wishlist w1=new Wishlist(2,"Wishlist1","1,2,3","2000-02-02");
+//        Wishlist w2=new Wishlist(2,"Wishlist1modifier","1,2,3modifier","1999-02-02");
+        //sw.modifier(1, w2);
+       // System.out.println(sw.getOneByName("Wishlist1modifier"));
+        
         
         
         //ServiceRating sr=new ServiceRating();
