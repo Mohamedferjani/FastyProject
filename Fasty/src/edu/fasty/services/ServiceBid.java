@@ -1,113 +1,106 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.fasty.services;
 
 import edu.fasty.entities.Bid;
-import edu.fasty.entities.Event;
-import edu.fasty.utils.DataSource;
+import edu.fasty.utils.Myconnexion;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author IHEB
  */
-public class ServiceBid implements IBid<Bid> {
-    Connection cnx = DataSource.getInstance().getCnx();
+public class ServiceBid implements IService<Bid>{
+    Connection cnx;
+    Statement st;
+    public ServiceBid (){
+        cnx = Myconnexion.getInstance().getCnx();}
+
 
     @Override
-    public void ajouter(Bid B) {
-
-  try {
-            String req = "INSERT INTO `bid` (`id_event`, `id_produit`,`starting_price`,`id_last_bidder`) VALUES (?,?,?,?)";
-          
-            PreparedStatement ps = cnx.prepareStatement(req);
-           ps.setInt(1, B.getId_event());
-           ps.setInt(2, B.getId_produit());
-           ps.setInt(3, B.getStarting_price());
-           ps.setInt(4,B.getId_last_bidder());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-    }
-
-    @Override
-    public void supprimer(int id) {
-try {
-            String req = "DELETE FROM `bid` WHERE id_bid = " + id;
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("bid deleted !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-    }
-
-    @Override
-    public void modifier(Bid B) {
- try {
-            String req = "UPDATE `bid` SET `id_produit` = '" +B.getId_produit() + "', `starting_price` = '" + B.getStarting_price() + "',`id_last_bidder` ='"+B.getId_last_bidder() +"' WHERE `bid`.`id_bid` = " + B.getId_bid();
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("bid UPDATED  !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-    }
-
-    @Override
-    public List<Bid> getAll() {
-          List<Bid> list = new ArrayList<>();
-          
+    public void ajouter(Bid bid) {
+        Statement st;
         try {
-            String req = "Select * from evenement";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Bid bid1 = new Bid(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5));
-                list.add(bid1);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return list;
-        
-
-
-
-
+        st = cnx.createStatement();
+        String query ="INSERT INTO `bid`(`id_event`, `id_produit`, `starting_price`, `id_User`) VALUES ('"+bid.getId_event()+"','"+bid.getId_produit()+"','"+bid.getStarting_price()+"','"+bid.getId_User()+"')";
+        st.executeUpdate(query);}         
+        catch (SQLException ex) {
+        System.out.println(ex.getMessage());}
     }
 
     @Override
-    public Bid getOneById(int id) {
-      Bid bid1=null;
-             try {
-            String req = "Select * from bid where id_bid ="+id;
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                bid1 = new Bid(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5));
-            }
+    public List<Bid> afficher() throws SQLException {
+        List<Bid> LBid = new ArrayList<Bid>();
+        st = cnx.createStatement();       
+        String query = "SELECT * FROM bid";
+        ResultSet rs= st.executeQuery(query);
+        while (rs.next()){
+        Bid bid = new Bid();
+        bid.setId_bid(rs.getInt("id_bid"));
+        bid.setId_event(rs.getInt("id_event"));
+        bid.setId_produit(rs.getInt("id_produit"));
+        bid.setStarting_price(rs.getInt("starting_price"));
+        bid.setId_User(rs.getInt("id_User"));
+        LBid.add(bid);}        
+        return LBid;
+    }
+
+    @Override
+    public void supprimer(int id_bid) throws SQLException {
+        Statement stm = cnx.createStatement();
+        String query = "delete from bid where id_bid =" + id_bid ;
+        stm.executeUpdate(query);
+    }
+    
+    public Bid SearchById(long id_bid) throws SQLException{
+        Statement stm = cnx.createStatement();
+        Bid bid = new Bid();
+        String query = "select * from bid where id_bid="+id_bid;
+        ResultSet rs= stm.executeQuery(query);
+        while (rs.next()){
+        bid.setId_bid(rs.getInt("id_bid"));
+        bid.setId_event(rs.getInt("id_event"));
+        bid.setId_produit(rs.getInt("id_produit"));
+        bid.setId_User(rs.getInt("id_User"));
+        bid.setStarting_price(rs.getInt("starting_price"));}
+        return bid;
+     }
+
+    @Override
+    public void modifier(int id_BidModifier, Bid bid) throws SQLException {
+        Statement stm = cnx.createStatement();
+        Bid b =SearchById(id_BidModifier);
+        String query = "UPDATE `bid` SET `id_event`='"+bid.getId_event()+"',`id_produit`='"+bid.getId_produit()+"',`starting_price`='"+bid.getStarting_price()+"',`id_User`='"+bid.getId_User()+"' where id_bid="+b.getId_bid();
+        stm.executeUpdate(query);
+    }
+    
+        public void modifierFront(int id_BidModifier, Bid bid) throws SQLException {
+        Statement stm = cnx.createStatement();
+        Bid b =SearchById(id_BidModifier);
+        String query = "UPDATE `bid` SET `starting_price`='"+bid.getStarting_price()+"',`id_User`='"+bid.getId_User()+"',`id_lastbidder`='"+bid.getId_lastbidder()+"' where id_bid="+b.getId_bid();
+        stm.executeUpdate(query);
+    }
+        
+ public void GetBidWinner(int id_bid,Bid bid ){
+        try {
+            Statement stm = cnx.createStatement();
+            String query="select * from bid where id_bid="+id_bid;;
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(ServiceBid.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return bid1;
-        
-        
-        
-}
+ 
+ 
+ }
+ 
+    
 }

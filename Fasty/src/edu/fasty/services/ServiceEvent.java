@@ -1,180 +1,109 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.fasty.services;
 
-import edu.fasty.entities.Event;
-import edu.fasty.services.IEvent;
-import edu.fasty.utils.DataSource;
+import edu.fasty.entities.Evenement;
+import edu.fasty.utils.Myconnexion;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author IHEB
  */
-public class ServiceEvent implements IEvent <Event>{
-    Connection cnx = DataSource.getInstance().getCnx();
+public class ServiceEvent implements IService<Evenement>{
 
+        Connection cnx;
+        Statement st;
+    public ServiceEvent (){
+        cnx = Myconnexion.getInstance().getCnx();}
+    
+/*****************************Add Evenement***************************/    
     @Override
-    public boolean ajouter(Event E) {
+    public void ajouter(Evenement evenement) {
+        Statement st;
         try {
-            String req1 = "SELECT * FROM evenement WHERE titre= '"+E.getTitre()+"'";
-             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req1);
-            if(rs.next()){
-                Alert alertType=new Alert(Alert.AlertType.ERROR);
-                alertType.setTitle("Error");
-                alertType.setHeaderText("titre already exists !");
-                alertType.show();
-                return false;
-            }else {
-                String req = "INSERT INTO `evenement` (`date`, `isAuction`,`id_user`,`titre`,`description`) VALUES (?,?,?,?,?)";
-                PreparedStatement ps = cnx.prepareStatement(req);
-		 ps.setDate(1, java.sql.Date.valueOf(E.getDate()));
-           	 ps.setBoolean(2, E.isIsAuction());
-           	 ps.setInt(3,E.getId_user());
-           	 ps.setString(4,E.getTitre());
-            	 ps.setString(5,E.getDescription());
-            
-                ps.executeUpdate();
-             Alert a = new Alert(Alert.AlertType.INFORMATION, "eventadded", ButtonType.OK);
-            a.showAndWait();
-                System.out.println("event Successfully Created !");
-                return true;
-            }
-          
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return false;
+        st = cnx.createStatement();
+        String query ="INSERT INTO `evenement`(`titre`, `date`, `id_user`) VALUES ('"+evenement.getTitre()+"','"+LocalDate.now()+"','"+evenement.getId_user()+"')";
+        st.executeUpdate(query);}         
+        catch (SQLException ex) {
+        System.out.println(ex.getMessage());}
     }
-    
-    
 
     @Override
-    public void supprimer(int id) {
-try {
-            String req = "DELETE FROM `evenement` WHERE id_evenement = " + id;
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("EVENT deleted !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-
-
+    public List<Evenement> afficher() throws SQLException {
+        List<Evenement> Levent = new ArrayList<Evenement>();
+        st = cnx.createStatement();       
+        String query = "SELECT * FROM evenement";
+        ResultSet rs= st.executeQuery(query);
+        while (rs.next()){
+        Evenement event = new Evenement();
+        event.setId_evenement(rs.getInt("id_evenement"));
+        event.setDate(rs.getTimestamp(2).toLocalDateTime());
+        event.setId_user(rs.getInt("id_user"));
+        event.setTitre(rs.getString("titre"));
+        Levent.add(event);}        
+        return Levent;
     }
-        public void supprimer(String titre) {
+
+    @Override
+    public void supprimer(int id_evenement) throws SQLException {
+        Statement stm = cnx.createStatement();
+        String query = "delete from evenement where id_evenement =" + id_evenement ;
+        stm.executeUpdate(query);
+    }
+
+    public Evenement SearchById(long id_evenement) throws SQLException{
+        Statement stm = cnx.createStatement();
+        Evenement evenement = new Evenement();
+        String query = "select * from evenement where id_evenement="+id_evenement;
+        ResultSet rs= stm.executeQuery(query);
+        while (rs.next()){
+        evenement.setId_evenement(rs.getInt("id_evenement"));
+        evenement.setDate(rs.getTimestamp(2).toLocalDateTime());
+        evenement.setId_user(rs.getInt("id_user"));
+        evenement.setTitre(rs.getString("titre"));}
+        return evenement;
+        }
+    
+    
+    @Override
+    public void modifier(int id_EventModifier, Evenement event) throws SQLException {
+        Statement stm = cnx.createStatement();
+        Evenement e =SearchById(id_EventModifier);
+        String query = "UPDATE `evenement` SET `date`='"+LocalDateTime.now()+"',`id_user`='"+event.getId_user()+"',`titre`='"+event.getTitre()+"' where id_evenement="+e.getId_evenement();
+        stm.executeUpdate(query);
+    }
+    
+    
+    public HashMap<String, Double> StatistiqueParTitle() {
+        HashMap<String, Double> data = new HashMap<>();
         try {
-            String req = "DELETE FROM `evenement` WHERE titre = ?";
-                PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, titre);
-            ps.executeUpdate();
-            
-            System.out.println("EVENT deleted !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-
-
-    }
-
-
-    @Override
-    public void modifier(Event E) {
-          try {
-            String req = "UPDATE `evenement` SET `date` = '" +E.getDate() + "', `isAuction` = '" + E.isIsAuction() + "',`titre` ='"+E.getTitre() + "', `description` = '" + E.getDescription() +"' WHERE `evenement`.`id_evenement` = " + E.getId_evenement();
-            Statement st = cnx.createStatement();
-            st.executeUpdate(req);
-            System.out.println("EVENT UPDATED updated !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-        public Event getOnbyTitre(String titre) {
-        Event Ev=null;
-             try {
-            String req = "Select * from evenement where id_evenement = "+titre;
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
+            Statement stm = cnx.createStatement();
+            String query = "SELECT titre, COUNT(*) as nb FROM evenement GROUP BY titre;";
+            ResultSet rs = stm.executeQuery(query);
             while (rs.next()) {
-                Ev = new Event(rs.getInt(1),rs.getDate(2).toLocalDate(),rs.getBoolean(3),rs.getInt(4),rs.getString("titre"),rs.getString("description"));
+                int nb = rs.getInt("nb");
+                String key = nb + " " + rs.getString("titre");
+                data.put(key, new Double(nb));
             }
+            System.out.println(data.toString());
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
+        return data;
+}
 
-        return Ev;
-    }
-    
-
-    @Override
-    public List<Event> getAll() {
-          List<Event> list = new ArrayList<>();
-          
-        try {
-            String req = "Select * from evenement";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Event Ev = new Event(rs.getInt(1),rs.getDate(2).toLocalDate(),rs.getBoolean(3),rs.getInt(4),rs.getString("titre"),rs.getString("description"));
-                list.add(Ev);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return list;
-        }
-        public List<Event> getMyEvents(int id ) {
-          List<Event> list = new ArrayList<>();
-          
-        try {
-            String req = "Select * from evenement where id_user = "+id;
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Event Ev = new Event(rs.getInt(1),rs.getDate(2).toLocalDate(),rs.getBoolean(3),rs.getInt(4),rs.getString("titre"),rs.getString("description"));
-                list.add(Ev);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return list;
-        
-        
-        
-    }
-    
-
-    @Override
-    public Event getOneById(int id) {
-        Event Ev=null;
-             try {
-            String req = "Select * from evenement where id_evenement = "+id;
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Ev = new Event(rs.getInt(1),rs.getDate(2).toLocalDate(),rs.getBoolean(3),rs.getInt(4),rs.getString("titre"),rs.getString("description"));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return Ev;
-    }
-    
 }

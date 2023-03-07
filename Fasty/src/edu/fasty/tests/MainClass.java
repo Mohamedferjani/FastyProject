@@ -6,13 +6,6 @@
 package edu.fasty.tests;
 
 import edu.fasty.entities.Bid;
-import edu.fasty.entities.Event;
-import edu.fasty.entities.Packagedeal;
-import edu.fasty.services.ServiceBid;
-import edu.fasty.services.ServiceEvent;
-import edu.fasty.services.ServicePackage;
-import edu.fasty.utils.DataSource;
-import java.sql.Connection;
 import java.time.LocalDate;
 
 /**
@@ -22,7 +15,7 @@ import java.time.LocalDate;
 public class MainClass {
         public static void main(String[] args) {
              LocalDate myObj = LocalDate.now();
-   // Event ne= new Event(myObj,1,"hi",true);
+   //Evenement ne= new Evenement(myObj,1,"hi",true);
     //Event ne2= new Event(myObj,1,"hiau^datezeaze",false);
     //System.out.print(ne);
     //Connection cnx = DataSource.getInstance().getCnx();
@@ -35,10 +28,10 @@ public class MainClass {
      //System.out.print(se.getOneById(5));
      // se.supprimer(4);
      //se.modifier(ne);
-     //Packagedeal pkg1= new Packagedeal(5,"2","23","44");
+     //PackageDeal pkg1= new PackageDeal(5,"2","23","44");
      //ServicePackage se1 = new ServicePackage();
      //se1.ajouter(pkg1);
-    // Bid bid1=new Bid(13,2,42,1);
+    Bid bid1=new Bid(13,2,42,1);
      //ServiceBid bidmannager=new ServiceBid();
      //bidmannager.ajouter(bid1);
      //System.out.print(bidmannager.getOneById(5));

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="left_main" prefHeight="801.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.MakeBidController">
+   <children>
+      <Button fx:id="btn_ajouterBid" layoutX="258.0" layoutY="722.0" mnemonicParsing="false" onAction="#EditBid" prefHeight="33.0" prefWidth="128.0" styleClass="search-button" stylesheets="@../value/style.css" text="Ajouter Bid">
+         <font>
+            <Font name="Times New Roman Bold" size="19.0" />
+         </font>
+      </Button>
+        
+      <TableView fx:id="BidTab" layoutX="495.0" layoutY="222.0" onMouseClicked="#fillforum" prefHeight="487.0" prefWidth="791.0">
+        <columns>
+          <TableColumn fx:id="IDBidTab" prefWidth="57.60003662109375" text="ID " />
+            <TableColumn fx:id="IDUserTab" minWidth="0.0" prefWidth="407.0" text="User" />
+            <TableColumn fx:id="StartingPriceTab" prefWidth="325.0" text="Starting Price" />
+        </columns>
+      </TableView>
+      <Pane layoutX="-1.0" prefHeight="175.0" prefWidth="1298.0" style="-fx-background-color: #1e2b3c;">
+         <children>
+            <ImageView fitHeight="146.0" fitWidth="348.0" layoutX="21.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/getaway.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Retour" layoutX="861.0" layoutY="17.0" mnemonicParsing="false" onAction="#Retour" prefHeight="34.0" prefWidth="114.0" styleClass="search-button" stylesheets="@../value/style.css" text="Retour">
+               <font>
+                  <Font name="Times New Roman Bold" size="19.0" />
+               </font>
+            </Button>
+            <TextField fx:id="TFSearch" layoutX="1021.0" layoutY="10.0" prefHeight="50.0" prefWidth="180.0" promptText="Type here to search" style="-fx-background-color: white;" styleClass="transparent" stylesheets="@../value/style.css" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95ccff" height="86.0" layoutX="394.0" layoutY="118.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="5.0" width="388.0" />
+            <Label layoutX="537.0" layoutY="106.0" prefHeight="96.0" prefWidth="102.0" text="Bid">
+               <font>
+                  <Font name="Harlow Solid Italic" size="57.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITESMOKE" height="36.0" layoutX="13.0" layoutY="463.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="2.0" width="146.0" />
+      <Label layoutX="29.0" layoutY="464.0" prefHeight="34.0" prefWidth="114.0" styleClass="labelform" text="Starting Price">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITESMOKE" height="36.0" layoutX="20.0" layoutY="307.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="2.0" width="146.0" />
+      <Label layoutX="25.0" layoutY="308.0" prefHeight="34.0" prefWidth="128.0" styleClass="labelform" text="User">
+         <font>
+            <Font name="Gill Sans MT" size="28.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cb_User" layoutX="208.0" layoutY="300.0" prefHeight="50.0" prefWidth="202.0" promptText="User" />
+      <TextField fx:id="StartingPricetf" layoutX="208.0" layoutY="456.0" prefHeight="50.0" prefWidth="202.0" promptText="Starting Price" />
+      
+   </children>
+</AnchorPane>
