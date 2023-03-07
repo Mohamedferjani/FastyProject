@@ -5,9 +5,29 @@
  */
 package edu.fasty.gui;
 
+import edu.fasty.entities.User;
+import edu.fasty.services.IServiceUser;
+import edu.fasty.utils.DataSource;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -16,6 +36,22 @@ import javafx.fxml.Initializable;
  */
 public class LoginFXMLController implements Initializable {
 
+    @FXML
+    private AnchorPane anchor;
+    @FXML
+    private Button inscrire_recruteur;
+    @FXML
+    private Button inscrire_user;
+    @FXML
+    private Button connect;
+    @FXML
+    private TextField donneradresse;
+    @FXML
+    private PasswordField password;
+
+    /**
+     * Initializes the controller class.
+     */
     /**
      * Initializes the controller class.
      */
@@ -23,5 +59,90 @@ public class LoginFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
+    private void admin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("inscription.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    private void user(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("inscriptionUser.fxml"));
+    Scene scene = new Scene(root);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
+    }
+
+    private void seconnecter(ActionEvent event)throws SQLException, IOException {
+        
+   Connection cnx = DataSource.getInstance().getCnx();
+    String email = donneradresse.getText();
+    String mdp = password.getText();
+    // Récupérer l'adresse email de l'utilisateur
+
+
+// Rechercher l'utilisateur par email
+IServiceUser userService = new IServiceUser();
+
+
+    if (email.isEmpty() || mdp.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Attention");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez saisir l'email et le mot de passe.");
+        alert.showAndWait();
+        return;
+    } 
+
+    try {
+        String requete = "SELECT * FROM user WHERE email = ? AND password = ?";
+        PreparedStatement statement = cnx.prepareStatement(requete);
+        statement.setString(1, email);
+        statement.setString(2, mdp);
+        ResultSet resultSet = statement.executeQuery();
+
+
+       if (resultSet.next()) {
+    int idRole = resultSet.getInt("id_role");
+    if (idRole == 1) {
+        // Admin user, load admin.fxml
+        Parent root = FXMLLoader.load(getClass().getResource("AdminFXML.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    } else if (idRole == 2) {
+        // User with role 2, load connexionutil.fxml
+        User u = new User();
+        u.getId_user();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
+        resultSet.close();
+        statement.close();
+      
+    } catch (SQLException e) {
+        e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText("Impossible de se connecter à la base de données.");
+        alert.showAndWait();
+    }  
+    
+    
+    }
+
+    }
+    
+
+    
+

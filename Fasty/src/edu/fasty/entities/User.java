@@ -5,6 +5,7 @@
  */
 package edu.fasty.entities;
 
+import java.awt.Image;
 import java.util.Objects;
 
 /**
@@ -14,8 +15,39 @@ import java.util.Objects;
 public class User {
     private int id_user,cin,num_tel;
     private String nom, prenom,adresse,email,password,token;
+    private Image image;
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+//    private blob photo;
+private int id_role ;
     public User() {
+    }
+
+    public int getId_role() {
+        return id_role;
+    }
+
+    public void setId_role(int id_role) {
+        this.id_role = id_role;
+    }
+
+    public User(int id_user, int cin, int num_tel, String nom, String prenom, String adresse, String email, String password, String token, int id_role) {
+        this.id_user = id_user;
+        this.cin = cin;
+        this.num_tel = num_tel;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.email = email;
+        this.password = password;
+        this.token = token;
+        this.id_role = id_role;
     }
 
     public User(int cin, int num_tel, String nom, String prenom, String adresse, String email, String password) {
@@ -124,22 +156,18 @@ public class User {
     }
 
     @Override
-    public String toString() {
-        return "User{" + "id_user=" + id_user + ", cin=" + cin + ", num_tel=" + num_tel + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email + ", password=" + password + ", token=" + token + '}';
-    }
-
-    @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + this.id_user;
-        hash = 67 * hash + this.cin;
-        hash = 67 * hash + this.num_tel;
-        hash = 67 * hash + Objects.hashCode(this.nom);
-        hash = 67 * hash + Objects.hashCode(this.prenom);
-        hash = 67 * hash + Objects.hashCode(this.adresse);
-        hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.password);
-        hash = 67 * hash + Objects.hashCode(this.token);
+        hash = 23 * hash + this.id_user;
+        hash = 23 * hash + this.cin;
+        hash = 23 * hash + this.num_tel;
+        hash = 23 * hash + Objects.hashCode(this.nom);
+        hash = 23 * hash + Objects.hashCode(this.prenom);
+        hash = 23 * hash + Objects.hashCode(this.adresse);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.password);
+        hash = 23 * hash + Objects.hashCode(this.token);
+        hash = 23 * hash + this.id_role;
         return hash;
     }
 
@@ -164,6 +192,9 @@ public class User {
         if (this.num_tel != other.num_tel) {
             return false;
         }
+        if (this.id_role != other.id_role) {
+            return false;
+        }
         if (!Objects.equals(this.nom, other.nom)) {
             return false;
         }
@@ -184,6 +215,13 @@ public class User {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id_user=" + id_user + ", cin=" + cin + ", num_tel=" + num_tel + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email + ", password=" + password + ", token=" + token + ", id_role=" + id_role + '}';
+    }
+
+
    
     
     

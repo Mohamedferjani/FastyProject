@@ -21,18 +21,18 @@ import java.util.ArrayList;
 public class MainClass {
     
     public static void main(String[] args) {    
-    User u1 = new User(1,3,2,"Abdelaziz", "M","g","edfgbn","terhgjh","rtfyhgjn");
-        User u2 = new User(3,1,2,"Tarak", "Ayari","tfgf","uyfdtsr","vghbnj","vgbhnj");
-     /*   User u3 = new User("Samir", "Sankou7");
-        User u4 = new User("Sinda", "Hamdi");*/
-        
-        IServiceUser su = new IServiceUser();
-        System.out.println(su.getAll());
-       User aa = su.getOneById(3);
-        System.out.println(aa.toString());
-        u2.setAdresse("beja jendouba");
-        //u2.setCin(1234567);
-        su.modifier(u2);
+//    User u1 = new User(1,3,2,"Abdelaziz", "M","g","edfgbn","terhgjh","rtfyhgjn");
+//        User u2 = new User(3,1,2,"Tarak", "Ayari","tfgf","uyfdtsr","vghbnj","vgbhnj");
+//     /*   User u3 = new User("Samir", "Sankou7");
+//        User u4 = new User("Sinda", "Hamdi");*/
+//        
+//        IServiceUser su = new IServiceUser();
+//        System.out.println(su.getAll());
+//       User aa = su.getOneById(3);
+//        System.out.println(aa.toString());
+//        u2.setAdresse("beja jendouba");
+//        //u2.setCin(1234567);
+//        su.modifier(u2);
         //System.out.println(u2.getId_user());
         //su.ajouter(u1);
         //su.ajouter(u2);

@@ -92,7 +92,7 @@ public class GestionUserFXMLController implements Initializable {
 
                     Text title = new Text("CIN : " + item.getCin());
 
-                    setOnMouseClicked(event -> {
+                    
                         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
                         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
                         Text subtitle = new Text(item.getNom());
@@ -154,9 +154,7 @@ public class GestionUserFXMLController implements Initializable {
 
                         vbox.setPrefHeight(80);
 
-                        setGraphic(vbox);
-
-                    });
+                        setGraphic(vbox);                  
                 }
             }
         });

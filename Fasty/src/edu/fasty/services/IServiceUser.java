@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import org.mindrot.jbcrypt.BCrypt;
 /**
  *
@@ -21,6 +24,22 @@ import java.util.List;
  */
 public class IServiceUser implements IService<User> {
 Connection cnx = DataSource.getInstance().getCnx();
+
+    public boolean checkIfUserCanBeAdded(User u) {
+    // Vérifier que l'adresse email n'est pas déjà utilisée par un autre utilisateur
+    String checkEmailQuery = "SELECT COUNT(*) FROM user WHERE email=?";
+    try (PreparedStatement checkEmailStmt = cnx.prepareStatement(checkEmailQuery)) {
+        checkEmailStmt.setString(1, u.getEmail());
+        ResultSet rs = checkEmailStmt.executeQuery();
+        if (rs.next() && rs.getInt(1) > 0) {
+            return false;
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(IServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+        return false;
+    }
+    return true;
+}
     @Override
     public void ajouter(User u) {
             try {

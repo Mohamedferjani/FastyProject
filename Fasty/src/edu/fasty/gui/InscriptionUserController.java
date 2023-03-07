@@ -55,7 +55,7 @@ public class InscriptionUserController implements Initializable {
     private String checkEmailQuery = "SELECT COUNT(*) FROM user WHERE email=?";
     Connection cnx = DataSource.getInstance().getCnx();
 
-    /*  public boolean TestExist(){   
+    public boolean TestExist(){   
     try (PreparedStatement checkEmailStmt = cnx.prepareStatement(checkEmailQuery)) {
         checkEmailStmt.setString(1, tfEmail.getText());
         ResultSet rs = checkEmailStmt.executeQuery();
@@ -63,15 +63,15 @@ public class InscriptionUserController implements Initializable {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Attention");
             alert.setHeaderText(null);
-            alert.setContentText("ajouter avec succes.");
+            alert.setContentText("Email déja utilisé");
             alert.showAndWait();
             return false;
         }
     } catch (SQLException ex) {
         Logger.getLogger(IServiceUser.class.getName()).log(Level.SEVERE, null, ex);
     }
-  }*/
-
+    return true;
+    }
     /**
      * Initializes the controller class.
      */
@@ -82,6 +82,7 @@ public class InscriptionUserController implements Initializable {
 
     @FXML
     private void AjouterUser(ActionEvent event) {
+
         if ((tfNom.getText().isEmpty()) || (tfPrenom.getText().isEmpty()) || (tfTel.getText().isEmpty()) || (tfAdresse.getText().isEmpty()) || (tfCin.getText().isEmpty()) || (tfEmail.getText().isEmpty()) || (tfMdp.getText().isEmpty())) {
             Alert alertType = new Alert(AlertType.ERROR);
             alertType.setTitle("Error");
@@ -146,5 +147,5 @@ public class InscriptionUserController implements Initializable {
                 System.out.println("Error:" + ex.getMessage());
             }
         }
-    } 
+    }
 }
