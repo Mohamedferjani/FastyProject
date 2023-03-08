@@ -34,7 +34,7 @@ import javafx.stage.StageStyle;
 /**
  * FXML Controller class
  *
- * @author Houissa
+ * @author ISSAM
  */
 public class GestionFactureFXMLController implements Initializable {
 
