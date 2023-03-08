@@ -5,19 +5,30 @@
  */
 package edu.fasty.gui;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -52,6 +63,38 @@ public class WishlisInterfaceController implements Initializable {
         
         
     }
+    @FXML
+    private Button  browseButton;
+    @FXML
+    private ImageView  imageview;
+    
+//    private void copyInMyProject (){
+//        
+//        /////////////////////////// /////////////////////////// ///////////////////////////
+//        Stage stage = (Stage) browseButton.getScene().getWindow();
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Select PNG File");
+//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png"));
+//        File selectedFile = fileChooser.showOpenDialog(stage);
+//        if (selectedFile != null) {
+//            // Do something with the selected file
+//            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+//        }
+//         /////////////////////////// /////////////////////////// /////////////////////////// ///////////////////////////
+//
+//        Path sourcePath = selectedFile.toPath();
+//
+//        String projectPath = System.getProperty("user.dir");
+//        Path destinationPath = Paths.get(projectPath, "icons", selectedFile.getName());
+//
+//        try {
+//            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+//            System.out.println("File copied successfully.");
+//        } catch (IOException ex) {
+//            System.out.println("Error copying file: " + ex.getMessage());
+//        }
+//        
+//    }
     
     
     private ObservableList<Node> nodes = FXCollections.observableArrayList();
@@ -64,10 +107,10 @@ public class WishlisInterfaceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        double y =100;
+        double y =200;
         double x=0;
         // TODO
-for (int i = 1; i <= 500; i++) {
+for (int i = 1; i <= 9; i++) {
         ImageView imageView = new ImageView(im);
         Label label = new Label("Image " + i);
         
@@ -89,5 +132,35 @@ for (int i = 1; i <= 500; i++) {
      
         System.out.println(result[0]+","+result[1]);
     }    
+    
+    
+    @FXML
+    private void OnBrowseClicked(ActionEvent event) throws IOException {
+       Stage stage = (Stage) browseButton.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select PNG File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            Path sourcePath = selectedFile.toPath();
+            String projectPath = System.getProperty("user.dir");
+            System.out.println("Project path == "+projectPath);
+            Path destinationPath = Paths.get(projectPath, "src\\Icons", selectedFile.getName());
+            System.out.println("Destination path == "+destinationPath);
+            try {
+                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("File copied successfully.");
+                String newPathName="file:"+projectPath+"\\src\\Icons\\"+selectedFile.getName();
+                Image im=new Image(newPathName);
+                imageview.setImage(im);
+                System.out.println("image seted");
+            } catch (IOException ex) {
+                System.out.println("Error copying file: " + ex.getMessage());
+            }
+            //System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+        }
+       
+                
+    }
     
 }
