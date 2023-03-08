@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,9 +19,9 @@
             <Font name="Britannic Bold" size="41.0" />
          </font>
       </Label>
-      <ImageView fitHeight="102.0" fitWidth="200.0" layoutX="672.0" layoutY="39.0">
+      <ImageView fitHeight="116.0" fitWidth="244.0" layoutX="601.0" layoutY="32.0">
          <image>
-            <Image url="@../../../../../../../Downloads/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
+            <Image url="@../../../images/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
          </image>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />
@@ -29,27 +30,95 @@
             <Blend />
          </effect>
       </ImageView>
-      <Label layoutX="127.0" layoutY="198.0" text="Nom" />
-      <Label layoutX="127.0" layoutY="267.0" text="Prénom" />
-      <Label layoutX="127.0" layoutY="351.0" prefHeight="21.0" prefWidth="52.0" text="Tel" />
-      <Label layoutX="127.0" layoutY="441.0" text="Adresse" />
-      <Label layoutX="486.0" layoutY="232.0" text="Cin" />
-      <Label layoutX="486.0" layoutY="311.0" text="Email" />
-      <Label layoutX="486.0" layoutY="396.0" text="Mdp" />
-      <TextField fx:id="tfNom" layoutX="233.0" layoutY="193.0" />
-      <TextField fx:id="tfPrenom" layoutX="233.0" layoutY="262.0" />
-      <TextField fx:id="tfTel" layoutX="233.0" layoutY="346.0" />
-      <TextField fx:id="tfAdresse" layoutX="233.0" layoutY="436.0" />
-      <TextField fx:id="tfCin" layoutX="579.0" layoutY="227.0" />
-      <TextField fx:id="tfEmail" layoutX="579.0" layoutY="306.0" />
-      <TextField fx:id="tfMdp" layoutX="579.0" layoutY="391.0" />
-      <Button fx:id="BtnInscri" layoutX="439.0" layoutY="517.0" mnemonicParsing="false" onAction="#AjouterUser" prefHeight="53.0" prefWidth="187.0" text="S'inscrire">
+      <Label layoutX="64.0" layoutY="232.0" text="Nom">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label layoutX="64.0" layoutY="301.0" text="Prénom">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label layoutX="64.0" layoutY="385.0" prefHeight="21.0" prefWidth="52.0" text="Tel">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label layoutX="64.0" layoutY="475.0" text="Adresse">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label layoutX="423.0" layoutY="266.0" text="Cin">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label layoutX="423.0" layoutY="345.0" text="Email">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label layoutX="423.0" layoutY="430.0" text="Mdp">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <TextField fx:id="tfNom" layoutX="161.0" layoutY="233.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfPrenom" layoutX="161.0" layoutY="302.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfTel" layoutX="161.0" layoutY="386.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfAdresse" layoutX="161.0" layoutY="476.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfCin" layoutX="507.0" layoutY="267.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfEmail" layoutX="507.0" layoutY="346.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfMdp" layoutX="507.0" layoutY="431.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <Button fx:id="BtnInscri" layoutX="458.0" layoutY="577.0" mnemonicParsing="false" onAction="#AjouterUser" prefHeight="53.0" prefWidth="187.0" text="S'inscrire">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
          <effect>
             <SepiaTone />
          </effect>
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnInscri1" layoutX="755.0" layoutY="396.0" mnemonicParsing="false" onAction="#ImageUpload" prefHeight="8.0" prefWidth="259.0" text="ajouter une image">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="imageUploadedID" fitHeight="181.0" fitWidth="223.0" layoutX="767.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="BtnInscri2" layoutX="785.0" layoutY="577.0" mnemonicParsing="false" onAction="#Backbtn" prefHeight="53.0" prefWidth="187.0" text="Retour">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

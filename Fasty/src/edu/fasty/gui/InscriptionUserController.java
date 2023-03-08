@@ -9,12 +9,16 @@ import edu.fasty.entities.User;
 import edu.fasty.services.IService;
 import edu.fasty.services.IServiceUser;
 import edu.fasty.utils.DataSource;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,8 +30,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -55,24 +62,32 @@ public class InscriptionUserController implements Initializable {
     private String emailRegex = "\\w+\\.?\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}";
     private String checkEmailQuery = "SELECT COUNT(*) FROM user WHERE email=?";
     Connection cnx = DataSource.getInstance().getCnx();
+    @FXML
+    private Button BtnInscri1;
+    @FXML
+    private ImageView imageUploadedID;
+     String imagePath;
+    File selectedFile;
+    @FXML
+    private Button BtnInscri2;
 
-    public boolean TestExist(){   
-    try (PreparedStatement checkEmailStmt = cnx.prepareStatement(checkEmailQuery)) {
-        checkEmailStmt.setString(1, tfEmail.getText());
-        ResultSet rs = checkEmailStmt.executeQuery();
-        if (rs.next() && rs.getInt(1) < 0) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Attention");
-            alert.setHeaderText(null);
-            alert.setContentText("Email déja utilisé");
-            alert.showAndWait();
-            return false;
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(IServiceUser.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return true;
-    }
+//    public boolean TestExist(){   
+//    try (PreparedStatement checkEmailStmt = cnx.prepareStatement(checkEmailQuery)) {
+//        checkEmailStmt.setString(1, tfEmail.getText());
+//        ResultSet rs = checkEmailStmt.executeQuery();
+//        if (rs.next() && rs.getInt(1) < 0) {
+//            Alert alert = new Alert(AlertType.WARNING);
+//            alert.setTitle("Attention");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Email déja utilisé");
+//            alert.showAndWait();
+//            return false;
+//        }
+//    } catch (SQLException ex) {
+//        Logger.getLogger(IServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+//    }
+//    return true;
+//    }
     /**
      * Initializes the controller class.
      */
@@ -83,7 +98,8 @@ public class InscriptionUserController implements Initializable {
 
     @FXML
     private void AjouterUser(ActionEvent event) {
-
+ IServiceUser sc = new IServiceUser();
+        boolean check = sc.UserExiste(tfEmail.getText());
         if ((tfNom.getText().isEmpty()) || (tfPrenom.getText().isEmpty()) || (tfTel.getText().isEmpty()) || (tfAdresse.getText().isEmpty()) || (tfCin.getText().isEmpty()) || (tfEmail.getText().isEmpty()) || (tfMdp.getText().isEmpty())) {
             Alert alertType = new Alert(AlertType.ERROR);
             alertType.setTitle("Error");
@@ -119,12 +135,19 @@ public class InscriptionUserController implements Initializable {
             alertType.setTitle("Error");
             alertType.setHeaderText("L'adresse email est invalide. Veuillez saisir une adresse email valide (ex: nom_utilisateur@domaine.com) !");
             alertType.show();
-        } /*        else if (TestExist() != true) {
-            Alert alertType = new Alert(AlertType.ERROR);
-            alertType.setTitle("Error");
-            alertType.setHeaderText("L'adresse email est invalide.");
-            alertType.show();
-        } */ else {
+        }else if(check == true){
+          Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setHeaderText(null);
+            alert.setContentText("Email déja utilisé");
+            alert.show();
+        } else if(selectedFile == null){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Sélectionner une image !");
+            alert.show();
+        } else {
 
             String nom = tfNom.getText();
             String prenom = tfPrenom.getText();
@@ -135,9 +158,14 @@ public class InscriptionUserController implements Initializable {
             String mdp = tfMdp.getText();
             String img = "/images/hsan.png";
             User s = new User(cin, tel, nom, prenom, adresse, email, mdp,2,img);
-            IServiceUser sc = new IServiceUser();
             sc.ajouter(s);
-
+ Alert ok=new Alert(Alert.AlertType.INFORMATION);
+               ok.setTitle("FAIT");
+               ok.setHeaderText("s'inscrire succès !");
+              
+              Optional<ButtonType> result  = ok.showAndWait();
+                        
+ if(result.get() == ButtonType.OK){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
             try {
                 Parent root = loader.load();
@@ -147,6 +175,40 @@ public class InscriptionUserController implements Initializable {
             } catch (IOException ex) {
                 System.out.println("Error:" + ex.getMessage());
             }
+ }  
+
         }
+    }
+
+    @FXML
+    private void ImageUpload(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+         selectedFile = fileChooser.showOpenDialog(imageUploadedID.getScene().getWindow());
+        if (selectedFile != null) {
+            // The user selected an image file
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            Path path = Paths.get(selectedFile.getAbsolutePath());
+    Path relativePath = path.subpath(path.getNameCount() - 2, path.getNameCount()).normalize();
+             imagePath = relativePath.toString().replace('\\', '/');
+             Image image = new Image(imagePath);
+             imageUploadedID.setImage(image);
+            // Add your code here to process the selected image file
+        }
+    }
+
+    @FXML
+    private void Backbtn(ActionEvent event) {
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
+            try {
+                Parent root = loader.load();
+
+                tfNom.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                System.out.println("Error:" + ex.getMessage());
+            } 
     }
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="572.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.ProductFXMLController">
+   <children>
+      <VBox alignment="CENTER" layoutY="80.0" prefHeight="394.0" prefWidth="510.0" spacing="10">
+          
+          <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Liste de Produits" />
+          
+          <ScrollPane fitToWidth="true">
+              <VBox spacing="10">
+                  
+                  <GridPane hgap="10" vgap="10">
+                      
+                      <ImageView preserveRatio="true" GridPane.columnIndex="0">
+                     <image>
+                        <Image url="@ProductIcon.png" />
+                     </image>
+                      </ImageView>
+                      
+                      <VBox spacing="5" GridPane.columnIndex="1">
+                          
+                          <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nom du produit 1" />
+                          
+                          <Label text="Description du produit 1" />
+                          
+                          <HBox spacing="10">
+                              <Label style="-fx-font-weight: bold;" text="Prix:" />
+                              <Label style="-fx-font-weight: bold;" text="100.00" />
+                          </HBox>
+                          
+                          <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Ajouter au Panier" />
+                          
+                      </VBox>
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                  </rowConstraints>
+                      
+                  </GridPane>
+                  
+                  <GridPane hgap="10" vgap="10">
+                      
+                      <ImageView preserveRatio="true" GridPane.columnIndex="0">
+                     <image>
+                        <Image url="@ProductIcon.png" />
+                     </image>
+                      </ImageView>
+                      
+                      <VBox spacing="5" GridPane.columnIndex="1">
+                          
+                          <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Nom du produit 2" />
+                          
+                          <Label text="Description du produit 2" />
+                          
+                          <HBox spacing="10">
+                              <Label style="-fx-font-weight: bold;" text="Prix:" />
+                              <Label style="-fx-font-weight: bold;" text="50.00" />
+                          </HBox>
+                          
+                          <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Ajouter au Panier" />
+                          
+                      </VBox>
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                  </rowConstraints>
+                      
+                  </GridPane>
+                  
+                  <!-- Ajouter plus de produits ici -->
+                  
+              </VBox>
+          </ScrollPane>
+          
+      </VBox>
+      <Button fx:id="logOut" layoutX="679.0" layoutY="37.0" mnemonicParsing="false" onAction="#LogOutbtn" text="LogOut" />
+   </children>
+</AnchorPane>

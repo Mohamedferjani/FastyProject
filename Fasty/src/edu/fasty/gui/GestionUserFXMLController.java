@@ -126,6 +126,7 @@ public class GestionUserFXMLController implements Initializable {
                                     muc.setTel(Integer.toString(item.getNum_tel()));
                                     muc.setCin(Integer.toString(item.getCin()));
                                     muc.setImage(item.getImage());
+                                    muc.setID(item.getId_user());
                                     
                                     searchbyname.getScene().setRoot(root);
                                 } catch (IOException e) {
@@ -176,6 +177,33 @@ public class GestionUserFXMLController implements Initializable {
                 }
             }
         });
+    }
+
+    @FXML
+    private void LogOutbtn(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
+            try {
+                Parent root = loader.load();
+
+                searchbyname.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                System.out.println("Error:" + ex.getMessage());
+            }
+    }
+
+    @FXML
+    private void AjoutUserbtn(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("inscriptionUser.fxml"));
+            try {
+                Parent root = loader.load();
+
+                searchbyname.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                System.out.println("Error:" + ex.getMessage());
+            }
+        
     }
 
 }

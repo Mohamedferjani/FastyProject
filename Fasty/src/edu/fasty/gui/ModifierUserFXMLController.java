@@ -8,9 +8,13 @@ package edu.fasty.gui;
 import edu.fasty.entities.User;
 import edu.fasty.services.IServiceUser;
 import edu.fasty.utils.DataSource;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,9 +24,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -53,6 +59,13 @@ public class ModifierUserFXMLController implements Initializable {
     @FXML
     private ImageView imageviewID;
     private String image;
+    private int iduser;
+    @FXML
+    private Button BtnModif1;
+        String imagePath;
+    File selectedFile;
+    @FXML
+    private Button BtnModif2;
 
     /**
      * Initializes the controller class.
@@ -65,7 +78,9 @@ public class ModifierUserFXMLController implements Initializable {
         });
 
     }
-
+public void setID(int id) {
+        this.iduser = id;
+    }
     public void setNom(String message) {
         this.tfNom.setText(message);
     }
@@ -141,7 +156,12 @@ public class ModifierUserFXMLController implements Initializable {
             alertType.setHeaderText("L'adresse email est invalide.");
             alertType.show();
         } */ else {
-
+            Alert alertType=new Alert(Alert.AlertType.CONFIRMATION);
+         alertType.setTitle("CONFIRMATION !");
+         alertType.setHeaderText("Voulez-vous vraiment mettre à jour à cet utilisateur ?");
+          Optional<ButtonType> result  = alertType.showAndWait();
+                        
+ if(result.get() == ButtonType.OK){
             String nom = tfNom.getText();
             String prenom = tfPrenom.getText();
             int tel = Integer.parseInt(tfTel.getText());
@@ -149,12 +169,11 @@ public class ModifierUserFXMLController implements Initializable {
             int cin = Integer.parseInt(tfCin.getText());
             String email = tfEmail.getText();
             String mdp = tfMdp.getText();
-            String img = "/images/hsan.png";
-            User s = new User(cin, tel, nom, prenom, adresse, email, prenom, 2, img);
+            User s = new User(iduser,cin, tel, nom, prenom, adresse, email, mdp, 2, image);
             IServiceUser sc = new IServiceUser();
             sc.modifier(s);
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminFXML.fxml"));
             try {
                 Parent root = loader.load();
 
@@ -164,7 +183,41 @@ public class ModifierUserFXMLController implements Initializable {
                 System.out.println("Error:" + ex.getMessage());
             }
         }
+        }
 
+    }
+
+    @FXML
+    private void uploadImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+         selectedFile = fileChooser.showOpenDialog(imageviewID.getScene().getWindow());
+        if (selectedFile != null) {
+            // The user selected an image file
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            Path path = Paths.get(selectedFile.getAbsolutePath());
+    Path relativePath = path.subpath(path.getNameCount() - 2, path.getNameCount()).normalize();
+             imagePath = relativePath.toString().replace('\\', '/');
+             Image imagee= new Image(imagePath);
+             imageviewID.setImage(imagee);
+             image = imagePath;
+            // Add your code here to process the selected image file
+        }
+    }
+
+    @FXML
+    private void annulerClick(ActionEvent event) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminFXML.fxml"));
+            try {
+                Parent root = loader.load();
+
+                tfNom.getScene().setRoot(root);
+
+            } catch (IOException ex) {
+                System.out.println("Error:" + ex.getMessage());
+            }
     }
 
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 //import org.mindrot.jbcrypt.BCrypt;
 /**
  *
@@ -76,7 +77,7 @@ Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void modifier(User u) {
         try {
-            String req = "UPDATE `user` SET `nom` = '" + u.getNom() + "' , `prenom` = '" + u.getPrenom() + "' , `adresse` = '" + u.getAdresse() + "' , `email` = '" + u.getEmail()+ "' , `cin` = '" + u.getCin()+ "' , `num_tel` = '" + u.getNum_tel()+ "' , `password` = '" + u.getPassword()+ "' , `token` = '" + u.getToken()+ "' WHERE id_user = " + u.getId_user();
+            String req = "UPDATE `user` SET `nom` = '" + u.getNom() + "' , `prenom` = '" + u.getPrenom() + "' , `adresse` = '" + u.getAdresse() + "' , `email` = '" + u.getEmail()+ "' , `cin` = '" + u.getCin()+ "' , `num_tel` = '" + u.getNum_tel()+ "' , `password` = '" + u.getPassword()+ "' , `photo` = '" + u.getImage()+"' WHERE id_user = " + u.getId_user();
             Statement st = cnx.createStatement();
             st.executeUpdate(req);
             System.out.println("User updated !");
@@ -141,5 +142,24 @@ Connection cnx = DataSource.getInstance().getCnx();
             System.out.println(ex.getMessage());
         }
     return u;
+    }
+
+    public boolean UserExiste(String email) {
+        boolean check = false;
+  String checkEmailQuery = "SELECT COUNT(*) FROM user WHERE email=?";   
+    try (PreparedStatement checkEmailStmt = cnx.prepareStatement(checkEmailQuery)) {
+        checkEmailStmt.setString(1, email);
+        ResultSet rs = checkEmailStmt.executeQuery();
+        if (rs.next() && rs.getInt(1) > 0) {
+          
+            check = true;
+        } else {
+        check = false;
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(IServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return check;
+   
     }
 }

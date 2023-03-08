@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,14 +14,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1037.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.ModifierUserFXMLController">
    <children>
-      <Label layoutX="144.0" layoutY="49.0" prefHeight="82.0" prefWidth="377.0" text="Modify Your Account">
+      <Label layoutX="144.0" layoutY="49.0" prefHeight="82.0" prefWidth="377.0" text="Modifier compte">
          <font>
             <Font name="Britannic Bold" size="41.0" />
          </font>
       </Label>
-      <ImageView fitHeight="102.0" fitWidth="200.0" layoutX="672.0" layoutY="39.0">
+      <ImageView fitHeight="112.0" fitWidth="237.0" layoutX="597.0" layoutY="34.0">
          <image>
-            <Image url="@../../../../../../../Downloads/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
+            <Image url="@../../../images/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
          </image>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />
@@ -36,21 +37,67 @@
       <Label layoutX="140.0" layoutY="515.0" text="Cin" />
       <Label layoutX="140.0" layoutY="594.0" text="Email" />
       <Label layoutX="140.0" layoutY="679.0" text="Mdp" />
-      <TextField fx:id="tfNom" layoutX="233.0" layoutY="193.0" />
-      <TextField fx:id="tfPrenom" layoutX="233.0" layoutY="262.0" />
-      <TextField fx:id="tfTel" layoutX="233.0" layoutY="346.0" />
-      <TextField fx:id="tfAdresse" layoutX="233.0" layoutY="436.0" />
-      <TextField fx:id="tfCin" layoutX="233.0" layoutY="510.0" />
-      <TextField fx:id="tfEmail" layoutX="233.0" layoutY="589.0" />
-      <TextField fx:id="tfMdp" layoutX="233.0" layoutY="674.0" />
-      <Button fx:id="BtnModif" layoutX="665.0" layoutY="594.0" mnemonicParsing="false" onAction="#ModifierUser" prefHeight="53.0" prefWidth="187.0" text="Modify">
+      <TextField fx:id="tfNom" layoutX="233.0" layoutY="193.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfPrenom" layoutX="233.0" layoutY="262.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfTel" layoutX="233.0" layoutY="346.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfAdresse" layoutX="233.0" layoutY="436.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfCin" layoutX="233.0" layoutY="510.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfEmail" layoutX="233.0" layoutY="589.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfMdp" layoutX="233.0" layoutY="674.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <Button fx:id="BtnModif" layoutX="773.0" layoutY="651.0" mnemonicParsing="false" onAction="#ModifierUser" prefHeight="53.0" prefWidth="187.0" text="Modifier">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
          <effect>
             <SepiaTone />
          </effect>
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
       </Button>
       <ImageView fx:id="imageviewID" fitHeight="213.0" fitWidth="301.0" layoutX="608.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="BtnModif1" layoutX="640.0" layoutY="421.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="40.0" prefWidth="237.0" text="modifier l'image de user">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnModif2" layoutX="529.0" layoutY="651.0" mnemonicParsing="false" onAction="#annulerClick" prefHeight="53.0" prefWidth="187.0" text="Annuler">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <effect>
+            <SepiaTone />
+         </effect>
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

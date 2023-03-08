@@ -120,7 +120,7 @@ User user = userService.RechercherUserparEmailMdp(email,mdp);
         // User with role 2, load connexionutil.fxml
         User u = new User();
         u.getId_user();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductFXML.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
