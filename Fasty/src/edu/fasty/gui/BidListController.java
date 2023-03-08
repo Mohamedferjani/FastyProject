@@ -247,7 +247,7 @@ public class BidListController implements Initializable {
     @FXML
     private void Retour(ActionEvent event) {
                                     try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MenuEvent.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("edu/fasty/gui/ChooseEvent.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

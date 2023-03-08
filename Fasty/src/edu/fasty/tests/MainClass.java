@@ -6,6 +6,7 @@
 package edu.fasty.tests;
 
 import edu.fasty.entities.Bid;
+import java.io.File;
 import java.time.LocalDate;
 
 /**
@@ -23,6 +24,8 @@ public class MainClass {
      //System.out.prise.getMyEvents(1);
     // se.ajouter(ne);
      //se.ajouter(ne2);
+
+
 
      //System.out.print(se.getAll());
      //System.out.print(se.getOneById(5));

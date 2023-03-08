@@ -13,9 +13,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -30,6 +34,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,6 +42,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import java.util.Date;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -74,6 +81,8 @@ public class MakeBidController implements Initializable {
     int id;
     Bid b;
     ObservableList<Bid> data=FXCollections.observableArrayList();
+    @FXML
+    private Label bidwinner;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
  
@@ -176,11 +185,56 @@ public class MakeBidController implements Initializable {
         }
         else{
             int id_lastbidder=3;
+                    Date now = new Date();
+LocalDate currentDate = LocalDate.now();
+  
         Bid b = new Bid(Integer.parseInt(StartingPricetf.getText()),
                                                  cb_User.getValue(),
-                                                 id_lastbidder
+                                                 id_lastbidder,
+                                                 currentDate
         
         );
+       
+       // Update bid winner label
+       int id_bid = BidTab.getSelectionModel().getSelectedItem().getId_bid();
+       //System.out.println(id_winner);
+      
+       // Date sqldate = sb.getLastTimeDataModifiedbyBidId(id_winner);
+            java.util.Date datetype = new java.util.Date(sb.getLastTimeDataModifiedbyBidId(id_bid).getTime());
+
+               // Duration dur = Duration.between(currentDate, lastmodifier);
+               
+              
+               
+
+
+for (int i = 0; i < 70; i += 10) {
+             long difference_In_Time
+                = now.getTime() - datetype.getTime();
+            long difference_In_Seconds
+                = (difference_In_Time
+                   / 1000)
+                  % 60;  
+            //System.out.println(difference_In_Seconds);
+if(difference_In_Seconds<40){
+    bidwinner.setText("bid is still running");
+}else {
+bidwinner.setText(sb.getBidWinner(id_bid));
+}
+                   // Execute code every time the variable moves by 10
+    System.out.println("Variable moved by 10. Current value: " + difference_In_Seconds);
+}
+
+
+
+
+
+//Duration duration = Duration.between(lastModifierloca, currentDate);
+
+
+       //System.out.print(bidwinner);
+       
+
         sb.modifierFront(id, b);
         refreshlist(); }
     }
@@ -205,5 +259,11 @@ public class MakeBidController implements Initializable {
             Logger.getLogger(EventHomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+   private void bidlogic(){
+   
+   
+   
+   }
 }
 

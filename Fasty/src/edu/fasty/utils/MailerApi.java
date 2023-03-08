@@ -11,8 +11,8 @@ public class MailerApi {
 
     public void SendMail(String mail, String msg) {
 
-        final String username = "mahdi.homrani@outlook.com";
-        final String password = "M20562219";
+        final String username = "Fastyappesprit@gmail.com";
+        final String password = "555JMT5555";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -30,7 +30,7 @@ public class MailerApi {
         });
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("mahdi.homrani@outlook.com"));
+            message.setFrom(new InternetAddress("Fastyappesprit@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO, InternetAddress.parse(mail)
             );

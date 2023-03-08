@@ -19,10 +19,10 @@
                <children>
                   <ImageView fitHeight="637.0" fitWidth="879.0" layoutX="52.0" layoutY="21.0" opacity="0.38" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/EventHome.jpg" />
+                        <Image url="@../../../imgused/EventHome.jpg" />
                      </image>
                   </ImageView>
-                  <Button layoutX="348.0" layoutY="320.0" mnemonicParsing="false" onAction="#eventManagement" prefHeight="40.0" prefWidth="172.0" styleClass="search-button" stylesheets="@../value/style.css" text="Gestion Événement" textFill="#fcf7f7">
+                  <Button layoutX="348.0" layoutY="320.0" mnemonicParsing="false" onAction="#eventManagement" prefHeight="40.0" prefWidth="172.0" styleClass="search-button" stylesheets="@../../../edu/fasty/tests/style.css" text="Gestion Événement" textFill="#fcf7f7">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -32,21 +32,16 @@
          <left>
             <Pane prefHeight="686.0" prefWidth="188.0" style="-fx-background-color: #c2cec7;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="140.0" fitWidth="177.0" layoutX="16.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/FastyLogo.png" />
-                     </image>
-                  </ImageView>
                   <VBox layoutY="141.0" prefHeight="551.0" prefWidth="169.0">
                      <children>
                         <Pane prefHeight="50.0" prefWidth="170.0">
                            <children>
                               <ImageView fitHeight="41.0" fitWidth="41.0" layoutX="11.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../img/Event.png" />
+                                    <Image url="@../../../imgused/Event.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="evenementlbl" layoutX="64.0" layoutY="12.0" text="Evenement">
+                              <Label fx:id="evenementlbl" layoutX="52.0" layoutY="8.0" text="Evenement">
                                  <font>
                                     <Font name="Bell MT Bold" size="24.0" />
                                  </font>

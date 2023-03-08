@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="left_main" prefHeight="801.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.MakeBidController">
    <children>
-      <Button fx:id="btn_ajouterBid" layoutX="258.0" layoutY="722.0" mnemonicParsing="false" onAction="#EditBid" prefHeight="33.0" prefWidth="128.0" styleClass="search-button" stylesheets="@../value/style.css" text="Ajouter Bid">
+      <Button fx:id="btn_ajouterBid" layoutX="258.0" layoutY="722.0" mnemonicParsing="false" onAction="#EditBid" prefHeight="33.0" prefWidth="128.0" styleClass="search-button" stylesheets="@../../../edu/fasty/tests/style.css" text="Ajouter Bid">
          <font>
             <Font name="Times New Roman Bold" size="19.0" />
          </font>
@@ -53,8 +53,8 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITESMOKE" height="36.0" layoutX="13.0" layoutY="463.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="2.0" width="146.0" />
-      <Label layoutX="29.0" layoutY="464.0" prefHeight="34.0" prefWidth="114.0" styleClass="labelform" text="Starting Price">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITESMOKE" height="36.0" layoutX="20.0" layoutY="383.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="2.0" width="146.0" />
+      <Label layoutX="32.0" layoutY="384.0" prefHeight="34.0" prefWidth="114.0" styleClass="labelform" text="Starting Price">
          <font>
             <Font name="Gill Sans MT" size="20.0" />
          </font>
@@ -66,7 +66,8 @@
          </font>
       </Label>
       <ComboBox fx:id="cb_User" layoutX="208.0" layoutY="300.0" prefHeight="50.0" prefWidth="202.0" promptText="User" />
-      <TextField fx:id="StartingPricetf" layoutX="208.0" layoutY="456.0" prefHeight="50.0" prefWidth="202.0" promptText="Starting Price" />
+      <TextField fx:id="StartingPricetf" layoutX="208.0" layoutY="376.0" prefHeight="50.0" prefWidth="202.0" promptText="Starting Price" />
+      <Label fx:id="bidwinner" layoutX="48.0" layoutY="470.0" prefHeight="208.0" prefWidth="283.0" text="Label" />
       
    </children>
 </AnchorPane>

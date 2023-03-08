@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,21 +88,51 @@ public class ServiceBid implements IService<Bid>{
         public void modifierFront(int id_BidModifier, Bid bid) throws SQLException {
         Statement stm = cnx.createStatement();
         Bid b =SearchById(id_BidModifier);
-        String query = "UPDATE `bid` SET `starting_price`='"+bid.getStarting_price()+"',`id_User`='"+bid.getId_User()+"',`id_lastbidder`='"+bid.getId_lastbidder()+"' where id_bid="+b.getId_bid();
+        String query = "UPDATE `bid` SET `starting_price`='"+bid.getStarting_price()+"',`id_User`='"+bid.getId_User()+"',`id_lastbidder`='"+bid.getId_lastbidder()+"',`last_modified_time`='"+bid.getLast_modified_time()+"' where id_bid="+b.getId_bid();
         stm.executeUpdate(query);
     }
         
- public void GetBidWinner(int id_bid,Bid bid ){
-        try {
-            Statement stm = cnx.createStatement();
-            String query="select * from bid where id_bid="+id_bid;;
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceBid.class.getName()).log(Level.SEVERE, null, ex);
+public String getBidWinner(int id_bid) {
+    String winner = null;
+    try {
+        Statement stm = cnx.createStatement();
+         String query = "SELECT id_lastbidder FROM bid WHERE id_bid = " + id_bid;
+        ResultSet rs = stm.executeQuery(query);
+        if (rs.next()) {
+            winner = rs.getString("id_lastbidder");
+            System.out.print(winner);
         }
+        rs.close();
+        stm.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(ServiceBid.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return winner;
+}
+public Date getLastTimeDataModifiedbyBidId(int id_bid){
 
+Date lastdate = null;
+    try {
+        Statement stm = cnx.createStatement();
+         String query = "SELECT last_modified_time FROM bid WHERE id_bid = " + id_bid;
+        ResultSet rs = stm.executeQuery(query);
+        if (rs.next()) {
+             lastdate = rs.getDate("last_modified_time");
+             //System.out.print(lastdate);
+        }
+        rs.close();
+        stm.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(ServiceBid.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return lastdate;
+}
+
+}
  
  
- }
  
     
-}
+

@@ -13,7 +13,6 @@ import edu.fasty.utils.MailerApi;
 import edu.fasty.utils.Myconnexion;
 import edu.fasty.utils.SMSApi;
 import java.io.IOException;
-import static java.lang.System.err;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -220,24 +219,24 @@ public class EventListController implements Initializable {
         
         tray.showAndDismiss(Duration.millis(10000));
                   try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("edu/fasty/gui/ChooseEventController.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("edu/fasty/gui/ChooseEvent.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(PackageDealListController.class.getName()).log(Level.SEVERE, null, ex);
+System.out.print(ex);
         }
         
         // SEND MAIL
-        //MailerApi mailer = new MailerApi();
-        //mailer.SendMail("Iheb.Rezgui@esprit.tn", "Admin.");
-        
-//        SMSApi sms = new SMSApi();
-//        sms.sendSMS("+21651089470", "Admin.");
-//            }catch(AuthenticationException e){
-//            System.out.print(e);
-//            }
+       // MailerApi mailer = new MailerApi();
+       // mailer.SendMail("rezgui.iheb@esprit.tn", "Admin.");
+        try{
+       SMSApi sms = new SMSApi();
+        sms.sendSMS("+21651089470", "Admin.");
+            }catch(AuthenticationException ee){
+            System.out.print(ee);
+            }
          
 //    
     }

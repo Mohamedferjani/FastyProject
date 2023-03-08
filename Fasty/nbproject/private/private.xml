@@ -4,30 +4,25 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/entities/PackageDeal.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/EventListController.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/entities/Evenement.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/EventHomeController.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MenuEvent.fxml</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/services/ServiceBid.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/JfreeChartApi.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/BidListController.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/EventList.fxml</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MenuEventController.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/SMSApi.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MakeBid.fxml</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/tests/MainFx.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/EventListController.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/ChooseEvent.fxml</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/services/ServiceEvent.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/services/ServicePackageDeal.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/tests/MainClass.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/entities/Bid.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/EventHome.fxml</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MenuEvent.fxml</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/PackageDealList.fxml</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/Myconnexion.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/services/ServiceBid.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/JfreeChartApi.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/MailerApi.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/PackageDealListController.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/BidListController.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MenuEventController.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/MakeBidController.java</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/values/style.css</file>
-            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/BidList.fxml</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/utils/SMSApi.java</file>
+            <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/tests/MainFx.java</file>
             <file>file:/C:/Users/IHEB/Documents/NetBeansProjects/FastyProject/Fasty/src/edu/fasty/gui/ChooseEventController.java</file>
         </group>
     </open-files>
