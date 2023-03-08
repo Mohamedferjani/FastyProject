@@ -44,9 +44,10 @@
                <content>
                   <AnchorPane fx:id="anchorPane" prefHeight="620.0" prefWidth="1261.0" style="-fx-background-color: #DCEFD8;">
                      <children>
-                        <TextField layoutX="49.0" layoutY="47.0" prefHeight="43.0" prefWidth="730.0" promptText="Rechercher" />
+                        <TextField layoutX="166.0" layoutY="47.0" prefHeight="43.0" prefWidth="730.0" promptText="Rechercher" />
                         <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="1025.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="browseButton" layoutX="896.0" layoutY="53.0" mnemonicParsing="false" onAction="#OnBrowseClicked" text="Browse" />
+                        <Button fx:id="bexport" layoutX="57.0" layoutY="53.0" mnemonicParsing="false" onAction="#OnExportClicked" text="EXPORT" />
                      </children></AnchorPane>
                </content>
             </ScrollPane>

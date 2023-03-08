@@ -5,17 +5,27 @@
  */
 package edu.fasty.gui;
 
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +39,26 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.image.WritableImage;
+import javafx.scene.SnapshotParameters;
+import javax.imageio.ImageIO;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.apache.batik.dom.GenericDOMImplementation;
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.XMLReader;
+
 
 /**
  * FXML Controller class
@@ -66,6 +96,8 @@ public class WishlisInterfaceController implements Initializable {
     @FXML
     private Button  browseButton;
     @FXML
+    private Button  bexport;
+    @FXML
     private ImageView  imageview;
     
 //    private void copyInMyProject (){
@@ -96,6 +128,68 @@ public class WishlisInterfaceController implements Initializable {
 //        
 //    }
     
+    private BufferedImage BufferedImageARGBtoRGB(BufferedImage image) {
+    BufferedImage convertedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2d = convertedImage.createGraphics();
+    g2d.drawImage(image, 0, 0, null);
+    g2d.dispose();
+    return convertedImage;
+}
+    
+    private void takesvg2(AnchorPane anc)  {
+        
+    WritableImage snapshot = anc.snapshot(new SnapshotParameters(), null);
+    File outputFile = new File("wishlist.svg");
+    try {
+        DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
+        Document document = domImpl.createDocument("http://www.w3.org/2000/svg", "svg", null);
+        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+
+        // Set the SVGCanvasSize to match the size of the AnchorPane
+         Bounds bounds = anc.getLayoutBounds();
+        Dimension canvasSize = new Dimension((int) bounds.getWidth(), (int) bounds.getHeight());
+        svgGenerator.setSVGCanvasSize(canvasSize);
+
+        // Draw the snapshot onto the SVGGraphics2D object
+        svgGenerator.drawImage(SwingFXUtils.fromFXImage(snapshot, null), null, null);
+
+        // Write the SVG file
+        FileWriter out = new FileWriter(outputFile);
+        svgGenerator.stream(out, true);
+        out.flush();
+        out.close();
+        System.out.println("svg created");
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+    
+    }
+    
+    
+    
+//    private void takesvg(AnchorPane anc){
+//        WritableImage snapshot = anchorPane.snapshot(new SnapshotParameters(), null);
+//        File outputFile = new File("wishlist.svg");
+//        try {
+//            DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
+//            Document document = domImpl.createDocument("http://www.w3.org/2000/svg", "svg", null);
+//            SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+//
+//    // Draw the snapshot onto the SVGGraphics2D object
+//            svgGenerator.drawImage(SwingFXUtils.fromFXImage(snapshot, null), null, null);
+//
+//    // Write the SVG file
+//            FileWriter out = new FileWriter(outputFile);
+//            svgGenerator.stream(out, true);
+//            out.flush();
+//            out.close();
+//            System.out.println("svg created");
+//} catch (IOException  ex) {
+//    ex.printStackTrace();
+//}
+//    }
+
+    
     
     private ObservableList<Node> nodes = FXCollections.observableArrayList();
     @FXML
@@ -110,7 +204,7 @@ public class WishlisInterfaceController implements Initializable {
         double y =200;
         double x=0;
         // TODO
-for (int i = 1; i <= 9; i++) {
+for (int i = 1; i <= 50; i++) {
         ImageView imageView = new ImageView(im);
         Label label = new Label("Image " + i);
         
@@ -131,6 +225,8 @@ for (int i = 1; i <= 9; i++) {
      double[] result = getLastComponentPosition(anchorPane);
      
         System.out.println(result[0]+","+result[1]);
+        
+
     }    
     
     
@@ -159,6 +255,14 @@ for (int i = 1; i <= 9; i++) {
             }
             //System.out.println("Selected file: " + selectedFile.getAbsolutePath());
         }
+       
+                
+    }
+    
+    
+     @FXML
+    private void OnExportClicked(ActionEvent event) throws IOException, TransformerException {
+       takesvg2(anchorPane);
        
                 
     }
