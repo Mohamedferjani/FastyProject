@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1030.0" style="-fx-background-color: rgb(240,255,240) rgb(240,255,240);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.SidesBarmesTransactionController">
+
+   <children>
+      <TextField fx:id="getNom" layoutX="38.0" layoutY="98.0" prefHeight="26.0" prefWidth="203.0" promptText="Donner le nom de la transaction" />
+      <ImageView fx:id="image" fitHeight="88.0" fitWidth="180.0" layoutY="-1.0">
+         <image>
+            <Image url="@../../../img/fasty.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="319.0" layoutY="95.0" mnemonicParsing="false" onAction="#getOneByName" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: rgb(192,192,192);" text="Rechercher" />
+      <Button layoutX="527.0" layoutY="95.0" mnemonicParsing="false" onAction="#DeleteOne" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: rgb(192,192,192);" text="Supprimer" />
+      <ListView fx:id="listViewNom" layoutX="99.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <Button layoutX="733.0" layoutY="95.0" mnemonicParsing="false" onAction="#getAll" prefHeight="32.0" prefWidth="225.0" style="-fx-background-color: rgb(192,192,192);" text="Afficher tous les transactions" />
+      <ListView fx:id="listViewRecepteur" layoutX="307.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <ListView fx:id="listViewExepediteur" layoutX="519.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <ListView fx:id="listViewMontant" layoutX="730.0" layoutY="167.0" prefHeight="402.0" prefWidth="155.0" />
+      <Label layoutX="163.0" layoutY="142.0" text="Nom">
+         <font>
+            <Font name="Calibri Bold Italic" size="15.0" />
+         </font></Label>
+      <Label layoutX="350.0" layoutY="142.0" text="Recepteur">
+         <font>
+            <Font name="Calibri Bold Italic" size="15.0" />
+         </font></Label>
+      <Label layoutX="554.0" layoutY="142.0" text="Expéditeur ">
+         <font>
+            <Font name="Calibri Bold Italic" size="15.0" />
+         </font></Label>
+      <Label layoutX="787.0" layoutY="142.0" text="Valeur">
+         <font>
+            <Font name="Calibri Bold Italic" size="15.0" />
+         </font></Label>
+      <Text layoutX="315.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Transaction">
+         <effect>
+            <Glow level="0.49" />
+         </effect>
+         <font>
+            <Font name="Arial Black" size="47.0" />
+         </font>
+      </Text>
+      <Button layoutX="844.0" layoutY="615.0" mnemonicParsing="false" onAction="#GoMesFacture" prefHeight="32.0" prefWidth="114.0" style="-fx-background-color: rgb(192,192,192);" text="Mes Factures" />
+      <Label layoutX="195.0" layoutY="615.0" text="Total transaction : " underline="true">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_totalTransac" layoutX="393.0" layoutY="615.0" text="0 Dt">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="Retour" layoutX="885.0" layoutY="25.0" mnemonicParsing="false" onAction="#Retour" prefHeight="37.0" prefWidth="120.0" styleClass="search-button" stylesheets="@../../../img/style.css" text="Retour">
+         <font>
+            <Font name="Times New Roman Bold" size="19.0" />
+         </font>
+      </Button>
+      
+   </children>
+</AnchorPane>

@@ -1,0 +1,195 @@
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.search-button{
+    -fx-background-color: #828282;
+    -fx-background-radius: 30;
+}
+
+.right-bar{
+    -fx-background-color: #D3D3D3;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: #708090;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.free-delivery-card{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #BAEAC3;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+        -fx-background-radius: 30;
+}
+.bg-form{
+    -fx-background-color:linear-gradient(to top right,#0e5e6f,#3a8891);
+}
+.textfield{
+    -fx-background-color:transparent;
+    -fx-text-inner-color:#fff;
+    -fx-border-color:#f2deba;
+    -fx-border-width:0px 0px .4px 0px ;
+     
+    
+}
+.textfield:focused{
+    -fx-border-color:#fb6363;
+    -fx-border-width:0px 0px 2px .0px;
+    
+  
+    
+    
+}
+.login-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#f2deba,ffefd6);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+}
+.create-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#3862c2,#4284d0);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+    
+}
+.ajouter-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#3862c2,#4284d0);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+    
+}
+.modifier-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#3862c2,#4284d0);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+    
+}
+.supprimer-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#3862c2,#4284d0);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+    
+}
+.afficher-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#3862c2,#4284d0);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+    
+}
+.uplod-btn:hover{
+     -fx-background-color:linear-gradient(to bottom right,#3862c2,#4284d0);
+    
+    -fx-background-radius:8px;
+     -fx-text-fill:#fff;
+     -fx-font-size :14px;
+     -fx-cursor:hand;
+    
+    
+}
+.hyperlink{-fx-underline:false;
+          -fx-text-fill:#fb6363;
+          -fx-border-color:transparent;
+           -fx-border-width:0px;
+}
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.search-button{
+    -fx-background-color: #828282;
+    -fx-background-radius: 30;
+}
+
+.right-bar{
+    -fx-background-color: #D3D3D3;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: #708090;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.free-delivery-card{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #BAEAC3;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+        -fx-background-radius: 30;
+}

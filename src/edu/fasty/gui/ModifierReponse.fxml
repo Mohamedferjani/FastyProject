@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="759.0" prefWidth="1037.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.ModifierReponseController">
+   <children>
+      <Text layoutX="324.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier Reponse">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="47.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="AnswerID" layoutX="314.0" layoutY="276.0" prefHeight="177.0" prefWidth="399.0" promptText="Enter your answer">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextArea>
+      <Text layoutX="129.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reponse : ">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="23.0" />
+         </font>
+      </Text>
+      <Button layoutX="606.0" layoutY="516.0" mnemonicParsing="false" onAction="#modifierReponse" prefHeight="41.0" prefWidth="121.0" text="Modifier" textFill="#62cd65">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button layoutX="300.0" layoutY="516.0" mnemonicParsing="false" onAction="#CancelClicked" prefHeight="41.0" prefWidth="121.0" text="Annuler" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

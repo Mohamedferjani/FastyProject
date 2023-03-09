@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="568.0" prefWidth="726.0" style="-fx-background-color: rgb(240,255,240);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.ModifierForumController">
+   <children>
+      <Text layoutX="197.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier Forum">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="47.0" />
+         </font>
+      </Text>
+      <Pane layoutX="109.0" layoutY="125.0" prefHeight="357.0" prefWidth="522.0" style="-fx-background-color: rgb(240,255,240);">
+         <children>
+            <Text layoutX="86.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre : ">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="23.0" />
+               </font>
+            </Text>
+            <Text layoutX="43.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contenu :">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="23.0" />
+               </font>
+            </Text>
+            <TextField fx:id="titreid" layoutX="169.0" layoutY="53.0" prefHeight="31.0" prefWidth="267.0">
+               <effect>
+                  <DropShadow />
+               </effect></TextField>
+            <TextArea fx:id="contenuid" layoutX="165.0" layoutY="117.0" prefHeight="174.0" prefWidth="267.0">
+               <effect>
+                  <DropShadow />
+               </effect></TextArea>
+         </children>
+      </Pane>
+      <Button layoutX="471.0" layoutY="484.0" mnemonicParsing="false" onAction="#modifierForum" prefHeight="41.0" prefWidth="121.0" text="Modifier" textFill="#62cd65">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button layoutX="165.0" layoutY="484.0" mnemonicParsing="false" onAction="#CancelClicked" prefHeight="41.0" prefWidth="121.0" text="Annuler" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="19.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

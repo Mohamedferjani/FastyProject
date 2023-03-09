@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="544.0" prefWidth="588.0" style="-fx-background-color: rgb(240,255,240);" styleClass="bg-form" stylesheets="@../../../img/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.LoginFXMLController">
+   <children>
+      <Button fx:id="inscrire_user" layoutX="148.0" layoutY="362.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="46.0" prefWidth="108.0" stylesheets="@../../../img/style.css" text="S'inscrire">
+         <styleClass>
+            <String fx:value="login-btn" />
+            <String fx:value="bg-form" />
+         </styleClass>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="connect" layoutX="358.0" layoutY="362.0" mnemonicParsing="false" onAction="#seconnecter" prefHeight="46.0" prefWidth="108.0" stylesheets="@../../../img/style.css" text="connecter">
+         <styleClass>
+            <String fx:value="login-btn" />
+            <String fx:value="bg-form" />
+         </styleClass>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Text layoutX="144.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="adresse email">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Text>
+      <Text layoutX="142.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mot de passe" wrappingWidth="114.41601459681988">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Text>
+      <TextField fx:id="donneradresse" layoutX="284.0" layoutY="199.0" styleClass="textfield" stylesheets="@../../../img/style.css">
+         <effect>
+            <InnerShadow />
+         </effect></TextField>
+      <PasswordField fx:id="password" layoutX="281.0" layoutY="271.0" styleClass="textfield" stylesheets="@../../../img/style.css">
+         <effect>
+            <InnerShadow />
+         </effect></PasswordField>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="237.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/278437787_7305069766230476_6720411048156639903_n.png" />
+         </image>
+      </ImageView>
+      
+   </children>
+</AnchorPane>
