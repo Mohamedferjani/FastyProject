@@ -29,11 +29,11 @@
             <TableColumn fx:id="StartingPriceTab" prefWidth="325.0" text="Starting Price" />
         </columns>
       </TableView>
-      <Pane layoutX="-1.0" prefHeight="175.0" prefWidth="1298.0" style="-fx-background-color: #1e2b3c;">
+      <Pane layoutX="-1.0" prefHeight="175.0" prefWidth="1298.0" style="-fx-background-color: rgb(240,255,240);" stylesheets="@../tests/style.css">
          <children>
             <ImageView fitHeight="146.0" fitWidth="348.0" layoutX="21.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/getaway.png" />
+                  <Image url="@../../../imgused/fasty.png" />
                </image>
             </ImageView>
             <Button fx:id="Retour" layoutX="861.0" layoutY="17.0" mnemonicParsing="false" onAction="#Retour" prefHeight="34.0" prefWidth="114.0" styleClass="search-button" stylesheets="@../value/style.css" text="Retour">
@@ -41,8 +41,8 @@
                   <Font name="Times New Roman Bold" size="19.0" />
                </font>
             </Button>
-            <TextField fx:id="TFSearch" layoutX="1021.0" layoutY="10.0" prefHeight="50.0" prefWidth="180.0" promptText="Type here to search" style="-fx-background-color: white;" styleClass="transparent" stylesheets="@../value/style.css" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95ccff" height="86.0" layoutX="394.0" layoutY="118.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="5.0" width="388.0" />
+            <TextField fx:id="TFSearch" layoutX="1021.0" layoutY="10.0" prefHeight="50.0" prefWidth="180.0" promptText="Type here to search" style="-fx-background-color: grey;" styleClass="transparent" stylesheets="@../value/style.css" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#99b7b9" height="86.0" layoutX="395.0" layoutY="118.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="5.0" width="388.0" />
             <Label layoutX="537.0" layoutY="106.0" prefHeight="96.0" prefWidth="102.0" text="Bid">
                <font>
                   <Font name="Harlow Solid Italic" size="57.0" />
