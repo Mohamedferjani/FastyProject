@@ -5,16 +5,18 @@
  */
 package edu.fasty.gui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +30,7 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
@@ -41,23 +44,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.WritableImage;
 import javafx.scene.SnapshotParameters;
-import javax.imageio.ImageIO;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
-import org.apache.batik.transcoder.TranscoderException;
-import org.apache.batik.transcoder.TranscoderInput;
-import org.apache.batik.transcoder.TranscoderOutput;
-import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.XMLReader;
+
 
 
 /**
@@ -66,6 +58,26 @@ import org.xml.sax.XMLReader;
  * @author skand
  */
 public class WishlisInterfaceController implements Initializable {
+    
+    private void makeQr() throws IOException{
+        String svgUrl = "https://example.com/path/to/your/svg.svg";
+        try {
+            URL url = new URL(svgUrl);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(WishlisInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        try {
+            BitMatrix bitMatrix = qrCodeWriter.encode(svgUrl, BarcodeFormat.QR_CODE, 200, 200);
+            MatrixToImageWriter.writeToFile(bitMatrix, "PNG", new File("qrcode.png"));
+            System.out.println("Qr created");
+        } catch (WriterException ex) {
+            Logger.getLogger(WishlisInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+
+    }
     
     
     private  double[] getLastComponentPosition(AnchorPane anc){
@@ -136,7 +148,7 @@ public class WishlisInterfaceController implements Initializable {
     return convertedImage;
 }
     
-    private void takesvg2(AnchorPane anc)  {
+    private void takesvg(AnchorPane anc)  {
         
     WritableImage snapshot = anc.snapshot(new SnapshotParameters(), null);
     File outputFile = new File("wishlist.svg");
@@ -164,30 +176,6 @@ public class WishlisInterfaceController implements Initializable {
     }
     
     }
-    
-    
-    
-//    private void takesvg(AnchorPane anc){
-//        WritableImage snapshot = anchorPane.snapshot(new SnapshotParameters(), null);
-//        File outputFile = new File("wishlist.svg");
-//        try {
-//            DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
-//            Document document = domImpl.createDocument("http://www.w3.org/2000/svg", "svg", null);
-//            SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-//
-//    // Draw the snapshot onto the SVGGraphics2D object
-//            svgGenerator.drawImage(SwingFXUtils.fromFXImage(snapshot, null), null, null);
-//
-//    // Write the SVG file
-//            FileWriter out = new FileWriter(outputFile);
-//            svgGenerator.stream(out, true);
-//            out.flush();
-//            out.close();
-//            System.out.println("svg created");
-//} catch (IOException  ex) {
-//    ex.printStackTrace();
-//}
-//    }
 
     
     
@@ -209,22 +197,37 @@ for (int i = 1; i <= 50; i++) {
         Label label = new Label("Image " + i);
         
         // Set the position for the ImageView and Label
-        imageView.setLayoutX(x);
-        imageView.setLayoutY(y);
-        label.setLayoutX(x);
-        label.setLayoutY(y+100);
-        x=x+500;
-        if(x == 1500){y=y+200; x=0;}
+         try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AfficheProduit.fxml"));
+            Parent fxmlRoot = fxmlLoader.load();
+            fxmlRoot.setLayoutX(x);
+            fxmlRoot.setLayoutY(y);
+            anchorPane.getChildren().add(fxmlRoot);
+            } catch (IOException ex) {
+            Logger.getLogger(WishlisInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        x=x+750;
+        if(x == 2250){y=y+500; x=0;}
 
-        nodes.addAll(imageView, label);
+//        nodes.addAll(imageView, label);
     }
 
-    anchorPane.getChildren().addAll(nodes);
+//    anchorPane.getChildren().addAll(nodes);
     
    
      double[] result = getLastComponentPosition(anchorPane);
      
         System.out.println(result[0]+","+result[1]);
+
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AfficheProduit.fxml"));
+//            Parent fxmlRoot = fxmlLoader.load();
+//            fxmlRoot.setLayoutX(0);
+//            fxmlRoot.setLayoutY(200);
+//            anchorPane.getChildren().add(fxmlRoot);
+//            } catch (IOException ex) {
+//            Logger.getLogger(WishlisInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
 
     }    
@@ -262,7 +265,8 @@ for (int i = 1; i <= 50; i++) {
     
      @FXML
     private void OnExportClicked(ActionEvent event) throws IOException, TransformerException {
-       takesvg2(anchorPane);
+       takesvg(anchorPane);
+       makeQr();
        
                 
     }

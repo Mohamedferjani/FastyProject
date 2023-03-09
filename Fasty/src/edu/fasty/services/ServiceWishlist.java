@@ -27,12 +27,12 @@ public class ServiceWishlist implements InterfaceServices<Wishlist> {
     public void ajouter(Wishlist w) {
         
         try {
-            String req = "INSERT INTO `wishlist1`(`id_user`, `name_wishlist`, `list_produit`, `creation_date`) VALUES (?,?,?,?)";
+            String req = "INSERT INTO `wishlist1`(`id_user`, `list_produit`) VALUES (?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
+            String produitString = w.getList_Produit().toString();
+            System.out.println(produitString);
             ps.setInt(1,w.getId_user());
-            ps.setString(2,w.getName_wishlist());
-            ps.setString(3,w.getList_produit());
-            ps.setString(4,w.getCreation_date());
+            ps.setString(2,produitString);
             ps.executeUpdate();
             System.out.println("Wishlist added  !");
         } catch (SQLException ex) {
@@ -57,9 +57,10 @@ public class ServiceWishlist implements InterfaceServices<Wishlist> {
 
     @Override
     public void modifier(int id, Wishlist w) {
+         String produitString = w.getList_Produit().toString();
         
          try {
-            String req = "UPDATE `wishlist1` SET `name_wishlist`='"+ w.getName_wishlist() +"',`list_produit`='"+ w.getList_produit() +"',`creation_date`='"+ w.getCreation_date() +"' WHERE `id_wishlist`="+ id;
+            String req = "UPDATE `wishlist1` SET `list_produit`='"+ produitString +"' WHERE `id_wishlist`="+ id;
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("Wishlist updated !");
@@ -78,7 +79,15 @@ public class ServiceWishlist implements InterfaceServices<Wishlist> {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Wishlist w = new Wishlist(rs.getInt(1), rs.getInt(2), rs.getString(3),rs.getString(4),rs.getString(5));
+                String produitString = rs.getString(3);
+                produitString = produitString.substring(1, produitString.length() - 1); // Remove square brackets
+                String[] produitArray = produitString.split(", "); // Split string into individual elements
+                ArrayList<Integer> list_Produit = new ArrayList<>();
+                for (String str : produitArray) {
+                    list_Produit.add(Integer.parseInt(str)); // Convert each element to an integer and add it to the ArrayList
+                }
+                
+                Wishlist w = new Wishlist(rs.getInt(1), rs.getInt(2),list_Produit);
                 list.add(w);
             }
         } catch (SQLException ex) {
@@ -99,7 +108,16 @@ public class ServiceWishlist implements InterfaceServices<Wishlist> {
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 if (rs.getInt(1)==id){
-                 w = new Wishlist(rs.getInt(1), rs.getInt(2), rs.getString(3),rs.getString(4),rs.getString(5));}
+                 String produitString = rs.getString(3);
+                produitString = produitString.substring(1, produitString.length() - 1); // Remove square brackets
+                String[] produitArray = produitString.split(", "); // Split string into individual elements
+                ArrayList<Integer> list_Produit = new ArrayList<>();
+                for (String str : produitArray) {
+                    list_Produit.add(Integer.parseInt(str)); // Convert each element to an integer and add it to the ArrayList
+                }
+                
+                 w = new Wishlist(rs.getInt(1), rs.getInt(2),list_Produit);
+                }
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -109,24 +127,7 @@ public class ServiceWishlist implements InterfaceServices<Wishlist> {
         
     }
     
-    public Wishlist getOneByName(String name) {
-        
-        Wishlist w = null;
-        try {
-            String req = "SELECT * FROM `wishlist1`";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                if (rs.getString(3).equals(name)){
-                 w = new Wishlist(rs.getInt(1),rs.getInt(2),rs.getString(3), rs.getString(4), rs.getString(5));}
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return w;
-        
-    }
+    
     
     
 }

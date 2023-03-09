@@ -5,6 +5,8 @@
  */
 package edu.fasty.entities;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author skand
@@ -14,38 +16,28 @@ public class Wishlist {
     //LES ATTRIBUTS
     int id_wishlist;
     int id_user;
-    String name_wishlist;
-    String list_produit;
-    String creation_date;
+    ArrayList<Integer> list_Produit = new ArrayList<>();
+
     
     //LES CONSTRUCTEURS
 
     public Wishlist() {
     }
 
-    public Wishlist(int id_wishlist, int id_user, String name_wishlist, String list_produit, String creation_date) {
+    
+    public Wishlist(int id_user, ArrayList<Integer> list_Produit) {
+    this.id_user = id_user;
+    this.list_Produit = list_Produit;
+}
+
+
+    public Wishlist(int id_wishlist, int id_user, ArrayList<Integer> list_Produit) {
         this.id_wishlist = id_wishlist;
         this.id_user = id_user;
-        this.name_wishlist = name_wishlist;
-        this.list_produit = list_produit;
-        this.creation_date = creation_date;
-    }
-
-    public Wishlist(int id_user, String name_wishlist, String list_produit, String creation_date) {
-        this.id_user = id_user;
-        this.name_wishlist = name_wishlist;
-        this.list_produit = list_produit;
-        this.creation_date = creation_date;
-    }
-
-    public Wishlist(String name_wishlist, String list_produit, String creation_date) {
-        this.name_wishlist = name_wishlist;
-        this.list_produit = list_produit;
-        this.creation_date = creation_date;
+        this.list_Produit = list_Produit;
     }
     
-    
-    //GETTERS ET SETTERS
+    //Getters and Setters
 
     public int getId_wishlist() {
         return id_wishlist;
@@ -63,36 +55,23 @@ public class Wishlist {
         this.id_user = id_user;
     }
 
-    public String getName_wishlist() {
-        return name_wishlist;
+    public ArrayList<Integer> getList_Produit() {
+        return list_Produit;
     }
 
-    public void setName_wishlist(String name_wishlist) {
-        this.name_wishlist = name_wishlist;
-    }
-
-    public String getList_produit() {
-        return list_produit;
-    }
-
-    public void setList_produit(String list_produit) {
-        this.list_produit = list_produit;
-    }
-
-    public String getCreation_date() {
-        return creation_date;
-    }
-
-    public void setCreation_date(String creation_date) {
-        this.creation_date = creation_date;
+    public void setList_Produit(ArrayList<Integer> list_Produit) {
+        this.list_Produit = list_Produit;
     }
     
-    //TO STRING , HACHCODE AND EQUALS
+    //TO STRING
 
     @Override
     public String toString() {
-        return "Wishlist{" + "id_user=" + id_user + ", name_wishlist=" + name_wishlist + ", list_produit=" + list_produit + ", creation_date=" + creation_date + '}';
+        return "Wishlist{"  + ", id_user=" + id_user + ", list_Produit=" + list_Produit + '}';
     }
+    
+
+
 
     @Override
     public int hashCode() {

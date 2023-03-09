@@ -16,9 +16,9 @@
    <children>
       <BorderPane layoutX="-14.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <top>
-            <VBox alignment="CENTER_LEFT" prefHeight="112.0" prefWidth="1280.0" style="-fx-background-color: #65B951;">
+            <VBox alignment="CENTER_LEFT" prefHeight="127.0" prefWidth="1280.0" style="-fx-background-color: #65B951;">
                <children>
-                  <Label prefHeight="127.0" prefWidth="507.0" text="My Wishlist ♥" textFill="WHITE">
+                  <Label prefHeight="127.0" prefWidth="510.0" text="My Wishlist ♥" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -30,6 +30,8 @@
                         <Font name="Cambria" size="52.0" />
                      </font>
                   </Label>
+                  <TextField prefHeight="43.0" prefWidth="730.0" promptText="Rechercher" />
+                  <Button fx:id="bexport" mnemonicParsing="false" onAction="#OnExportClicked" text="EXPORT" />
                </children>
                <padding>
                   <Insets left="30.0" />
@@ -44,10 +46,8 @@
                <content>
                   <AnchorPane fx:id="anchorPane" prefHeight="620.0" prefWidth="1261.0" style="-fx-background-color: #DCEFD8;">
                      <children>
-                        <TextField layoutX="166.0" layoutY="47.0" prefHeight="43.0" prefWidth="730.0" promptText="Rechercher" />
                         <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="1025.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="browseButton" layoutX="896.0" layoutY="53.0" mnemonicParsing="false" onAction="#OnBrowseClicked" text="Browse" />
-                        <Button fx:id="bexport" layoutX="57.0" layoutY="53.0" mnemonicParsing="false" onAction="#OnExportClicked" text="EXPORT" />
                      </children></AnchorPane>
                </content>
             </ScrollPane>

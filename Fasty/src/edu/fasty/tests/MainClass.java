@@ -10,6 +10,7 @@ import edu.fasty.services.ServiceScore;
 import edu.fasty.services.ServiceWishlist;
 import edu.fasty.utils.DataSource;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class MainClass {
     
@@ -21,9 +22,15 @@ public class MainClass {
 //        DataSource c3=DataSource.getInstance() ;
 //        DataSource c4=DataSource.getInstance() ;
 
-        
+//        ArrayList<Integer> list_Produit = new ArrayList<>();
+//        list_Produit.add(5);
+//        list_Produit.add(10);
+//        list_Produit.add(33);
 //        ServiceWishlist sw=new ServiceWishlist();
-//        Wishlist w1=new Wishlist(2,"Wishlist1","1,2,3","2000-02-02");
+//        Wishlist w1=new Wishlist(3,list_Produit);
+//        sw.ajouter(w1);
+//        System.out.println(sw.getAll());
+//        System.out.println(sw.getOneByID(3));
 //        Wishlist w2=new Wishlist(2,"Wishlist1modifier","1,2,3modifier","1999-02-02");
         //sw.modifier(1, w2);
        // System.out.println(sw.getOneByName("Wishlist1modifier"));
