@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -216,10 +218,18 @@ public class BidListController implements Initializable {
             alert.showAndWait();
         }
         else{
+//                  Date now = new Date();
+//                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        LocalDate now2 = LocalDate.now();
+            LocalDate myObj = LocalDate.now();
+
+                   //:  java.sql.Date.valueOf(E.getDate())
         Bid b = new Bid(cb_UserEvent.getValue(),
                                                  cb_UserProduit.getValue(),
                                                  Integer.parseInt(StartingPricetf.getText()),
-                                                 cb_User.getValue());
+                                                 cb_User.getValue(),
+                                                myObj
+);
                   sb.ajouter(b);    
                   
                    refreshlist();   }

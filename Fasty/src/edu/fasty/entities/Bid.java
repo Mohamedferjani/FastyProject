@@ -52,6 +52,14 @@ public class Bid {
         this.last_modified_time = last_modified_time;
     }
 
+    public Bid(int id_event, int id_produit, int starting_price, int id_User, LocalDate last_modified_time) {
+        this.id_event = id_event;
+        this.id_produit = id_produit;
+        this.starting_price = starting_price;
+        this.id_User = id_User;
+        this.last_modified_time = last_modified_time;
+    }
+
     public LocalDate getLast_modified_time() {
         return last_modified_time;
     }

@@ -39,6 +39,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.util.Date;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.util.Duration;
 
 /**
@@ -79,6 +81,8 @@ public class MakeBidController implements Initializable {
     ObservableList<Bid> data=FXCollections.observableArrayList();
     @FXML
     private Label bidwinner;
+    @FXML
+    private Label bidwinner2;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
  
@@ -102,6 +106,7 @@ public class MakeBidController implements Initializable {
             }
             cb_User.setItems(optionsUser);
         } catch (SQLException ex) {
+            System.out.print(ex);
         }
     } 
                 public void refreshlist(){
@@ -111,7 +116,8 @@ public class MakeBidController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(EventListController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        IDBidTab.setVisible(false);
+        IDBidTab.setVisible(true);
+        IDUserTab.setVisible(false);
         IDBidTab.setCellValueFactory(new PropertyValueFactory<>("id_bid"));
         IDUserTab.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
         StartingPriceTab.setCellValueFactory(new PropertyValueFactory<>("starting_price"));
@@ -180,14 +186,19 @@ public class MakeBidController implements Initializable {
             alert.showAndWait();
         }
         else{
-            int id_lastbidder=3;
-                    Date now = new Date();
-                                LocalDate now2 = LocalDate.now();
+                     int id_lastbidder=3;
+                     Date now = new Date();
+                        LocalDate now2 = LocalDate.now();
+            LocalDate myObj = LocalDate.now();
+                         // System.out.print(java.sql.Date.valueOf(now2)
 
+//                                                     
+        //Date sqldate=java.sql.Date.valueOf(now2).
+        //System.out.print(sb.getDateNow());
         Bid b = new Bid(Integer.parseInt(StartingPricetf.getText()),
                                                  cb_User.getValue(),
                                                  id_lastbidder,
-                                                 now2
+                                                 myObj
         
         );
        
@@ -212,11 +223,24 @@ for (int i = 0; i < 70; i += 10) {
                    / 1000)
                   % 60;  
             //System.out.println(difference_In_Seconds);
-if(difference_In_Seconds<40){
-    bidwinner.setText("bid is still running");
-}else {
-bidwinner.setText(sb.getBidWinner(id_bid));
-}
+                    String bid_status;
+                    String bid_status2;
+                    StringProperty textProperty = new SimpleStringProperty();
+                    StringProperty textProperty2 = new SimpleStringProperty();
+
+                if(difference_In_Seconds<40){
+                    bidwinner.textProperty().bind(textProperty);
+                                         bid_status="bid est live";
+                        textProperty.set(bid_status);
+                    bidwinner2.textProperty().bind(textProperty2);
+                        
+
+            bidwinner.textFillProperty();
+                }else {
+                     bidwinner.textProperty().bind(textProperty);
+                                         bid_status=sb.getBidWinner(id_bid);
+                        textProperty.set(bid_status);
+                }
                    // Execute code every time the variable moves by 10
     System.out.println("Variable moved by 10. Current value: " + difference_In_Seconds);
 }

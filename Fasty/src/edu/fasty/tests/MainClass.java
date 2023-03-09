@@ -15,7 +15,9 @@ import java.time.LocalDate;
  */
 public class MainClass {
         public static void main(String[] args) {
-             LocalDate myObj = LocalDate.now();
+           //  LocalDate myObj = LocalDate.now();
+             
+             
    //Evenement ne= new Evenement(myObj,1,"hi",true);
     //Event ne2= new Event(myObj,1,"hiau^datezeaze",false);
     //System.out.print(ne);

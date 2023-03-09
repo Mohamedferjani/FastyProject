@@ -85,12 +85,12 @@ public class ServiceBid implements IService<Bid>{
         stm.executeUpdate(query);
     }
     
-        public void modifierFront(int id_BidModifier, Bid bid) throws SQLException {
-        Statement stm = cnx.createStatement();
-        Bid b =SearchById(id_BidModifier);
-        String query = "UPDATE `bid` SET `starting_price`='"+bid.getStarting_price()+"',`id_User`='"+bid.getId_User()+"',`id_lastbidder`='"+bid.getId_lastbidder()+"',`last_modified_time`='"+bid.getLast_modified_time()+"' where id_bid="+b.getId_bid();
-        stm.executeUpdate(query);
-    }
+            public void modifierFront(int id_BidModifier, Bid bid) throws SQLException {
+            Statement stm = cnx.createStatement();
+            Bid b =SearchById(id_BidModifier);
+            String query = "UPDATE `bid` SET `starting_price`='"+bid.getStarting_price()+"',`id_User`='"+bid.getId_User()+"',`id_lastbidder`='"+bid.getId_lastbidder()+"',`last_modified_time`='"+bid.getLast_modified_time()+"' where id_bid="+b.getId_bid();
+            stm.executeUpdate(query);
+        }
         
 public String getBidWinner(int id_bid) {
     String winner = null;
@@ -129,9 +129,16 @@ Date lastdate = null;
     
     return lastdate;
 }
-
+//public Date getDateNow() throws SQLException{
+// Statement stm = cnx.createStatement();
+//         String query = "SELECT NOW()" ;
+//        Date rs = (Date) stm.executeQuery(query);
+//
+//return rs;
+//
+//
+//}
 }
- 
  
  
     
