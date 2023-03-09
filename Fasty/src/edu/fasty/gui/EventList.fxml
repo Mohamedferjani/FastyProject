@@ -49,18 +49,23 @@
                   <Image url="@../../../imgused/fasty.png" />
                </image>
             </ImageView>
-            <Button fx:id="Retour" layoutX="832.0" layoutY="17.0" mnemonicParsing="false" onAction="#Retour" prefHeight="34.0" prefWidth="114.0" styleClass="search-button" stylesheets="@../tests/style.css" text="Retour">
+            <Button fx:id="Retour" layoutX="709.0" layoutY="17.0" mnemonicParsing="false" onAction="#Retour" prefHeight="34.0" prefWidth="114.0" styleClass="search-button" stylesheets="@../tests/style.css" text="Retour">
                <font>
                   <Font name="Times New Roman Bold" size="19.0" />
                </font>
             </Button>
-            <TextField fx:id="TFSearch" layoutX="1021.0" layoutY="10.0" prefHeight="50.0" prefWidth="180.0" promptText="Rechercher" style="-fx-background-color: grey;" styleClass="transparent" stylesheets="@../tests/style.css" />
+            <TextField fx:id="TFSearch" layoutX="1095.0" layoutY="10.0" prefHeight="50.0" prefWidth="180.0" promptText="Rechercher" style="-fx-background-color: grey;" styleClass="transparent" stylesheets="@../tests/style.css" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#99b7b9" height="86.0" layoutX="394.0" layoutY="118.0" stroke="#1e2b3c" strokeType="OUTSIDE" strokeWidth="5.0" width="388.0" />
             <Label layoutX="450.0" layoutY="106.0" prefHeight="76.0" prefWidth="316.0" text="Événement">
                <font>
                   <Font name="Harlow Solid Italic" size="57.0" />
                </font>
             </Label>
+            <Button fx:id="sorty" layoutX="939.0" layoutY="17.0" mnemonicParsing="false" onAction="#SortItmes" prefHeight="34.0" prefWidth="114.0" styleClass="search-button" stylesheets="@../tests/style.css" text="sort by date">
+               <font>
+                  <Font name="Times New Roman Bold" size="19.0" />
+               </font>
+            </Button>
          </children>
          <effect>
             <DropShadow />

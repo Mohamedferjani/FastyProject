@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package edu.fasty.gui;
 
 import edu.fasty.entities.Bid;
@@ -186,12 +182,12 @@ public class MakeBidController implements Initializable {
         else{
             int id_lastbidder=3;
                     Date now = new Date();
-LocalDate currentDate = LocalDate.now();
-  
+                                LocalDate now2 = LocalDate.now();
+
         Bid b = new Bid(Integer.parseInt(StartingPricetf.getText()),
                                                  cb_User.getValue(),
                                                  id_lastbidder,
-                                                 currentDate
+                                                 now2
         
         );
        
@@ -266,4 +262,3 @@ bidwinner.setText(sb.getBidWinner(id_bid));
    
    }
 }
-

@@ -20,10 +20,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -97,6 +100,8 @@ public class EventListController implements Initializable {
     int id;
     Evenement e;
     ObservableList<Evenement> data=FXCollections.observableArrayList();
+    @FXML
+    private Button sorty;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -292,5 +297,25 @@ System.out.print(ex);
             Logger.getLogger(EventListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+        private void SortItmes(ActionEvent event) {
+        try {
+            // EventTab.getSelectionModel().getSelectedItem();
+            
+                    List<Evenement> events = new ArrayList<>();
+                    events = se.afficher();
+                  List<Evenement> sortedlist=  events.stream().sorted(Evenement.dateDescendingComparator()).collect(Collectors.toList());
+                   data.clear();
+                   data.addAll(sortedlist);
+// data = FXCollections.observableArrayList(sortedlist);
+            
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(EventListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+           
+        }
     
 }

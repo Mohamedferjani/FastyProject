@@ -6,6 +6,8 @@
 package edu.fasty.entities;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.Objects;
 
 /**
  *
@@ -62,5 +64,34 @@ public class Evenement {
     public String toString() {
         return "Evenement{" + "id_evenement=" + id_evenement + ", date=" + date + ", titre=" + titre + ", id_user=" + id_user + '}';
     }
-  
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.date);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Evenement other = (Evenement) obj;
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        return true;
+    }
+public static Comparator<Evenement> dateDescendingComparator(){
+        return Comparator.comparing(Evenement::getDate).reversed();
+    
+    
+}  
 }
