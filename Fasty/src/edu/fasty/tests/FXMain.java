@@ -32,7 +32,7 @@ public class FXMain extends Application {
             
             Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Inscription!");
+            primaryStage.setTitle("Fasty");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

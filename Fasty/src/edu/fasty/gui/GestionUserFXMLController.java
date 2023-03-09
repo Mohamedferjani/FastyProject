@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,7 +40,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
- * FXML Controller class
+ * FXML Controller MSI GAMING
  *
  * @author mehdi
  */
@@ -62,8 +63,6 @@ public class GestionUserFXMLController implements Initializable {
     private TextField searchbyname;
     @FXML
     private Button BtnAjouterUser;
-    @FXML
-    private Button aaa;
 
     /**
      * Initializes the controller class.
@@ -74,13 +73,13 @@ public class GestionUserFXMLController implements Initializable {
         IServiceUser su = new IServiceUser();
         List<User> myusers = su.getAll();
         for (User u : myusers) {
-        LVAffiche.getItems().add(u);
+            LVAffiche.getItems().add(u);
         }
         LVAffiche.setCellFactory(param -> new ListCell<User>() {
             @Override
             protected void updateItem(User item, boolean empty) {
                 super.updateItem(item, empty);
-                
+
                 if (empty || item == null) {
                     setText(null);
                     setGraphic(null);
@@ -94,18 +93,144 @@ public class GestionUserFXMLController implements Initializable {
 //                    String adresse = words[4];
 
                     Text title = new Text("CIN : " + item.getCin());
+                    Image image = new Image(item.getImage());
+                    ImageView imageview = new ImageView();
+                    imageview.setImage(image);
+                    double aspectRatio = image.getWidth() / image.getHeight();
+                    double scaledWidth = 50 * aspectRatio;
+                    imageview.setFitWidth(scaledWidth);
+                    imageview.setFitHeight(50);
+
+                    setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
+                    title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+                    Text subtitle = new Text(item.getNom());
+                    subtitle.setStyle("-fx-font-size: 14px; -fx-fill: gray;");
+
+                    Button button = new Button("Modify");
+                    button.setStyle("-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
+                    Button button1 = new Button("Delete");
+                    button1.setStyle("-fx-background-color: #c62828; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
+
+                    button.setOnAction(new EventHandler<ActionEvent>() {
+                        public void handle(ActionEvent event) {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierUserFXML.fxml"));
+                            try {
+                                Parent root = loader.load();
+                                ModifierUserFXMLController muc = loader.getController();
+                                muc.setAdresse(item.getAdresse());
+                                muc.setEmail(item.getEmail());
+                                muc.setMdp(item.getPassword());
+                                muc.setNom(item.getNom());
+                                muc.setPrenom(item.getPrenom());
+                                muc.setTel(Integer.toString(item.getNum_tel()));
+                                muc.setCin(Integer.toString(item.getCin()));
+                                muc.setImage(item.getImage());
+                                muc.setID(item.getId_user());
+
+                                searchbyname.getScene().setRoot(root);
+                            } catch (IOException e) {
+                                System.err.println("Error: " + e.getMessage());
+                            }
+                        }
+                    });
+                    button1.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Confirm Delete ");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Are you sure you want to delete this user?");
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK) {
+                                IServiceUser su = new IServiceUser();
+                                User u = new User();
+                                su.supprimer(u.getId_user());
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+                                try {
+                                    Parent root = loader.load();
+
+                                    searchbyname.getScene().setRoot(root);
+
+                                } catch (IOException e) {
+                                    System.err.println("Error: " + e.getMessage());
+                                }
+                            }
+                        }
+                    });
+                
+
+
+
+            VBox imageBox = new VBox(imageview);
+
+            imageBox.setStyle (
+            "-fx-alignment: center;");
+
+                    HBox buttonBox = new HBox(button, button1);
+
+            buttonBox.setSpacing (
+
+            25);
+            buttonBox.setStyle (
+            "-fx-alignment: center;");
+                    VBox vbox = new VBox(imageBox, title, subtitle, buttonBox);
+
+            vbox.setMargin (imageBox, 
+
+            new Insets(5, 0, 15, 0));
+            vbox.setMargin (title, 
+
+            new Insets(0, 0, 5, 0));
+            vbox.setMargin (subtitle, 
+
+            new Insets(0, 0, 10, 0));
+            vbox.setMargin (buttonBox, 
+
+            new Insets(0, 0, 15, 0));
+
+            setGraphic(vbox);
+        }
+    }
+}
+                );
+                searchbyname.textProperty().addListener((obs,oldValue,newValue)->{
+                 LVAffiche.getItems().clear();
+                 List<User> users = findUserByName(newValue);
+                 for (User f : users) {
+                     LVAffiche.getItems().add(f);
+        }
+         LVAffiche.setCellFactory(param -> new ListCell<User>() {
+            @Override
+            protected void updateItem(User item, boolean empty) {
+                super.updateItem(item, empty);
+                
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+//                    String[] words = item.split("\\s", 5);
+//                    String cin = words[0];
+//                    String nom = words[1];
+//                    String prenom = words[2];
+//                    String email = words[3];
+//                    String adresse = words[4];
+
+                    Text title = new Text("CIN : " + item.getCin());
+                    Text nom = new Text("NOM : "+item.getNom());
+                    Text prenom = new Text("PRENOM : " + item.getPrenom());
                        Image image = new Image(item.getImage());
                        ImageView imageview = new ImageView();
                        imageview.setImage(image);
                        double aspectRatio = image.getWidth() / image.getHeight();
-                       double scaledWidth = 50 * aspectRatio;
+                       double scaledWidth = 90 * aspectRatio;
                        imageview.setFitWidth(scaledWidth);
-                       imageview.setFitHeight(50);
+                       imageview.setFitHeight(90);
                        
                         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
-                        title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                        Text subtitle = new Text(item.getNom());
-                        subtitle.setStyle("-fx-font-size: 14px; -fx-fill: gray;");
+                        title.setStyle("-fx-text-alignment: center;-fx-font-size: 18px; -fx-font-weight: bold;");
+                        
+                        nom.setStyle("-fx-text-alignment: center;-fx-font-size: 14px; -fx-font-weight: bold;");
+                        prenom.setStyle("-fx-text-alignment: center;-fx-font-size: 14px; -fx-font-weight: bold; ");
 
                         Button button = new Button("Modify");
                         button.setStyle("-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 12pt; -fx-font-weight: bold; -fx-padding:5 10; -fx-background-radius: 5;");
@@ -128,7 +253,7 @@ public class GestionUserFXMLController implements Initializable {
                                     muc.setImage(item.getImage());
                                     muc.setID(item.getId_user());
                                     
-                                    searchbyname.getScene().setRoot(root);
+                                    LVAffiche.getScene().setRoot(root);
                                 } catch (IOException e) {
                                     System.err.println("Error: " + e.getMessage());
                                 }
@@ -138,19 +263,19 @@ public class GestionUserFXMLController implements Initializable {
                             @Override
                             public void handle(ActionEvent event) {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                                alert.setTitle("Confirm Delete ");
+                                alert.setTitle("Confirme suppression ");
                                 alert.setHeaderText(null);
-                                alert.setContentText("Are you sure you want to delete this user?");
+                                alert.setContentText("Voulez-vous vraiment supprimer cet utilisateur ?");
                                 Optional<ButtonType> result = alert.showAndWait();
                                 if (result.get() == ButtonType.OK) {
                                     IServiceUser su = new IServiceUser();
-                                    User u = new User();
-                                    su.supprimer(u.getId_user());
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionUserFXML.fxml"));
+                                  
+                                    su.supprimer(item.getId_user());
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminFXML.fxml"));
                                     try {
                                         Parent root = loader.load();
 
-                                        searchbyname.getScene().setRoot(root);
+                                        LVAffiche.getScene().setRoot(root);
 
                                     } catch (IOException e) {
                                         System.err.println("Error: " + e.getMessage());
@@ -164,11 +289,14 @@ public class GestionUserFXMLController implements Initializable {
                         HBox buttonBox = new HBox(button, button1);
                         buttonBox.setSpacing(25);
                         buttonBox.setStyle("-fx-alignment: center;");
-                        VBox vbox = new VBox(imageBox,title, subtitle,buttonBox);
+                        VBox content = new VBox(title, nom,prenom);
+                        content.setStyle("-fx-alignment: center;");
+                        VBox vbox = new VBox(imageBox,content,buttonBox);
                         vbox.setMargin(imageBox,new Insets(5,0,15,0));
                         vbox.setMargin(title,new Insets(0,0,5,0));
-                        vbox.setMargin(subtitle,new Insets(0,0,10,0));
-                        vbox.setMargin(buttonBox,new Insets(0,0,15,0));
+                        vbox.setMargin(nom,new Insets(0,0,10,0));
+                        vbox.setMargin(prenom,new Insets(0,0,15,0));
+                        vbox.setMargin(buttonBox,new Insets(0,0,20,0));
 
 
 
@@ -176,34 +304,42 @@ public class GestionUserFXMLController implements Initializable {
                         setGraphic(vbox);                  
                 }
             }
-        });
+        });      
+                });
+
     }
 
     @FXML
-    private void LogOutbtn(ActionEvent event) {
+        private void LogOutbtn(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
-            try {
-                Parent root = loader.load();
+        try {
+            Parent root = loader.load();
 
-                searchbyname.getScene().setRoot(root);
+            searchbyname.getScene().setRoot(root);
 
-            } catch (IOException ex) {
-                System.out.println("Error:" + ex.getMessage());
-            }
+        } catch (IOException ex) {
+            System.out.println("Error:" + ex.getMessage());
+        }
     }
 
     @FXML
-    private void AjoutUserbtn(ActionEvent event) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("inscriptionUser.fxml"));
-            try {
-                Parent root = loader.load();
+        private void AjoutUserbtn(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("inscriptionUser.fxml"));
+        try {
+            Parent root = loader.load();
 
-                searchbyname.getScene().setRoot(root);
+            searchbyname.getScene().setRoot(root);
 
-            } catch (IOException ex) {
-                System.out.println("Error:" + ex.getMessage());
-            }
-        
+        } catch (IOException ex) {
+            System.out.println("Error:" + ex.getMessage());
+        }
+
+    }
+        public List<User> findUserByName(String text){
+  IServiceUser su = new IServiceUser();
+    List<User> result = su.getAll().stream().filter((p)->p.getPrenom().toUpperCase().contains(text.toUpperCase())|| p.getNom().toUpperCase().contains(text.toUpperCase()) || Integer.toString(p.getCin()).contains(text)).collect(Collectors.toList());
+    return result;
+  
     }
 
 }

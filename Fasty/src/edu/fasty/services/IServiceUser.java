@@ -7,6 +7,12 @@ package edu.fasty.services;
 
 import edu.fasty.entities.User;
 import edu.fasty.utils.DataSource;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -162,4 +168,37 @@ Connection cnx = DataSource.getInstance().getCnx();
     return check;
    
     }
+//        public void sendEmail(String to, String subject, String body) throws jakarta.mail.MessagingException {
+//    	   String username = "hsan.slim@esprit.tn";
+//           String password = "xfqygpnlpzvvjvdh";
+//         Properties props = new Properties();
+//            props.put("mail.smtp.host", "smtp.gmail.com"); // Change this to your SMTP server host(yahoo...)
+//            props.put("mail.smtp.port", "587"); // Change this to your SMTP server port
+//            props.put("mail.smtp.auth", "true");
+//            props.put("mail.smtp.starttls.enable", "true");
+//
+//            Session session;
+//            session = Session.getInstance(props,new Authenticator() {
+//            protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+//                return new jakarta.mail.PasswordAuthentication(username, password);
+//            }
+//        });
+//        try{
+//            
+//            // Create a MimeMessage object
+//            
+//            // Create a new message
+//            MimeMessage message = new MimeMessage(session);
+//            // Set the From, To, Subject, and Text fields of the message
+//            message.setFrom(new InternetAddress(username));
+//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//            message.setSubject(subject);
+//            message.setText(body);
+//            // Send the message using Transport.send
+//            Transport.send(message);
+//            System.out.println("Email sent successfully");
+//             } catch (jakarta.mail.MessagingException ex) {
+//                Logger.getLogger(IServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//     }
 }

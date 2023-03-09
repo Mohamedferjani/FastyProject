@@ -14,7 +14,7 @@
         <Button fx:id="logoutbtn" layoutX="920.0" layoutY="21.0" mnemonicParsing="false" onAction="#LogOutbtn" prefHeight="41.0" prefWidth="88.0" text="Log out" textFill="#0021ff" />
         <Pane layoutX="-1.0" layoutY="120.0" prefHeight="180.0" prefWidth="1038.0" style="-fx-background-color: #6fd404;">
             <children>
-                <TextField fx:id="searchbyname" layoutX="230.0" layoutY="65.0" prefHeight="50.0" prefWidth="578.0" promptText="Search for forum" />
+                <TextField fx:id="searchbyname" layoutX="230.0" layoutY="65.0" prefHeight="50.0" prefWidth="578.0" promptText="Search for User" />
                 <Button fx:id="BtnAjouterUser" layoutX="877.0" layoutY="70.0" mnemonicParsing="false" onAction="#AjoutUserbtn" prefHeight="41.0" prefWidth="105.0" text="ADD" textFill="#32b97a">
                     <font>
                         <Font name="Arial Rounded MT Bold" size="19.0" />
@@ -23,12 +23,11 @@
                         <DropShadow />
                     </effect>
                 </Button>
-                <Text layoutX="829.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Need to add new forum?">
+                <Text layoutX="829.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Need to add new User?">
                     <font>
                         <Font name="Arial Rounded MT Bold" size="17.0" />
                     </font>
                 </Text>
-            <Button fx:id="aaa" layoutX="89.0" layoutY="75.0" mnemonicParsing="false" text="Button" />
             </children>
         </Pane>
         <Text layoutX="352.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Section">

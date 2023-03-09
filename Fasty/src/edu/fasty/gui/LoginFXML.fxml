@@ -4,11 +4,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="759.0" prefWidth="1037.0" styleClass="bg-form" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.LoginFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="759.0" prefWidth="1037.0" style="-fx-background-color: rgb(240,255,240);" styleClass="bg-form" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.fasty.gui.LoginFXMLController">
    <children>
       <Button fx:id="inscrire_user" layoutX="396.0" layoutY="421.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="46.0" prefWidth="108.0" stylesheets="@login.css" text="S'inscrire">
          <styleClass>
@@ -18,7 +20,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="connect" layoutX="569.0" layoutY="421.0" mnemonicParsing="false" onAction="#seconnecter" prefHeight="46.0" prefWidth="100.0" stylesheets="@login.css" text="connecter">
+      <Button fx:id="connect" layoutX="569.0" layoutY="421.0" mnemonicParsing="false" onAction="#seconnecter" prefHeight="46.0" prefWidth="100.0" text="connecter">
          <styleClass>
             <String fx:value="login-btn" />
             <String fx:value="bg-form" />
@@ -34,8 +36,13 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Text>
-      <TextField fx:id="donneradresse" layoutX="475.0" layoutY="258.0" styleClass="textfield" stylesheets="@login.css" />
-      <PasswordField fx:id="password" layoutX="475.0" layoutY="330.0" styleClass="textfield" stylesheets="@login.css" />
+      <TextField fx:id="donneradresse" layoutX="475.0" layoutY="258.0" promptText="Entrer votre adresse" />
+      <PasswordField fx:id="password" layoutX="475.0" layoutY="330.0" promptText="Entrer votre Mot de Passe" />
+      <ImageView blendMode="MULTIPLY" fitHeight="102.0" fitWidth="200.0" layoutX="404.0" layoutY="53.0">
+         <image>
+            <Image url="@../../../images/324388620_1448206458916490_8562342000025175528_n%20(1).png" />
+         </image>
+      </ImageView>
       
    </children>
 </AnchorPane>

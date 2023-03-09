@@ -9,6 +9,7 @@ import edu.fasty.entities.User;
 import edu.fasty.services.IService;
 import edu.fasty.services.IServiceUser;
 import edu.fasty.utils.DataSource;
+import jakarta.mail.MessagingException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -66,7 +67,7 @@ public class InscriptionUserController implements Initializable {
     private Button BtnInscri1;
     @FXML
     private ImageView imageUploadedID;
-     String imagePath;
+    String imagePath;
     File selectedFile;
     @FXML
     private Button BtnInscri2;
@@ -97,8 +98,8 @@ public class InscriptionUserController implements Initializable {
     }
 
     @FXML
-    private void AjouterUser(ActionEvent event) {
- IServiceUser sc = new IServiceUser();
+    private void AjouterUser(ActionEvent event) throws MessagingException {
+        IServiceUser sc = new IServiceUser();
         boolean check = sc.UserExiste(tfEmail.getText());
         if ((tfNom.getText().isEmpty()) || (tfPrenom.getText().isEmpty()) || (tfTel.getText().isEmpty()) || (tfAdresse.getText().isEmpty()) || (tfCin.getText().isEmpty()) || (tfEmail.getText().isEmpty()) || (tfMdp.getText().isEmpty())) {
             Alert alertType = new Alert(AlertType.ERROR);
@@ -135,14 +136,14 @@ public class InscriptionUserController implements Initializable {
             alertType.setTitle("Error");
             alertType.setHeaderText("L'adresse email est invalide. Veuillez saisir une adresse email valide (ex: nom_utilisateur@domaine.com) !");
             alertType.show();
-        }else if(check == true){
-          Alert alert = new Alert(Alert.AlertType.WARNING);
+        } else if (check == true) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Attention");
             alert.setHeaderText(null);
             alert.setContentText("Email déja utilisé");
             alert.show();
-        } else if(selectedFile == null){
-           Alert alert = new Alert(Alert.AlertType.WARNING);
+        } else if (selectedFile == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
             alert.setContentText("Sélectionner une image !");
@@ -157,25 +158,38 @@ public class InscriptionUserController implements Initializable {
             String email = tfEmail.getText();
             String mdp = tfMdp.getText();
             String img = "/images/hsan.png";
-            User s = new User(cin, tel, nom, prenom, adresse, email, mdp,2,img);
+            User s = new User(cin, tel, nom, prenom, adresse, email, mdp, 2, img);
             sc.ajouter(s);
- Alert ok=new Alert(Alert.AlertType.INFORMATION);
-               ok.setTitle("FAIT");
-               ok.setHeaderText("s'inscrire succès !");
-              
-              Optional<ButtonType> result  = ok.showAndWait();
-                        
- if(result.get() == ButtonType.OK){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
-            try {
-                Parent root = loader.load();
+            Alert ok = new Alert(Alert.AlertType.INFORMATION);
+            ok.setTitle("FAIT");
+            ok.setHeaderText("s'inscrire succès !");
+//            User u = new User(cin, tel, nom, prenom, adresse, email, mdp, 2, img);
+//            System.out.println(u.toString());
+//            sc.ajouter(u);
+//            String Subject ="Bienvenue Chez Fasty";
+//            String To = email;
+//            String Body = "Welcomeeeeeeeee";
+//            sc.sendEmail(To, Subject, Body);
+//            Alert alert = new Alert(AlertType.INFORMATION);
+//        alert.setTitle("Confirmation");
+//        alert.setHeaderText(null);
+//        alert.setContentText("L'inscription a été ajoutée avec succès !\n un mail vous a été envoyé  " ); 
+//        alert.showAndWait();
+            
 
-                tfNom.getScene().setRoot(root);
+            Optional<ButtonType> result = ok.showAndWait();
 
-            } catch (IOException ex) {
-                System.out.println("Error:" + ex.getMessage());
+            if (result.get() == ButtonType.OK) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
+                try {
+                    Parent root = loader.load();
+
+                    tfNom.getScene().setRoot(root);
+
+                } catch (IOException ex) {
+                    System.out.println("Error:" + ex.getMessage());
+                }
             }
- }  
 
         }
     }
@@ -186,29 +200,29 @@ public class InscriptionUserController implements Initializable {
         fileChooser.setTitle("Select Image File");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-         selectedFile = fileChooser.showOpenDialog(imageUploadedID.getScene().getWindow());
+        selectedFile = fileChooser.showOpenDialog(imageUploadedID.getScene().getWindow());
         if (selectedFile != null) {
             // The user selected an image file
             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
             Path path = Paths.get(selectedFile.getAbsolutePath());
-    Path relativePath = path.subpath(path.getNameCount() - 2, path.getNameCount()).normalize();
-             imagePath = relativePath.toString().replace('\\', '/');
-             Image image = new Image(imagePath);
-             imageUploadedID.setImage(image);
+            Path relativePath = path.subpath(path.getNameCount() - 2, path.getNameCount()).normalize();
+            imagePath = relativePath.toString().replace('\\', '/');
+            Image image = new Image(imagePath);
+            imageUploadedID.setImage(image);
             // Add your code here to process the selected image file
         }
     }
 
     @FXML
     private void Backbtn(ActionEvent event) {
-       FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
-            try {
-                Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
+        try {
+            Parent root = loader.load();
 
-                tfNom.getScene().setRoot(root);
+            tfNom.getScene().setRoot(root);
 
-            } catch (IOException ex) {
-                System.out.println("Error:" + ex.getMessage());
-            } 
+        } catch (IOException ex) {
+            System.out.println("Error:" + ex.getMessage());
+        }
     }
 }
